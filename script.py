@@ -17,7 +17,7 @@ def main():
  
     for i in range(2,len(argument)):
         if i%2 == 0:    # pour chaque chiffre pair
-            if(argument[i+1] == 'start' or 'stop' or 'status'):
+            if(argument[i+1] == 'start' or 'stop' or 'status' or 'restart'):
                 task = task_self()
                 cli="service %s %s"% (argument[i], argument[i+1])
                 task.shell(cli, nodes=argument[1])
