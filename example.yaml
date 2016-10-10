@@ -1,0 +1,9 @@
+- ssh:
+    name: ssh
+    state: on
+    nodes: node[2]
+
+- cron:
+    name: cron
+    state: off
+    nodes: node[2-3] 
