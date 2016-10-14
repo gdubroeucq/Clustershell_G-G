@@ -1,9 +1,8 @@
-- ssh:
-    name: ssh
-    state: on
-    nodes: node[2]
+---
+ ssh:
+    state: start
+    nodes: bonjour
 
-- cron:
-    name: cron
-    state: off
-    nodes: node[2-3] 
+ cron:
+    state: start
+    nodes: node[2-3]
