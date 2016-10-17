@@ -49,7 +49,6 @@ def main():
                                 if(doc.get(name).has_key("nodes")==False or doc.get(name).get("nodes")==None):
                                     print("/!\\ attribut \"nodes\" manquant pour %s /!\\" % name)
                                     sys.exit()
-                                #print(" name: %s       state: %s       nodes: %s" % (name,state,nodes)) 
                             for i in range(0,len(service)):
                                 task = task_self()
                                 name=service[i]
@@ -60,7 +59,6 @@ def main():
                                 task.run()
                                 print("- name: %s     state: %s         nodes: %s" % (name,state,nodes))
                                 for output, nodelist in task.iter_buffers():
-                                  #  print '\n'
                                     print '--> %s: %s' % (NodeSet.fromlist(nodelist), output) 
                                     print '\n'
                             print '\n'
