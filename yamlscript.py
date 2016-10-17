@@ -22,12 +22,12 @@ def main():
                     print(doc)                                         #                   #
                     print("------------")                              ##################### 
                     service=[]
-                    if(isinstance(doc,dict)==True and len(doc.keys())!=0):
+                    if(isinstance(doc,dict)==True and len(doc.keys())!=0): # vérification de la structure du fichier YAML
                         print(len(doc.keys()))
-                        print("D'après votre fichier \"%s\", les services concernés sont:" % sys.argv[1])
+                        print("D'après le fichier \"%s\", les services concernés sont:" % sys.argv[1])
                         compt=0
                         service=[]
-                        for cle in reversed(doc.keys()):    #remettre les clés dans le bon ordre
+                        for cle in reversed(doc.keys()):    #remet les clés dans le bon ordre
                             print("   %d: %s" % (compt,cle))
                             compt += 1
                             service.append(cle)
@@ -38,18 +38,26 @@ def main():
                             rep = raw_input("Confirmer (y/n) : ")
                         if(rep=='y'):
                             print '\n'
-                            for i in range(0,len(service)):  # vérification
+                            for i in range(0,len(service)):  # vérification des attributs de chaque service
                                 name=service[i]
-                                if(doc.get(name).has_key("state")==False): 
-                                    print("/!\\ attribut \"state\" manquant pour %s /!\\" % name)
+                                if(doc.get(name).has_key("state")==False):   
+                                    print("/!\\ attribut \"state\" manquant pour %d: %s /!\\" % (i,name))
                                     sys.exit()
-                                    if not(doc.get(name).get("state") in ['start','stop','status','reload']):
-                                        print("/!\\ attribut \"state\" doit être start,stop,status ou reload /!\\") 
-                                        sys.exit()
+
+                                if not(doc.get(name).get("state") in ['start','stop','status','reload']):
+                                    print("/!\\ attribut \"state\" doit être [start/stop/status/reload] pour %d: %s /!\\" % (i,name)) 
+                                    sys.exit()
+
                                 if(doc.get(name).has_key("nodes")==False or doc.get(name).get("nodes")==None):
-                                    print("/!\\ attribut \"nodes\" manquant pour %s /!\\" % name)
+                                    print("/!\\ attribut \"nodes\" manquant pour %d: %s /!\\" % (i,name))
                                     sys.exit()
-                            for i in range(0,len(service)):
+                                try:               # vérifie les erreurs de syntaxe pour les nodes
+                                    nodeset=NodeSet(doc.get(name).get("nodes"))
+                                except:
+                                    print("/!\\ Problème avec la syntaxe des noeuds \"%s\" pour %d: %s /!\\" % (doc.get(name).get("nodes"),i,name))
+                                    print("\n")
+                                    sys.exit()
+                            for i in range(0,len(service)): # Une fois la vérification terminée, on effectue les actions
                                 task = task_self()
                                 name=service[i]
                                 state=doc.get(name).get("state")
