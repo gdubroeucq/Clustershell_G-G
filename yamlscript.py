@@ -18,6 +18,7 @@
 import yaml,sys,os
 from ClusterShell.Task import task_self, NodeSet
 
+BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8)
 
 def debug(doc):
     print("------------")                              #####################
@@ -27,6 +28,28 @@ def debug(doc):
     print("------------")                              ##################### 
     return() 
 
+
+def has_colours(stream):
+    if not hasattr(stream, "isatty"):
+        return False
+    if not stream.isatty():
+        return False # auto color only on TTYs
+    try:
+        import curses
+        curses.setupterm()
+        return curses.tigetnum("colors") > 2
+    except:
+        # guess false in case of error
+        return False
+has_colours = has_colours(sys.stdout)
+
+
+def printout(text, colour=WHITE):
+        if has_colours:
+                seq = "\x1b[0;%dm" % (30+colour) + text + "\x1b[0m"
+                sys.stdout.write(seq)
+        else:
+                sys.stdout.write(text)
 def check_service(doc):
     if(isinstance(doc,dict)==True and len(doc.keys())!=0): # vérification de la structure du fichier YAML
         print(len(doc.keys()))
@@ -57,6 +80,36 @@ def check_attribut(doc,service):
             return(False) 
     return(True) 
 
+def getTerminalSize():
+    import os
+    env = os.environ
+    def ioctl_GWINSZ(fd):
+        try:
+            import fcntl, termios, struct, os
+            cr = struct.unpack('hh', fcntl.ioctl(fd, termios.TIOCGWINSZ,
+        '1234'))
+        except:
+            return
+        return cr
+    cr = ioctl_GWINSZ(0) or ioctl_GWINSZ(1) or ioctl_GWINSZ(2)
+    if not cr:
+        try:
+            fd = os.open(os.ctermid(), os.O_RDONLY)
+            cr = ioctl_GWINSZ(fd)
+            os.close(fd)
+        except:
+            pass
+    if not cr:
+        cr = (env.get('LINES', 25), env.get('COLUMNS', 80))
+
+        ### Use get(key[, default]) instead of a try/catch
+        #try:
+        #    cr = (env['LINES'], env['COLUMNS'])
+        #except:
+        #    cr = (25, 80)
+    return int(cr[1]), int(cr[0])
+
+
 def reverse_key(doc):  # remet les services dans le bon ordre
         service=[]
         compt=0
@@ -64,43 +117,60 @@ def reverse_key(doc):  # remet les services dans le bon ordre
             print("   %d: %s" % (compt,cle))
             compt += 1
             service.append(cle)
-        print("\n")
+        print("")
         return(service)
 
 def clustershell(doc,service):  # Commandes distribuées
+    out=""
+    output=""
     for i in range(0,len(service)): 
         task = task_self()
         name=service[i]
+        name_split=service[i].split(",")
         state=doc.get(name).get("state")
         nodes=doc.get(name).get("nodes")
-        cli="service %s %s in %s" % (name,state,nodes)     
-        task.shell(cli, nodes=nodes) 
-        task.run()
-        print("- name: %s     state: %s         nodes: %s" % (name,state,nodes))
-        for output, nodelist in task.iter_buffers():
-            print '--> %s: %s' % (NodeSet.fromlist(nodelist), output) 
-            print '\n'
+        x,y=getTerminalSize()
+        string="TASK: [%s]" % name
+        star= '*' * (x-len(string)-1)
+        #print '*' * x
+        print("TASK: [%s] %s" % (name,star))
+        for n in range(0,len(name_split)):
+            cli="service %s %s" % (name_split[n],state)    
+            task.shell(cli, nodes=nodes) 
+            task.run()
+            printout("\n%s       :  state=%s     nodes=%s\n" % (name_split[n],state,nodes), YELLOW)
+            for output, nodelist in task.iter_buffers():
+                
+                printout('Error: %s: %s' % (NodeSet.fromlist(nodelist), output), RED) 
+            if(out==output):
+                printout("OK", GREEN) 
+            else:
+                out=output
+            print("")
+        print("")
 
 def main():
+
+    service=[]
+    rep=""
 
     if(len(sys.argv)>=2):
         if(os.path.isfile(sys.argv[1])==True):   # vérifie l'existence du fichier yaml
             fichier = sys.argv[1]
             with open(fichier,'r') as stream:
                 try:
-                    doc=yaml.load(stream)
+                    print stream
+                    doc=yaml.safe_load(stream)
                     debug(doc) # information (optionnel)
-                    if(check_service(doc)):
-                        service=[]
-                        service=reverse_key(doc)
-                        rep=""
+                    if(check_service(doc)): # Contrôle les services
+                        service=reverse_key(doc) # Met les services dans le bon ordre
                         while(rep !='y' and rep !='n'):
                             rep = raw_input("Confirmer (y/n) : ")
                         if(rep=='y'):
-                            print '\n'
-                            if(check_attribut(doc,service)):
-                                clustershell(doc,service)
-                            print '\n'
+                            print ""
+                            if(check_attribut(doc,service)): # Contrôle les attributs des services
+                                clustershell(doc,service)  
+                            print ""
                          
                 except yaml.YAMLError as exc:
                     print(exc)

@@ -1,8 +1,8 @@
 ---
- ssh:
-    state: start
-    nodes: bonjour
+nginx,ssh:
+  state: start
+  nodes: node[2-3]
+cron:
+  state: start
+  nodes: salut
 
- cron:
-    state: start
-    nodes: node[2-3]
