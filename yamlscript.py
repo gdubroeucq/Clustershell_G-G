@@ -17,6 +17,7 @@
 
 import yaml,sys,os
 from ClusterShell.Task import task_self, NodeSet
+from supply import has_colours,printout,getTerminalSize
 
 BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE = range(8)
 
@@ -29,27 +30,6 @@ def debug(doc):
     return() 
 
 
-def has_colours(stream):
-    if not hasattr(stream, "isatty"):
-        return False
-    if not stream.isatty():
-        return False # auto color only on TTYs
-    try:
-        import curses
-        curses.setupterm()
-        return curses.tigetnum("colors") > 2
-    except:
-        # guess false in case of error
-        return False
-has_colours = has_colours(sys.stdout)
-
-
-def printout(text, colour=WHITE):
-        if has_colours:
-                seq = "\x1b[0;%dm" % (30+colour) + text + "\x1b[0m"
-                sys.stdout.write(seq)
-        else:
-                sys.stdout.write(text)
 def check_service(doc):
     if(isinstance(doc,dict)==True and len(doc.keys())!=0): # vérification de la structure du fichier YAML
         print(len(doc.keys()))
