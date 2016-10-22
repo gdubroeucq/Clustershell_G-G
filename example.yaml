@@ -1,8 +1,7 @@
 ---
-nginx,ssh:
+ssh:
   state: start
   nodes: node[2-3]
 cron:
   state: start
-  nodes: salut
-
+  nodes: node[2-3]

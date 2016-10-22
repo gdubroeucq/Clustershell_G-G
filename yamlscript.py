@@ -60,35 +60,6 @@ def check_attribut(doc,service):
             return(False) 
     return(True) 
 
-def getTerminalSize():
-    import os
-    env = os.environ
-    def ioctl_GWINSZ(fd):
-        try:
-            import fcntl, termios, struct, os
-            cr = struct.unpack('hh', fcntl.ioctl(fd, termios.TIOCGWINSZ,
-        '1234'))
-        except:
-            return
-        return cr
-    cr = ioctl_GWINSZ(0) or ioctl_GWINSZ(1) or ioctl_GWINSZ(2)
-    if not cr:
-        try:
-            fd = os.open(os.ctermid(), os.O_RDONLY)
-            cr = ioctl_GWINSZ(fd)
-            os.close(fd)
-        except:
-            pass
-    if not cr:
-        cr = (env.get('LINES', 25), env.get('COLUMNS', 80))
-
-        ### Use get(key[, default]) instead of a try/catch
-        #try:
-        #    cr = (env['LINES'], env['COLUMNS'])
-        #except:
-        #    cr = (25, 80)
-    return int(cr[1]), int(cr[0])
-
 
 def reverse_key(doc):  # remet les services dans le bon ordre
         service=[]
@@ -103,6 +74,7 @@ def reverse_key(doc):  # remet les services dans le bon ordre
 def clustershell(doc,service):  # Commandes distribuées
     out=""
     output=""
+    recap=[]
     for i in range(0,len(service)): 
         task = task_self()
         name=service[i]
@@ -111,24 +83,52 @@ def clustershell(doc,service):  # Commandes distribuées
         nodes=doc.get(name).get("nodes")
         x,y=getTerminalSize()
         string="TASK: [%s]" % name
-        star= '*' * (x-len(string)-1)
-        #print '*' * x
-        print("TASK: [%s] %s" % (name,star))
+        star= '*' * (x-len(string))
+        print("%s %s" % (string,star))
         for n in range(0,len(name_split)):
             cli="service %s %s" % (name_split[n],state)    
             task.shell(cli, nodes=nodes) 
             task.run()
-            printout("\n%s       :  state=%s     nodes=%s\n" % (name_split[n],state,nodes), YELLOW)
+            space=' ' * (15-len(name_split[n]))
+            printout("%s%s:  state=%s     nodes=%s\n" % (name_split[n],space,state,nodes), YELLOW)
             for output, nodelist in task.iter_buffers():
-                
-                printout('Error: %s: %s' % (NodeSet.fromlist(nodelist), output), RED) 
+                printout('Error: %s: %s\n' % (NodeSet.fromlist(nodelist), output), RED) 
+                recap.append(0)
             if(out==output):
-                printout("OK", GREEN) 
+                printout("OK\n", GREEN) 
+                recap.append(1)
             else:
                 out=output
             print("")
-        print("")
+    return recap
 
+def recap(service,recap):
+    x,y=getTerminalSize()
+    recaptext="RECAP"
+    stars= '*' * (x-len(recaptext)-1)
+    print("%s %s" % (recaptext,stars))
+    z=0
+    for g in range(0,len(service)):
+        name=service[g]
+        name_split=service[g].split(",")
+        
+        for p in range(0,len(name_split)):
+            if(recap[z]==1):
+                recap_value="[%s]%s" % (name,name_split[p])
+                space=' ' * (30-len(recap_value))
+                recap_final="%s %s:" % (recap_value,space)
+                print(recap_final),
+                printout(" ok=1", GREEN)
+                print("        failed=0")
+            else:
+                recap_value="[%s]%s" % (name,name_split[p])
+                space=' ' * (30-len(recap_value))
+                recap_final="%s %s: ok=0" % (recap_value,space)
+                print(recap_final),
+                printout("        failed=1\n", RED)
+            z=z+1
+        print("")
+ 
 def main():
 
     service=[]
@@ -149,7 +149,8 @@ def main():
                         if(rep=='y'):
                             print ""
                             if(check_attribut(doc,service)): # Contrôle les attributs des services
-                                clustershell(doc,service)  
+                                recapitulatif=clustershell(doc,service)  
+                                recap(service,recapitulatif)
                             print ""
                          
                 except yaml.YAMLError as exc:
