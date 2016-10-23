@@ -32,7 +32,7 @@ def debug(doc):
 
 def check_service(doc):
     if(isinstance(doc,dict)==True and len(doc.keys())!=0): # vérification de la structure du fichier YAML
-        print(len(doc.keys()))
+       # print(len(doc.keys()))
         print("D'après le fichier \"%s\", les services concernés sont:" % sys.argv[1])
         compt=0
         return(True)
@@ -60,6 +60,32 @@ def check_attribut(doc,service):
             return(False) 
     return(True) 
 
+def check_depend(doc,name):
+    if(doc.get(name).get("depend")!=None):
+        serv=doc.get(name).get("depend")
+        serv_split=serv.split(",")
+        taske = task_self()
+        nodes=doc.get(name).get("nodes")
+        out=""
+        output=""
+        result=[]
+        for m in range(0,len(serv_split)):
+            cli="service %s start" % serv_split[m]
+            taske.shell(cli, nodes=nodes)
+            taske.run()
+            for output, nodelist in taske.iter_buffers():
+                if(out!=output):
+                    result.append(serv_split[m])
+                    out=output
+    else:
+        return(True,0)
+    if(len(result)==0):
+        return(True,0)
+    else:
+        return(False,result)
+                    
+   #print doc.get(name).has_key("depend")
+   #print doc.get(name).get("depend")
 
 def reverse_key(doc):  # remet les services dans le bon ordre
         service=[]
@@ -85,21 +111,29 @@ def clustershell(doc,service):  # Commandes distribuées
         string="TASK: [%s]" % name
         star= '*' * (x-len(string))
         print("%s %s" % (string,star))
-        for n in range(0,len(name_split)):
-            cli="service %s %s" % (name_split[n],state)    
-            task.shell(cli, nodes=nodes) 
-            task.run()
-            space=' ' * (15-len(name_split[n]))
-            printout("%s%s:  state=%s     nodes=%s\n" % (name_split[n],space,state,nodes), YELLOW)
-            for output, nodelist in task.iter_buffers():
-                printout('Error: %s: %s\n' % (NodeSet.fromlist(nodelist), output), RED) 
-                recap.append(0)
-            if(out==output):
-                printout("OK\n", GREEN) 
-                recap.append(1)
-            else:
-                out=output
+        test_depend,result=check_depend(doc,name)
+        if(test_depend==True):
+            for n in range(0,len(name_split)):
+                cli="service %s %s" % (name_split[n],state)    
+                task.shell(cli, nodes=nodes) 
+                task.run()
+                space=' ' * (15-len(name_split[n]))
+                printout("%s%s:  state=%s     nodes=%s\n" % (name_split[n],space,state,nodes), YELLOW)
+                for output, nodelist in task.iter_buffers():
+                    printout('Error: %s: %s\n' % (NodeSet.fromlist(nodelist), output), RED) 
+                    recap.append(0)
+                if(out==output):
+                    printout("OK\n", GREEN) 
+                    recap.append(1)
+                else:
+                    out=output
+                print("")
+        else:
+            space=' ' * (15-len(name))
+            printout("%s%s:  state=%s    nodes=%s\n" % (name,space,state,nodes), YELLOW)
+            printout("Error depend: le(s) service(s) %s n'est(sont) pas activé(s) ou installé(s)\n" % result, RED)
             print("")
+            recap.append(0)
     return recap
 
 def recap(service,recap):
@@ -139,9 +173,8 @@ def main():
             fichier = sys.argv[1]
             with open(fichier,'r') as stream:
                 try:
-                    print stream
                     doc=yaml.safe_load(stream)
-                    debug(doc) # information (optionnel)
+                   # debug(doc) # information (optionnel)
                     if(check_service(doc)): # Contrôle les services
                         service=reverse_key(doc) # Met les services dans le bon ordre
                         while(rep !='y' and rep !='n'):
