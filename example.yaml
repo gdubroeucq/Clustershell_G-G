@@ -1,8 +1,12 @@
 ---
-ssh:
-  state: start
-  nodes: node[2-3]
-cron:
-  state: start
-  nodes: node[2-3]
+- cron:
+    state: start
+    nodes: node[1-3]
+    depend: nginx
+- ssh:
+    state: start
+    nodes: node123
+- nginx:
+    state: start
+    nodes: node[1-3]
 

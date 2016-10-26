@@ -3,15 +3,20 @@
 #
 # Script.yaml:
 #              ---
-#               service1,[service2,...]:
-#                  state: [start,stop,restart,reload] 
-#                  nodes: node1,[node2,...]
-#
+#               - service1,[service2,...]:
+#                   state: [start,stop,restart,reload] 
+#                   nodes: node1,[node2,...]
+#                   depend: service
 # Exemple:                 
 #              ---
-#               cron,nginx: 
-#                  state: restart
-#                  nodes: node[50-100]
+#               - cron,nginx: 
+#                   state: restart
+#                   nodes: node[50-100]
+#               - proxmox:
+#                   state: stop
+#                   nodes: node[1-10]
+#                   depend: vsphere
+#
 #
 #
 
@@ -26,15 +31,18 @@ def debug(doc):
     print("nombre de service: %d" % len(doc))          #                   #
     print(type(doc))                                   # Section debugging #
     print(doc)                                         #                   #
+    print(doc[0])
+    print(len(doc))
+    print(doc[0].keys()[0])
+    print(doc[0].get(doc[0].keys()[0]).get("state"))
+    print(len(doc))
     print("------------")                              ##################### 
     return() 
 
 
 def check_service(doc):
-    if(isinstance(doc,dict)==True and len(doc.keys())!=0): # vérification de la structure du fichier YAML
-       # print(len(doc.keys()))
+    if(isinstance(doc,list)==True and len(doc)>=1): # vérification de la structure du fichier YAML
         print("D'après le fichier \"%s\", les services concernés sont:" % sys.argv[1])
-        compt=0
         return(True)
     else:
         print("/!\\ Erreur syntaxe dans \"%s\" /!\\" % sys.argv[1]) 
@@ -43,77 +51,76 @@ def check_service(doc):
 def check_attribut(doc,service):
     for i in range(0,len(service)):  # vérification des attributs de chaque service
         name=service[i]
-        if(doc.get(name).has_key("state")==False):   
+        if(doc[i].get(name).has_key("state")==False):
             print("/!\\ attribut \"state\" manquant pour %d: %s /!\\" % (i,name))
             return(False) 
-        if not(doc.get(name).get("state") in ['start','stop','status','reload']):
+        if not(doc[i].get(name).get("state") in ['start','stop','status','reload']):
             print("/!\\ attribut \"state\" doit être [start/stop/status/reload] pour %d: %s /!\\" % (i,name)) 
             return(False)
-        if(doc.get(name).has_key("nodes")==False or doc.get(name).get("nodes")==None):
+        if(doc[i].get(name).has_key("nodes")==False or doc[i].get(name).get("nodes")==None): 
             print("/!\\ attribut \"nodes\" manquant pour %d: %s /!\\" % (i,name))
             return(False)
         try:               # vérifie les erreurs de syntaxe pour les nodes
-            nodeset=NodeSet(doc.get(name).get("nodes"))
+            nodeset=NodeSet(doc[i].get(name).get("nodes"))
         except:
-            print("/!\\ Problème avec la syntaxe de \"%s\" pour %d: %s /!\\" % (doc.get(name).get("nodes"),i,name))
+            print("/!\\ Problème avec la syntaxe de \"%s\" pour %d: %s /!\\" % (doc[i].get(name).get("nodes"),i,name))
             print("\n")
             return(False) 
     return(True) 
 
-def check_depend(doc,name):
-    if(doc.get(name).get("depend")!=None):
-        serv=doc.get(name).get("depend")
+def check_depend(doc,name,i):
+    if(doc[i].get(name).get("depend")!=None):
+        serv=doc[i].get(name).get("depend")
         serv_split=serv.split(",")
         taske = task_self()
-        nodes=doc.get(name).get("nodes")
-        out=""
-        output=""
+        nodes=doc[i].get(name).get("nodes")
+       # out=""
+       # output=""
         result=[]
         for m in range(0,len(serv_split)):
+            out=""
+            output=""
             cli="service %s start" % serv_split[m]
             taske.shell(cli, nodes=nodes)
             taske.run()
             for output, nodelist in taske.iter_buffers():
-                if(out!=output):
-                    result.append(serv_split[m])
-                    out=output
+                result.append(serv_split[m])
+                error_nodes=NodeSet.fromlist(nodelist)
     else:
-        return(True,0)
+        return(True,0,0)
     if(len(result)==0):
-        return(True,0)
+        return(True,0,0)
     else:
-        return(False,result)
+        return(False,result,error_nodes)
                     
-   #print doc.get(name).has_key("depend")
-   #print doc.get(name).get("depend")
 
-def reverse_key(doc):  # remet les services dans le bon ordre
+def add_key(doc):  # remet les services dans le bon ordre
         service=[]
         compt=0
-        for cle in reversed(doc.keys()):    
-            print("   %d: %s" % (compt,cle))
-            compt += 1
-            service.append(cle)
+        for i in range(0,len(doc)):
+            print("   %s: %s" % (compt,doc[i].keys()[0]))
+            compt +=1
+            service.append(doc[i].keys()[0])
         print("")
         return(service)
 
 def clustershell(doc,service):  # Commandes distribuées
-    out=""
-    output=""
     recap=[]
     for i in range(0,len(service)): 
         task = task_self()
         name=service[i]
         name_split=service[i].split(",")
-        state=doc.get(name).get("state")
-        nodes=doc.get(name).get("nodes")
+        state=doc[i].get(name).get("state")
+        nodes=doc[i].get(name).get("nodes")
         x,y=getTerminalSize()
         string="TASK: [%s]" % name
         star= '*' * (x-len(string))
         print("%s %s" % (string,star))
-        test_depend,result=check_depend(doc,name)
+        test_depend,result,error_nodes=check_depend(doc,name,i)
         if(test_depend==True):
             for n in range(0,len(name_split)):
+                out=""
+                output=""
                 cli="service %s %s" % (name_split[n],state)    
                 task.shell(cli, nodes=nodes) 
                 task.run()
@@ -125,13 +132,11 @@ def clustershell(doc,service):  # Commandes distribuées
                 if(out==output):
                     printout("OK\n", GREEN) 
                     recap.append(1)
-                else:
-                    out=output
                 print("")
         else:
             space=' ' * (15-len(name))
             printout("%s%s:  state=%s    nodes=%s\n" % (name,space,state,nodes), YELLOW)
-            printout("Error depend: le(s) service(s) %s n'est(sont) pas activé(s) ou installé(s)\n" % result, RED)
+            printout("Error depend %s: le(s) service(s) %s n'est(sont) pas activé(s) ou installé(s)\n" % (error_nodes,result), RED)
             print("")
             recap.append(0)
     return recap
@@ -174,9 +179,9 @@ def main():
             with open(fichier,'r') as stream:
                 try:
                     doc=yaml.safe_load(stream)
-                   # debug(doc) # information (optionnel)
+                   #debug(doc) # information (optionnel)
                     if(check_service(doc)): # Contrôle les services
-                        service=reverse_key(doc) # Met les services dans le bon ordre
+                        service=add_key(doc) # Met les services en état
                         while(rep !='y' and rep !='n'):
                             rep = raw_input("Confirmer (y/n) : ")
                         if(rep=='y'):
