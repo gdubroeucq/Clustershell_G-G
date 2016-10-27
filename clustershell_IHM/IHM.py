@@ -43,19 +43,32 @@ if __name__=='__main__':
         clustershell_IHM.listWidget.insertItem(1,"test")
         configuration_IHM.main()
 
-    def on_click_service():
+    def on_click_add_service():
         service=configuration_IHM.lineEdit.text()
         noeuds=configuration_IHM.lineEdit_2.text()
         dependance=configuration_IHM.lineEdit_3.text()
         action=configuration_IHM.comboBox.currentText()
         if(service!="" and noeuds!="" and dependance!=""):
-            configuration_IHM.listWidget.insertItem(1,"%s %s on %s if %s"%(service,action,noeuds,dependance))
+            configuration_IHM.listWidget.insertItem(1,"%s %s on %s (depend %s)"%(service,action,noeuds,dependance))
         if(service!="" and noeuds!="" and dependance==""):
             configuration_IHM.listWidget.insertItem(1,"%s %s on %s"%(service,action,noeuds))
         configuration_IHM.main()
 
+    def on_click_delete_service():
+        service_number=configuration_IHM.listWidget.currentRow()
+        configuration_IHM.listWidget.takeItem(service_number)
+
+    def close():
+        configuration_IHM.close()
+
+
+    #action boutons
     clustershell_IHM.pushButton.clicked.connect(on_click)
-    configuration_IHM.pushButton.clicked.connect(on_click_service)
+
+    configuration_IHM.pushButton.clicked.connect(on_click_add_service)
+    configuration_IHM.pushButton_2.clicked.connect(on_click_delete_service)
+    configuration_IHM.pushButton_3.clicked.connect(close)
+
 
     clustershell_IHM.main()
     app.exec_()

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'clustershell_IHM.ui'
 #
-# Created: Thu Oct 27 21:48:06 2016
+# Created: Thu Oct 27 22:37:10 2016
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -30,16 +30,16 @@ class Ui_MainWindow(object):
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.pushButton = QtGui.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(460, 320, 95, 31))
+        self.pushButton.setGeometry(QtCore.QRect(370, 510, 95, 31))
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
         self.label = QtGui.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(480, 60, 66, 21))
+        self.label.setGeometry(QtCore.QRect(520, 510, 66, 21))
         self.label.setObjectName(_fromUtf8("label"))
         self.pushButton_2 = QtGui.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(460, 200, 95, 31))
+        self.pushButton_2.setGeometry(QtCore.QRect(120, 510, 95, 31))
         self.pushButton_2.setObjectName(_fromUtf8("pushButton_2"))
         self.listWidget = QtGui.QListWidget(self.centralwidget)
-        self.listWidget.setGeometry(QtCore.QRect(0, 10, 411, 541))
+        self.listWidget.setGeometry(QtCore.QRect(10, 10, 571, 471))
         self.listWidget.setObjectName(_fromUtf8("listWidget"))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)

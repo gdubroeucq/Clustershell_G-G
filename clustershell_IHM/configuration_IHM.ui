@@ -20,18 +20,18 @@
    <property name="geometry">
     <rect>
      <x>5</x>
-     <y>130</y>
-     <width>271</width>
-     <height>321</height>
+     <y>10</y>
+     <width>321</width>
+     <height>441</height>
     </rect>
    </property>
   </widget>
   <widget class="QComboBox" name="comboBox">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>40</y>
-     <width>101</width>
+     <x>370</x>
+     <y>80</y>
+     <width>141</width>
      <height>29</height>
     </rect>
    </property>
@@ -42,47 +42,56 @@
   <widget class="QLineEdit" name="lineEdit">
    <property name="geometry">
     <rect>
-     <x>20</x>
+     <x>370</x>
      <y>40</y>
-     <width>113</width>
+     <width>141</width>
      <height>33</height>
     </rect>
    </property>
    <property name="text">
     <string/>
+   </property>
+   <property name="placeholderText">
+    <string>Service</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit_2">
    <property name="geometry">
     <rect>
-     <x>270</x>
-     <y>40</y>
-     <width>111</width>
+     <x>370</x>
+     <y>120</y>
+     <width>141</width>
      <height>33</height>
     </rect>
    </property>
    <property name="text">
     <string/>
+   </property>
+   <property name="placeholderText">
+    <string>Noeuds</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit_3">
    <property name="geometry">
     <rect>
-     <x>400</x>
-     <y>40</y>
-     <width>113</width>
+     <x>370</x>
+     <y>160</y>
+     <width>141</width>
      <height>33</height>
     </rect>
    </property>
    <property name="text">
     <string/>
    </property>
+   <property name="placeholderText">
+    <string>Dépendance</string>
+   </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>220</x>
-     <y>80</y>
+     <x>390</x>
+     <y>210</y>
      <width>95</width>
      <height>31</height>
     </rect>
@@ -94,8 +103,8 @@
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>360</x>
-     <y>260</y>
+     <x>390</x>
+     <y>250</y>
      <width>95</width>
      <height>31</height>
     </rect>
@@ -104,56 +113,17 @@
     <string>Supprimer</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QPushButton" name="pushButton_3">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>10</y>
-     <width>66</width>
-     <height>21</height>
+     <x>390</x>
+     <y>410</y>
+     <width>95</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="text">
-    <string>Service</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_2">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>10</y>
-     <width>41</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Action</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_3">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>10</y>
-     <width>51</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Noeuds</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_4">
-   <property name="geometry">
-    <rect>
-     <x>410</x>
-     <y>10</y>
-     <width>81</width>
-     <height>21</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Dépendance</string>
+    <string>Fermer</string>
    </property>
   </widget>
  </widget>
