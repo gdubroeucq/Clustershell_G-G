@@ -1,0 +1,131 @@
+\documentclass[a4paper,11pt]{article} 
+\usepackage[french]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[svgnames]{xcolor}
+\usepackage{graphicx}
+\usepackage{amsmath,amssymb,amsthm,amscd}
+\usepackage{tabularx}
+\usepackage{url}
+\usepackage{geometry}
+\usepackage{ae}
+\usepackage{float}
+
+
+
+%% Mise en page (marges)
+% (NON MODIFIABLE)
+\geometry{hmargin=15mm,vmargin=20mm}
+
+%% Environnement de "théorèmes"
+% (MODIFIABLE)
+\newtheorem{defin}{Définition}
+\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Théorème}
+\newtheorem{cor}{Corollaire}
+\newtheorem{lem}{Lemme}
+\newtheorem{nota}{Notation}
+\newtheorem{rem}{Remarque}
+\newtheorem{conj}{Conjecture}
+\newtheorem{nb}{N.B.}
+
+%% Taille relative tolérée d'un objet flottant sur une page
+% (MODIFIABLE)
+\renewcommand{\floatpagefraction}{0.95}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DÉBUT DU DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+%% Changement de nom pour la bibliographie
+\renewcommand{\refname}{Bibliographie}
+%% Style de bibliographie alpha
+\bibliographystyle{alpha}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Première de couverture %
+%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\thispagestyle{empty}
+\begin{center}
+	 {\LARGE UNIVERSITÉ D'ÉVRY -- VAL D'ESSONNE}
+	 
+\vskip 10mm	 
+	 \begin{figure}[H]
+		\centerline{\includegraphics[scale=0.4]{logoUEVE.png}}
+
+	\end{figure}
+
+  %% Indiquez le titre de votre stage
+  \vfill {\huge {\bf Réalisation en python d'un outils de gestion de services distribués}} 
+  \vskip 1mm
+ à l'aide de l'API python clustershell\\
+  
+  %% Indiquez votre prénom et votre nom en lieu et place de "Prénom Nom"
+  \vskip 3mm {\LARGE {\bf Guillaume Dubroeucq}} 
+  \\ \LARGE {\bf Théo Pocard}
+  \\ \LARGE {\bf Nicolas Chapron}
+  
+  %% Remplacez JJ et AAAA par le jour et l'année de votre soutenance
+  \vskip 3mm le 18 octobre 2016
+  \vfill
+ 
+  \emph{Professeur}\\
+  %% Indiquez le prénom et le nom de votre maître de stage en lieu et place
+  %% de "Prénom Nom"
+  Patrice LUCAS\\
+  \emph{\ adresse mail}\\
+	\emph{\ patrice.lucas@cea.fr}\\
+  %% Indiquez l'année universitaire
+  \vskip 3cm Année universitaire 2016-2017
+\end{center}
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%
+% Table des matières %
+%%%%%%%%%%%%%%%%%%%%%%
+
+\hrule\medskip
+
+\begin{center}
+  \tableofcontents
+\end{center}
+
+\medskip\hrule\bigskip\bigskip
+\clearpage
+
+\section{Introduction}
+\label{sec:section1}
+\subsection{Objectif}
+\label{sub:1.1}
+Développée et utilisée au CEA, l'API Clusterhell est une bibliothèque en Python qui permet d'exécuter en parallèle des commandes local et distantes sur des nœuds d'un cluster. Elle fournit également 3 outils en ligne de commande (script utilitaires basés dessus) qui nous permettent de bénéficier des fonctionnalités de la bibliothèque: clush,nodeset et clubak.
+\\
+Ce projet nous demande de réalisé et de développer un outils en ligne de commande de gestion distribué des service de systèmes permettant d'administrer ces services sur plusieurs nœuds, et cela en utilisant l'API Python ClusterShell.
+\\
+Nous allons donc dans un premier temps implémenter une version basique de gestion de services avec des fonctionnalités simple comme : start, stop, restart , etc.. sur un ensemble de nœuds distant. Puis une fois cette base réalisé, nous allons mettre en place une configuration statique de la répartition des services grâce à des fichiers. Et pour finir nous développerons une IHM à partir des éléments déjà crée afin de parfaire l'outil de gestion des services distribué. 
+
+\subsection{Présentation des outils}
+\label{sub:1.2}
+Commençons tout d'abords par définir les 3 fonctionnalités de la bibliothèques de ClusterShell définit plus haut:crush,nodeset et clubak.
+\\
+\begin{itemize}
+\item Nodeset : Permet la création et la manipulation de liste de nœuds . En effet on peut créer des listes machines ainsi que des ranges de nœuds, on peut effectuer plusieurs opérations sur ces listes ( union, exclusion, intersection , etc...)
+\item Clush : Permet l'exécution des commandes en parallèle sur des machines distantes, prends également en charge les groupes.
+\item Clubak : Regroupement de sorties standards qui permet de présenter de manière synthétique un résultat d'exécution un peu trop verbeux.
+\end{itemize}
+
+\section{Gestion des Services}
+\label{sec:section2}
+
+\section{Configuration des Services}
+\label{sec:section3}
+
+\section{Création d'une IHM}
+\label{sec:section4}
+
+\section{Sources}
+\label{sec:section5}
+
+
+\end{document}
