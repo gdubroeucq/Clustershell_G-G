@@ -3,4 +3,5 @@ FORMS += \
     configuration_IHM.ui
 
 OTHER_FILES += \
-    IHM.py
+    IHM.py \
+    cluster.py

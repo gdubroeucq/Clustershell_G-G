@@ -9,9 +9,21 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>546</width>
-    <height>456</height>
+    <width>554</width>
+    <height>455</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>554</width>
+    <height>455</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>554</width>
+    <height>455</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Configuration</string>
@@ -20,9 +32,9 @@
    <property name="geometry">
     <rect>
      <x>5</x>
-     <y>10</y>
+     <y>30</y>
      <width>321</width>
-     <height>441</height>
+     <height>421</height>
     </rect>
    </property>
   </widget>
@@ -124,6 +136,19 @@
    </property>
    <property name="text">
     <string>Fermer</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>110</x>
+     <y>10</y>
+     <width>121</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Liste des services</string>
    </property>
   </widget>
  </widget>

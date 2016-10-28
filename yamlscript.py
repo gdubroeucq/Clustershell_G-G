@@ -138,7 +138,8 @@ def clustershell(doc,service):  # Commandes distribuées
             printout("%s%s:  state=%s    nodes=%s\n" % (name,space,state,nodes), YELLOW)
             printout("Error depend %s: le(s) service(s) %s n'est(sont) pas activé(s) ou installé(s)\n" % (error_nodes,result), RED)
             print("")
-            recap.append(0)
+            for yop in range(0,len(name_split)):
+                recap.append(0)
     return recap
 
 def recap(service,recap):
@@ -150,7 +151,6 @@ def recap(service,recap):
     for g in range(0,len(service)):
         name=service[g]
         name_split=service[g].split(",")
-        
         for p in range(0,len(name_split)):
             if(recap[z]==1):
                 recap_value="[%s]%s" % (name,name_split[p])
@@ -166,6 +166,7 @@ def recap(service,recap):
                 print(recap_final),
                 printout("        failed=1\n", RED)
             z=z+1
+        
         print("")
  
 def main():

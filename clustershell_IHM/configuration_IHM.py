@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'configuration_IHM.ui'
 #
-# Created: Thu Oct 27 22:46:04 2016
+# Created: Fri Oct 28 16:51:01 2016
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -27,9 +27,11 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName(_fromUtf8("Form"))
         Form.setEnabled(True)
-        Form.resize(546, 456)
+        Form.resize(554, 455)
+        Form.setMinimumSize(QtCore.QSize(554, 455))
+        Form.setMaximumSize(QtCore.QSize(554, 455))
         self.listWidget = QtGui.QListWidget(Form)
-        self.listWidget.setGeometry(QtCore.QRect(5, 10, 321, 441))
+        self.listWidget.setGeometry(QtCore.QRect(5, 30, 321, 421))
         self.listWidget.setObjectName(_fromUtf8("listWidget"))
         self.comboBox = QtGui.QComboBox(Form)
         self.comboBox.setGeometry(QtCore.QRect(370, 80, 141, 29))
@@ -56,6 +58,9 @@ class Ui_Form(object):
         self.pushButton_3 = QtGui.QPushButton(Form)
         self.pushButton_3.setGeometry(QtCore.QRect(390, 410, 95, 31))
         self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
+        self.label = QtGui.QLabel(Form)
+        self.label.setGeometry(QtCore.QRect(110, 10, 121, 21))
+        self.label.setObjectName(_fromUtf8("label"))
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -68,4 +73,5 @@ class Ui_Form(object):
         self.pushButton.setText(_translate("Form", "Ajouter", None))
         self.pushButton_2.setText(_translate("Form", "Supprimer", None))
         self.pushButton_3.setText(_translate("Form", "Fermer", None))
+        self.label.setText(_translate("Form", "Liste des services", None))
 
