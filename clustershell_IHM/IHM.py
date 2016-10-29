@@ -74,6 +74,9 @@ if __name__=='__main__':
         etatnoeud_IHM.main()
 
     def check_etat_noeud():
+        etatnoeud_IHM.listWidget.clear()
+
+        i = 1
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Information)
         msg.setWindowTitle("Erreur")
@@ -81,16 +84,26 @@ if __name__=='__main__':
         if (noeuds!=""):
             try:
                 nodeset = NodeSet(str(noeuds))
-
+                msg.setWindowTitle("Information des noeuds")
+                msg.setText("Voici les résultats:")
                 for node in nodeset:
-                    cli = "service ssh status"
+                    cli = "echo Hello"
+                    out=""
                     taske = task_self()
                     taske.shell(cli, nodes=node)
                     taske.run()
 
-                    for output, nodelist in taske.iter_errors():
-                        print "tot"
-                        print output, nodelist
+                    for output, nodelist in task_self().iter_buffers():
+                        if(output=="Hello"):
+                            etatnoeud_IHM.listWidget.insertItem(i,"%s: OK" % nodelist)
+                            i = i + 1
+                            print "%s: OK" % nodelist
+
+                        else:
+                            etatnoeud_IHM.listWidget.insertItem(i,"%s: %s" % (nodelist,output))
+                            i = i + 1
+                            print "%s: %s" % (nodelist,output)
+
 
             except:
                 print("Oups ! Problème de syntaxe")
@@ -99,7 +112,7 @@ if __name__=='__main__':
 
 
 
-                #print('Erreur: %s: %s\n' % (NodeSet.fromlist(nodelist), output))
+
 
         else:
             msg.setText("Veuillez rentrer un ou plusieur noeuds")
