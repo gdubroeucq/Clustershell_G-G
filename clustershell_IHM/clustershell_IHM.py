@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'clustershell_IHM.ui'
 #
-# Created: Fri Oct 28 16:51:17 2016
+# Created: Sat Oct 29 16:19:00 2016
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -32,11 +32,11 @@ class Ui_MainWindow(object):
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.pushButton = QtGui.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(370, 510, 95, 31))
+        self.pushButton.setGeometry(QtCore.QRect(370, 520, 95, 31))
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
         self.pushButton_2 = QtGui.QPushButton(self.centralwidget)
         self.pushButton_2.setEnabled(False)
-        self.pushButton_2.setGeometry(QtCore.QRect(120, 510, 95, 31))
+        self.pushButton_2.setGeometry(QtCore.QRect(120, 520, 95, 31))
         self.pushButton_2.setAutoFillBackground(False)
         self.pushButton_2.setCheckable(False)
         self.pushButton_2.setAutoDefault(False)
@@ -48,11 +48,16 @@ class Ui_MainWindow(object):
         self.listWidget.setMouseTracking(True)
         self.listWidget.setObjectName(_fromUtf8("listWidget"))
         self.label = QtGui.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(260, 510, 91, 21))
+        self.label.setGeometry(QtCore.QRect(250, 520, 91, 21))
         self.label.setObjectName(_fromUtf8("label"))
         self.label_2 = QtGui.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(270, 10, 61, 21))
         self.label_2.setObjectName(_fromUtf8("label_2"))
+        self.progressBar = QtGui.QProgressBar(self.centralwidget)
+        self.progressBar.setEnabled(False)
+        self.progressBar.setGeometry(QtCore.QRect(110, 490, 351, 23))
+        self.progressBar.setProperty("value", 0)
+        self.progressBar.setObjectName(_fromUtf8("progressBar"))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 592, 27))

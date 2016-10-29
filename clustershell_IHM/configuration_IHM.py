@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'configuration_IHM.ui'
 #
-# Created: Fri Oct 28 16:51:01 2016
+# Created: Sat Oct 29 17:05:52 2016
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -61,6 +61,9 @@ class Ui_Form(object):
         self.label = QtGui.QLabel(Form)
         self.label.setGeometry(QtCore.QRect(110, 10, 121, 21))
         self.label.setObjectName(_fromUtf8("label"))
+        self.pushButton_4 = QtGui.QPushButton(Form)
+        self.pushButton_4.setGeometry(QtCore.QRect(390, 330, 95, 31))
+        self.pushButton_4.setObjectName(_fromUtf8("pushButton_4"))
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -74,4 +77,5 @@ class Ui_Form(object):
         self.pushButton_2.setText(_translate("Form", "Supprimer", None))
         self.pushButton_3.setText(_translate("Form", "Fermer", None))
         self.label.setText(_translate("Form", "Liste des services", None))
+        self.pushButton_4.setText(_translate("Form", "Importer", None))
 
