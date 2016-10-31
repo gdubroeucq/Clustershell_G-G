@@ -7,9 +7,7 @@ from PyQt4.QtCore import pyqtSlot
 from PyQt4.QtGui import *
 
 from ClusterShell.Task import task_self, NodeSet
-from cluster import clustershell,fichier,typeservice,recap_cluster
-
-import clustershell_IHM,configuration_IHM,etatnoeud_IHM
+from cluster import clustershell,fichier,typeservice,recap_cluster,fichier2,check_service2,check_attribut2
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -17,6 +15,10 @@ except AttributeError:
     _fromUtf8 = lambda s: s
 
 import sys,datetime,os,yaml
+
+
+import clustershell_IHM,configuration_IHM,etatnoeud_IHM,check_noeud
+from ClusterShell.Task import task_self, NodeSet
 
 
 class clustershell_IHM(QtGui.QMainWindow, clustershell_IHM.Ui_MainWindow):
@@ -27,7 +29,6 @@ class clustershell_IHM(QtGui.QMainWindow, clustershell_IHM.Ui_MainWindow):
         self.setupUi(self)
         #self.label.setText("test")
         self.progressBar.hide()
-        self.pushButton_3.setEnabled(False)
     def main(self):
         self.show()
 
@@ -39,7 +40,6 @@ class configuration_IHM(QtGui.QWidget, configuration_IHM.Ui_Form):
         self.comboBox.addItem("stop")
         self.comboBox.addItem("restart")
         self.comboBox.addItem("reload")
-        self.comboBox.addItem("status")
     def main(self):
         self.show()
 
@@ -50,6 +50,11 @@ class etatnoeud_IHM(QtGui.QWidget, etatnoeud_IHM.Ui_Form):
         self.setupUi(self)
     def main(self):
         self.show()
+
+
+
+
+
 
 if __name__=='__main__':
     app=QtGui.QApplication(sys.argv)
@@ -82,11 +87,11 @@ if __name__=='__main__':
                     noeuds=""
                     QMessageBox.about(configuration_IHM,"Erreur","Syntaxe noeuds incorrect")
                 if( ok==1 and name!="" and noeuds!="" and dependance!=""):
-                    configuration_IHM.listWidget.addItem(u"%d: %s %s ON %s (depend %s)"%(configuration_IHM.listWidget.count()+1,name,action,noeuds,dependance))
+                    configuration_IHM.listWidget.addItem("%d: %s %s ON %s (depend %s)"%(configuration_IHM.listWidget.count()+1,name,action,noeuds,dependance))
                     clustershell_IHM.list_service.append(typeservice(name,action,noeuds,dependance))
                     print("c'est cool")
                 if(ok==1 and name!="" and noeuds!="" and dependance==""):
-                    configuration_IHM.listWidget.addItem(u"%d: %s %s ON %s"%(configuration_IHM.listWidget.count()+1,name,action,noeuds))
+                    configuration_IHM.listWidget.addItem("%d: %s %s ON %s"%(configuration_IHM.listWidget.count()+1,name,action,noeuds))
                     clustershell_IHM.list_service.append(typeservice(name,action,noeuds))
             else:
                 QMessageBox.about(configuration_IHM,"Erreur","Attribut noeuds manquant")
@@ -149,13 +154,8 @@ if __name__=='__main__':
     def close_window_etat():
         etatnoeud_IHM.close()
 
-    def open_file_browsers(self):
-        dlg = QFileDialog()
-        dlg.setFileMode(QFileDialog.AnyFile)
-        filename = dlg.getOpenFileName(etatnoeud_IHM, 'Ouverture Fichier','/home/', 'File (*.yaml)')
-        print filename
-        if(os.path.isfile(filename)==True):   # vérifie l'existence du fichier yaml
-            fichier = filename
+    def open_file_browsers():
+        fichier2(etatnoeud_IHM)
 
 
     def on_item_clicked():
@@ -179,7 +179,6 @@ if __name__=='__main__':
         del(clustershell_IHM.list_recap[:])
         clustershell_IHM.listWidget.clear()
         clustershell_IHM.progressBar.reset()
-        clustershell_IHM.progressBar.setValue(0)
         clustershell_IHM.progressBar.update()
         clustershell_IHM.progressBar.show()
         for i in range(0,len(clustershell_IHM.list_service)):
@@ -189,17 +188,11 @@ if __name__=='__main__':
             dependance=clustershell_IHM.list_service[i].dependance
             if(clustershell_IHM.list_service[i].dependance==""):
                 #clustershell_IHM.listWidget.insertItem(clustershell_IHM.listWidget.count()+1,"%s %s ON %s" % (nom,action,noeuds))
-                string="** %s %s ON %s" % (nom,action,noeuds)
-                print len(string)
-                star= '*' * (70-len(string))
-                clustershell_IHM.listWidget.addItem(u"%s %s" % (string,star))
-                print("** %s %s ON %s *********************************" % (nom,action,noeuds))
+                clustershell_IHM.listWidget.addItem("%s %s ON %s *********************************" % (nom,action,noeuds))
+                print("%s %s ON %s *********************************" % (nom,action,noeuds))
             else:
-                string="** %s %s ON %s (depend: %s)" % (nom,action,noeuds,dependance)
-                print len(string)
-                star= '*' * (70-len(string))
-                clustershell_IHM.listWidget.addItem(u"%s %s" % (string,star))
-                print("** %s %s ON %s (depend: %s) ********************" % (nom,action,noeuds,dependance))
+                clustershell_IHM.listWidget.addItem("%s %s ON %s (depend: %s) ********************" % (nom,action,noeuds,dependance))
+                print("%s %s ON %s (depend: %s) ********************" % (nom,action,noeuds,dependance))
 
 
             clustershell(clustershell_IHM,clustershell_IHM.list_service,i)
@@ -207,7 +200,6 @@ if __name__=='__main__':
             clustershell_IHM.progressBar.update()
         clustershell_IHM.progressBar.setValue(100)
         clustershell_IHM.progressBar.update()
-        clustershell_IHM.pushButton_3.setEnabled(True)
 
     def resultat():
         print("")
@@ -244,7 +236,6 @@ if __name__=='__main__':
                             fich.write("Output: %s\n" % b.output)
                     print("")
                     fich.write("\n")
-                    clustershell_IHM.pushButton_3.setEnabled(False)
 
 
     def item_selected():

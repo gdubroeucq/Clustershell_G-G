@@ -48,7 +48,7 @@ def check_depend(clustershell_IHM,service,name,j):
             for output, nodelist in taske.iter_buffers():
                 result.append(serv_split[m])
                 print("/!\ Avortement /!\ %s: le service %s n'est pas activé ou installé" % (NodeSet.fromlist(nodelist),serv_split[m]))
-                clustershell_IHM.listWidget.addItem(u"$ Avortement %s: le service %s n'est pas activé ou installé" % (NodeSet.fromlist(nodelist),serv_split[m]))
+                clustershell_IHM.listWidget.addItem("Avortement %s: le service %s n'est pas activé ou installé" % (NodeSet.fromlist(nodelist),serv_split[m]))
                 dep="Avortement %s: le service %s n'est pas activé ou installé" % (NodeSet.fromlist(nodelist),serv_split[m])
                 clustershell_IHM.list_recap.append(recap_cluster(serv,serv_split[m],NodeSet.fromlist(nodelist),0,1,dep))
 
@@ -77,17 +77,17 @@ def clustershell(clustershell_IHM,service,i):
             nodeset= NodeSet(nodes)
             for output, nodelist in task.iter_buffers():
                 print("FAIL %s: %s %s" %(name_split[n],NodeSet.fromlist(nodelist), output))
-                clustershell_IHM.listWidget.addItem(u"$ FAIL %s: %s %s" %(name_split[n],NodeSet.fromlist(nodelist), output))
+                clustershell_IHM.listWidget.addItem("FAIL %s: %s %s" %(name_split[n],NodeSet.fromlist(nodelist), output))
                 nodeset.remove(NodeSet.fromlist(nodelist))
                 clustershell_IHM.list_recap.append(recap_cluster(name,name_split[n],NodeSet.fromlist(nodelist),0,2,output))
             if(str(nodeset)!=nodes):
                 if(len(nodeset)>0):
                     print("OK %s: %s" % (name_split[n],nodeset))
-                    clustershell_IHM.listWidget.addItem(u"$ OK %s: %s" % (name_split[n],nodeset))
+                    clustershell_IHM.listWidget.addItem("OK %s: %s" % (name_split[n],nodeset))
                     clustershell_IHM.list_recap.append(recap_cluster(name,name_split[n],nodeset,1))
             if(str(nodeset)==nodes):
                 print("OK %s: %s" % (name_split[n],nodes))
-                clustershell_IHM.listWidget.addItem(u"$ OK %s: %s" % (name_split[n],nodes))
+                clustershell_IHM.listWidget.addItem("OK %s: %s" % (name_split[n],nodes))
                 clustershell_IHM.list_recap.append(recap_cluster(name,name_split[n],nodes,1))
             #if(out==output):
             #    print("OK")
@@ -95,10 +95,8 @@ def clustershell(clustershell_IHM,service,i):
 
 def check_service(doc):
     if(isinstance(doc,list)==True and len(doc)>=1): # vérification de la structure du fichier YAML
-        #print("D'après le fichier \"%s\", les services concernés sont:" % sys.argv[1])
         return(True)
     else:
-        print("/!\\ Erreur syntaxe dans \"%s\" /!\\" % sys.argv[1])
         return(False)
 
 def add_key(doc):  # remet les services dans le bon ordre
@@ -144,10 +142,10 @@ def check_attribut(doc,service,clustershell_IHM,configuration_IHM):
             if(doc[i].get(name).get("depend")!=None):
                 dependance=doc[i].get(name).get("depend")
                 print dependance
-                configuration_IHM.listWidget.addItem(u"%d: %s %s ON %s (depend %s)"%(configuration_IHM.listWidget.count()+1,name,action,str(nodeset),dependance))
+                configuration_IHM.listWidget.addItem("%d: %s %s ON %s (depend %s)"%(configuration_IHM.listWidget.count()+1,name,action,str(nodeset),dependance))
                 clustershell_IHM.list_service.append(typeservice(name,action,noeuds,dependance))
             else:
-                configuration_IHM.listWidget.addItem(u"%d: %s %s ON %s"%(configuration_IHM.listWidget.count()+1,name,action,str(nodeset)))
+                configuration_IHM.listWidget.addItem("%d: %s %s ON %s"%(configuration_IHM.listWidget.count()+1,name,action,str(nodeset)))
                 clustershell_IHM.list_service.append(typeservice(name,action,noeuds))
 
     return(True)
@@ -162,7 +160,7 @@ def fichier(clustershell_IHM,configuration_IHM):
     with open(filename,'r') as stream:
         try:
             doc=yaml.safe_load(stream)
-            if(check_service(doc)):
+            if(check_service2(doc)):
                 service=add_key(doc)
                 if(check_attribut(doc,service,clustershell_IHM,configuration_IHM)):
                     return(True)
@@ -171,5 +169,65 @@ def fichier(clustershell_IHM,configuration_IHM):
             QMessageBox.about(configuration_IHM,"Erreur Fichier YAML","%s" % exc)
             print(exc)
             return(False)
+
+def fichier2(etatnoeud_IHM):
+    dlg = QFileDialog()
+    dlg.setFileMode(QFileDialog.AnyFile)
+
+    filename = dlg.getOpenFileName(etatnoeud_IHM, 'Explorateur','/home/', 'File (*.*)')
+    with open(filename,'r') as stream:
+        try:
+            doc=yaml.safe_load(stream)
+            if(check_service2(doc,etatnoeud_IHM,filename)):
+                service=add_key(doc)
+                if(check_attribut2(doc,service,etatnoeud_IHM)):
+                    return(True)
+
+        except yaml.YAMLError as exc:
+            QMessageBox.about(etatnoeud_IHM,"Erreur Fichier YAML","%s" % exc)
+            print(exc)
+            return(False)
+
+
+def check_service2(doc,etatnoeud_IHM,filename):
+    if(isinstance(doc,list)==True and len(doc)>=1): # vérification de la structure du fichier YAML
+        return(True)
+    else:
+        QMessageBox.about(etatnoeud_IHM,"Erreur Syntaxe dans","%s" % filename)
+        return(False)
+
+def check_attribut2(doc,service,etatnoeud_IHM):
+    for i in range(0,len(service)):
+        ok=0
+        name=service[i]
+        if(doc[i].get(name).has_key("state")==False):
+            print("/!\\ attribut \"state\" manquant pour %d: %s /!\\" % (i,name))
+            QMessageBox.about(etatnoeud_IHM,"Erreur","/!\\ attribut \"state\" manquant pour %d: %s /!\\" % (i+1,name))
+            return(False)
+        if not(doc[i].get(name).get("state") in ['start','stop','status','reload']):
+            print("/!\\ attribut \"state\" doit être [start/stop/status/reload] pour %d: %s /!\\" % (i,name))
+            QMessageBox.about(etatnoeud_IHM,"Erreur","/!\\ attribut \"state\" doit être [start/stop/status/reload] pour %d: %s /!\\" % (i+1,name))
+            return(False)
+        if(doc[i].get(name).has_key("nodes")==False or doc[i].get(name).get("nodes")==None):
+            print("/!\\ attribut \"nodes\" manquant pour %d: %s /!\\" % (i,name))
+            QMessageBox.about(etatnoeud_IHM,"Erreur","/!\\ attribut \"nodes\" manquant pour %d: %s /!\\" % (i+1,name))
+            return(False)
+        try:               # vérifie les erreurs de syntaxe pour les node
+            nodeset=NodeSet(doc[i].get(name).get("nodes"))
+            ok=1
+        except:
+            QMessageBox.about(etatnoeud_IHM,"Erreur","/!\\ Problème avec la syntaxe de \"%s\" pour %d: %s /!\\" % (doc[i].get(name).get("nodes"),i,name))
+            print("/!\\ Problème avec la syntaxe de \"%s\" pour %d: %s /!\\" % (doc[i].get(name).get("nodes"),i+1,name))
+            print("\n")
+            return(False)
+
+    if(ok==1):
+        for i in range(0,len(service)):
+            print "toto"
+
+    return(True)
+
+
+
 
 

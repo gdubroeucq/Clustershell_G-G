@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'clustershell_IHM.ui'
 #
-# Created: Mon Oct 31 23:47:24 2016
+# Created: Mon Oct 31 19:59:39 2016
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -61,7 +61,7 @@ class Ui_MainWindow(object):
         self.progressBar.setProperty("value", 0)
         self.progressBar.setObjectName(_fromUtf8("progressBar"))
         self.pushButton_3 = QtGui.QPushButton(self.centralwidget)
-        self.pushButton_3.setGeometry(QtCore.QRect(340, 520, 111, 31))
+        self.pushButton_3.setGeometry(QtCore.QRect(350, 520, 95, 31))
         self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
         self.pushButton_4 = QtGui.QPushButton(self.centralwidget)
         self.pushButton_4.setGeometry(QtCore.QRect(460, 520, 121, 31))
@@ -88,6 +88,6 @@ class Ui_MainWindow(object):
         self.pushButton_2.setText(_translate("MainWindow", "Lancer", None))
         self.label.setText(_translate("MainWindow", "0 action(s)", None))
         self.label_2.setText(_translate("MainWindow", "Console", None))
-        self.pushButton_3.setText(_translate("MainWindow", "Générer un log", None))
+        self.pushButton_3.setText(_translate("MainWindow", "Résultat", None))
         self.pushButton_4.setText(_translate("MainWindow", "Etat des noeuds", None))
 

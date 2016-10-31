@@ -6,7 +6,9 @@ FORMS += \
 OTHER_FILES += \
     IHM.py \
 <<<<<<< HEAD \
-    cluster.py
+    cluster.py \
+    check_noeud.py \
+    ../yamlscript.py
     cluster.py
 =======
     etatnoeud_IHM.py \

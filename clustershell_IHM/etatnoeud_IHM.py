@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'etatnoeud_IHM.ui'
 #
-# Created: Mon Oct 31 20:00:18 2016
+# Created: Mon Oct 31 19:34:55 2016
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -110,8 +110,8 @@ class Ui_Form(object):
         self.label_3.setText(_translate("Form", "Noeud(s)", None))
         self.lineEdit.setPlaceholderText(_translate("Form", "noeuds", None))
         self.pushButton_3.setText(_translate("Form", "Parcourir", None))
-        self.pushButton.setText(_translate("Form", "OK", None))
-        self.pushButton_2.setText(_translate("Form", "Annuler", None))
+        self.pushButton.setText(_translate("Form", "Lancer", None))
+        self.pushButton_2.setText(_translate("Form", "Fermer", None))
         self.label_2.setText(_translate("Form", "Noeud(s) actif(s)", None))
         self.label.setText(_translate("Form", "Noeud(s) inactifs(s)", None))
 
