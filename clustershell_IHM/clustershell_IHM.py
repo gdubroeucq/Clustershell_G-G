@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'clustershell_IHM.ui'
 #
-# Created: Sun Oct 30 16:11:10 2016
+# Created: Mon Oct 31 19:59:39 2016
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -33,6 +33,8 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.pushButton = QtGui.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(120, 520, 95, 31))
+        self.pushButton.setCheckable(True)
+        self.pushButton.setDefault(False)
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
         self.pushButton_2 = QtGui.QPushButton(self.centralwidget)
         self.pushButton_2.setEnabled(False)
@@ -61,6 +63,9 @@ class Ui_MainWindow(object):
         self.pushButton_3 = QtGui.QPushButton(self.centralwidget)
         self.pushButton_3.setGeometry(QtCore.QRect(350, 520, 95, 31))
         self.pushButton_3.setObjectName(_fromUtf8("pushButton_3"))
+        self.pushButton_4 = QtGui.QPushButton(self.centralwidget)
+        self.pushButton_4.setGeometry(QtCore.QRect(460, 520, 121, 31))
+        self.pushButton_4.setObjectName(_fromUtf8("pushButton_4"))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 592, 27))
@@ -84,4 +89,5 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "0 action(s)", None))
         self.label_2.setText(_translate("MainWindow", "Console", None))
         self.pushButton_3.setText(_translate("MainWindow", "Résultat", None))
+        self.pushButton_4.setText(_translate("MainWindow", "Etat des noeuds", None))
 

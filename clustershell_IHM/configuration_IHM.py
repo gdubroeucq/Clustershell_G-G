@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'configuration_IHM.ui'
 #
-# Created: Sat Oct 29 17:05:52 2016
+# Created: Mon Oct 31 20:00:03 2016
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
