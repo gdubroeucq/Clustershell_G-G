@@ -48,7 +48,7 @@ def check_depend(clustershell_IHM,service,name,j):
             for output, nodelist in taske.iter_buffers():
                 result.append(serv_split[m])
                 print("/!\ Avortement /!\ %s: le service %s n'est pas activé ou installé" % (NodeSet.fromlist(nodelist),serv_split[m]))
-                clustershell_IHM.listWidget.addItem("Avortement %s: le service %s n'est pas activé ou installé" % (NodeSet.fromlist(nodelist),serv_split[m]))
+                clustershell_IHM.listWidget.addItem(u"$ Avortement %s: le service %s n'est pas activé ou installé" % (NodeSet.fromlist(nodelist),serv_split[m]))
                 dep="Avortement %s: le service %s n'est pas activé ou installé" % (NodeSet.fromlist(nodelist),serv_split[m])
                 clustershell_IHM.list_recap.append(recap_cluster(serv,serv_split[m],NodeSet.fromlist(nodelist),0,1,dep))
 
@@ -77,17 +77,17 @@ def clustershell(clustershell_IHM,service,i):
             nodeset= NodeSet(nodes)
             for output, nodelist in task.iter_buffers():
                 print("FAIL %s: %s %s" %(name_split[n],NodeSet.fromlist(nodelist), output))
-                clustershell_IHM.listWidget.addItem("FAIL %s: %s %s" %(name_split[n],NodeSet.fromlist(nodelist), output))
+                clustershell_IHM.listWidget.addItem(u"$ FAIL %s: %s %s" %(name_split[n],NodeSet.fromlist(nodelist), output))
                 nodeset.remove(NodeSet.fromlist(nodelist))
                 clustershell_IHM.list_recap.append(recap_cluster(name,name_split[n],NodeSet.fromlist(nodelist),0,2,output))
             if(str(nodeset)!=nodes):
                 if(len(nodeset)>0):
                     print("OK %s: %s" % (name_split[n],nodeset))
-                    clustershell_IHM.listWidget.addItem("OK %s: %s" % (name_split[n],nodeset))
+                    clustershell_IHM.listWidget.addItem(u"$ OK %s: %s" % (name_split[n],nodeset))
                     clustershell_IHM.list_recap.append(recap_cluster(name,name_split[n],nodeset,1))
             if(str(nodeset)==nodes):
                 print("OK %s: %s" % (name_split[n],nodes))
-                clustershell_IHM.listWidget.addItem("OK %s: %s" % (name_split[n],nodes))
+                clustershell_IHM.listWidget.addItem(u"$ OK %s: %s" % (name_split[n],nodes))
                 clustershell_IHM.list_recap.append(recap_cluster(name,name_split[n],nodes,1))
             #if(out==output):
             #    print("OK")
@@ -144,10 +144,10 @@ def check_attribut(doc,service,clustershell_IHM,configuration_IHM):
             if(doc[i].get(name).get("depend")!=None):
                 dependance=doc[i].get(name).get("depend")
                 print dependance
-                configuration_IHM.listWidget.addItem("%d: %s %s ON %s (depend %s)"%(configuration_IHM.listWidget.count()+1,name,action,str(nodeset),dependance))
+                configuration_IHM.listWidget.addItem(u"%d: %s %s ON %s (depend %s)"%(configuration_IHM.listWidget.count()+1,name,action,str(nodeset),dependance))
                 clustershell_IHM.list_service.append(typeservice(name,action,noeuds,dependance))
             else:
-                configuration_IHM.listWidget.addItem("%d: %s %s ON %s"%(configuration_IHM.listWidget.count()+1,name,action,str(nodeset)))
+                configuration_IHM.listWidget.addItem(u"%d: %s %s ON %s"%(configuration_IHM.listWidget.count()+1,name,action,str(nodeset)))
                 clustershell_IHM.list_service.append(typeservice(name,action,noeuds))
 
     return(True)
