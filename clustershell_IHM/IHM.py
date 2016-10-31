@@ -6,7 +6,7 @@
 from PyQt4 import QtGui, QtCore
 from PyQt4.QtCore import pyqtSlot
 from PyQt4.QtGui import *
-import sys
+import sys,os,yaml
 
 import clustershell_IHM,configuration_IHM,etatnoeud_IHM,check_noeud
 from ClusterShell.Task import task_self, NodeSet
@@ -33,10 +33,11 @@ class configuration_IHM(QtGui.QWidget, configuration_IHM.Ui_Form):
         self.show()
 
 class etatnoeud_IHM(QtGui.QWidget, etatnoeud_IHM.Ui_Form):
+    sortie = []
+
     def __init__(self, parent=None):
         super(etatnoeud_IHM, self).__init__(parent)
         self.setupUi(self)
-
     def main(self):
         self.show()
 
@@ -74,45 +75,41 @@ if __name__=='__main__':
         etatnoeud_IHM.main()
 
     def check_etat_noeud():
+
         etatnoeud_IHM.listWidget.clear()
+        etatnoeud_IHM.listWidget_2.clear()
+        etatnoeud_IHM.listWidget_3.clear()
 
         i = 1
         msg = QMessageBox()
-        msg.setIcon(QMessageBox.Information)
+        msg.setIcon(QMessageBox.Warning)
         msg.setWindowTitle("Erreur")
         noeuds = etatnoeud_IHM.lineEdit.text()
         if (noeuds!=""):
             try:
                 nodeset = NodeSet(str(noeuds))
-                msg.setWindowTitle("Information des noeuds")
-                msg.setText("Voici les résultats:")
+                print nodeset
                 for node in nodeset:
                     cli = "echo Hello"
-                    out=""
                     taske = task_self()
                     taske.shell(cli, nodes=node)
                     taske.run()
 
                     for output, nodelist in task_self().iter_buffers():
                         if(output=="Hello"):
-                            etatnoeud_IHM.listWidget.insertItem(i,"%s: OK" % nodelist)
+
+                            etatnoeud_IHM.listWidget.insertItem(i,"%s" % (NodeSet.fromlist(nodelist)))
                             i = i + 1
-                            print "%s: OK" % nodelist
 
                         else:
-                            etatnoeud_IHM.listWidget.insertItem(i,"%s: %s" % (nodelist,output))
+                            etatnoeud_IHM.listWidget_2.insertItem(i,"%s" % (NodeSet.fromlist(nodelist)))
                             i = i + 1
-                            print "%s: %s" % (nodelist,output)
-
+                            etatnoeud_IHM.sortie.append(output)
+                            print "output: %s" % output
 
             except:
-                print("Oups ! Problème de syntaxe")
-
-
-
-
-
-
+                msg.setText("Oups ! Probleme")
+                msg.exec_()
 
         else:
             msg.setText("Veuillez rentrer un ou plusieur noeuds")
@@ -125,12 +122,17 @@ if __name__=='__main__':
     def open_file_browsers(self):
         dlg = QFileDialog()
         dlg.setFileMode(QFileDialog.AnyFile)
-
         filename = dlg.getOpenFileName(etatnoeud_IHM, 'Ouverture Fichier','/home/', 'File (*.yaml)')
         print filename
+        if(os.path.isfile(filename)==True):   # vérifie l'existence du fichier yaml
+            fichier = filename
 
 
-
+    def on_item_clicked():
+        index = etatnoeud_IHM.listWidget_2.currentRow()
+        print "index: %s" % index
+        etatnoeud_IHM.listWidget_3.clear()
+        etatnoeud_IHM.listWidget_3.insertItem(1,str(etatnoeud_IHM.sortie[index]))
 
     def close():
         configuration_IHM.close()
@@ -145,6 +147,7 @@ if __name__=='__main__':
     etatnoeud_IHM.pushButton_2.clicked.connect(close_window_etat)
     etatnoeud_IHM.pushButton_3.clicked.connect(open_file_browsers)
     etatnoeud_IHM.pushButton.clicked.connect(check_etat_noeud)
+    etatnoeud_IHM.listWidget_2.currentItemChanged.connect(on_item_clicked)
 
 
     clustershell_IHM.main()
