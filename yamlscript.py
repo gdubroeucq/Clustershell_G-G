@@ -17,8 +17,9 @@
 #                   nodes: node[1-10]
 #                   depend: vsphere
 #
-#
-#
+# ./yamlscript example.yaml [-force]
+# -force: Bypass la confirmation humaine, utile si on veut automatiser par exemple 
+# Il est fortement conseiller de tester son fichier de configuration une fois avant de l'automatiser.
 
 import yaml,sys,os
 from ClusterShell.Task import task_self, NodeSet
@@ -183,12 +184,22 @@ def main():
                    #debug(doc) # information (optionnel)
                     if(check_service(doc)): # Contrôle les services
                         service=add_key(doc) # Met les services en état
-                        while(rep !='y' and rep !='n'):
-                            rep = raw_input("Confirmer (y/n) : ")
-                        if(rep=='y'):
-                            print ""
-                            if(check_attribut(doc,service)): # Contrôle les attributs des services
-                                recapitulatif=clustershell(doc,service)  
+                        passe=0
+                        for r in sys.argv:
+                            if(r=="-force"):
+                                passe=1
+                        if(passe==0):     
+                            while(rep !='y' and rep !='n'):
+                                rep = raw_input("Confirmer (y/n) : ")
+                            if(rep=='y'):
+                                print ""
+                                if(check_attribut(doc,service)): # Contrôle les attributs des services
+                                    recapitulatif=clustershell(doc,service)  
+                                    recap(service,recapitulatif)
+                                print ""
+                        else:
+                            if(check_attribut(doc,service)):
+                                recapitulatif=clustershell(doc,service)
                                 recap(service,recapitulatif)
                             print ""
                          
