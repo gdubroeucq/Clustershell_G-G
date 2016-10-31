@@ -6,27 +6,21 @@ from PyQt4 import QtGui, QtCore
 from PyQt4.QtCore import pyqtSlot
 from PyQt4.QtGui import *
 from ClusterShell.Task import task_self, NodeSet
-from cluster import clustershell,fichier,typeservice
+from cluster import clustershell,fichier,typeservice,recap_cluster
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
 except AttributeError:
     _fromUtf8 = lambda s: s
 
-import sys
+import sys,datetime
 
 import clustershell_IHM,configuration_IHM
 
 
-#class typeservice:
-#    def __init__(self,nom,action,noeuds,dependance=""):
-#        self.nom=nom
-#        self.action=action
-#        self.noeuds=noeuds
-#        self.dependance=dependance
-
 class clustershell_IHM(QtGui.QMainWindow, clustershell_IHM.Ui_MainWindow):
     list_service=[]
+    list_recap=[]
     def __init__(self, parent=None):
         super(clustershell_IHM, self).__init__(parent)
         self.setupUi(self)
@@ -61,6 +55,7 @@ if __name__=='__main__':
         configuration_IHM.lineEdit.clear()
         configuration_IHM.lineEdit_2.clear()
         configuration_IHM.lineEdit_3.clear()
+        configuration_IHM.pushButton_2.setEnabled(False)
         configuration_IHM.main()
 
     def on_click_add_service():
@@ -94,6 +89,7 @@ if __name__=='__main__':
         service_number=configuration_IHM.listWidget.currentRow()
         configuration_IHM.listWidget.takeItem(service_number)
         del clustershell_IHM.list_service[configuration_IHM.listWidget.currentRow()]
+        configuration_IHM.pushButton_2.setEnabled(False)
 
 
     def close():
@@ -105,13 +101,10 @@ if __name__=='__main__':
         configuration_IHM.close()
 
     def importer():
-        if(fichier(clustershell_IHM,configuration_IHM)):
-            print("OKKKKKKKKKKKKKKKKKK")
-            print(clustershell_IHM.list_service[0])
-
-
+        fichier(clustershell_IHM,configuration_IHM)
 
     def lancer():
+        del(clustershell_IHM.list_recap[:])
         clustershell_IHM.listWidget.clear()
         clustershell_IHM.progressBar.reset()
         clustershell_IHM.progressBar.update()
@@ -136,17 +129,57 @@ if __name__=='__main__':
         clustershell_IHM.progressBar.setValue(100)
         clustershell_IHM.progressBar.update()
 
+    def resultat():
+        print("")
+        if(len(clustershell_IHM.list_recap)>0):
+            for b in clustershell_IHM.list_recap:
+                if(b.resultat==1):
+                    print("OK: [%s] %s: %s" % (b.nom,b.nom_split,b.noeuds))
+                else:
+                    if(b.type==1):
+                        print("FAIL: [%s] %s: %s DEPENDANCE FAIL" % (b.nom,b.nom_split,b.noeuds))
+                        print("Output: %s" % b.output)
+                    elif(b.type==2):
+                        print("FAIL: [%s] %s: %s SERVICE FAIL" % (b.nom,b.nom_split,b.noeuds))
+                        print("Output: %s" % b.output)
+                print("")
+        date=datetime.datetime.now().strftime('%Y-%m-%d_%H:%M:%S')
+        print type(date)
+        if(len(clustershell_IHM.list_recap)>0):
+            with open("log_%s" % date,'w') as fich:
+                for b in clustershell_IHM.list_recap:
+                    if(b.resultat==1):
+                        print("OK: [%s] %s: %s" % (b.nom,b.nom_split,b.noeuds))
+                        fich.write("OK: [%s] %s: %s\n" % (b.nom,b.nom_split,b.noeuds))
+                    else:
+                        if(b.type==1):
+                            print("FAIL: [%s] %s: %s DEPENDANCE FAIL" % (b.nom,b.nom_split,b.noeuds))
+                            print("Output: %s" % b.output)
+                            fich.write("FAIL: [%s] %s: %s DEPENDANCE FAIL\n" % (b.nom,b.nom_split,b.noeuds))
+                            fich.write("Output: %s\n" % b.output)
+                        elif(b.type==2):
+                            print("FAIL: [%s] %s: %s SERVICE FAIL" % (b.nom,b.nom_split,b.noeuds))
+                            print("Output: %s" % b.output)
+                            fich.write("FAIL: [%s] %s: %s SERVICE FAIL\n" % (b.nom,b.nom_split,b.noeuds))
+                            fich.write("Output: %s\n" % b.output)
+                    print("")
+                    fich.write("\n")
 
 
+    def item_selected():
+        configuration_IHM.pushButton_2.setEnabled(True)
 
     #signaux
     clustershell_IHM.pushButton.clicked.connect(config)
     clustershell_IHM.pushButton_2.clicked.connect(lancer)
+    clustershell_IHM.pushButton_3.clicked.connect(resultat)
 
     configuration_IHM.pushButton.clicked.connect(on_click_add_service)
     configuration_IHM.pushButton_2.clicked.connect(on_click_delete_service)
     configuration_IHM.pushButton_3.clicked.connect(close)
     configuration_IHM.pushButton_4.clicked.connect(importer)
+    configuration_IHM.listWidget.itemClicked.connect(item_selected)
+
 
 
     clustershell_IHM.main()

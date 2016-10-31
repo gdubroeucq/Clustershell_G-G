@@ -22,6 +22,14 @@ class typeservice:
         self.noeuds=noeuds
         self.dependance=dependance
 
+class recap_cluster:
+    def __init__(self,nom,nom_split,noeuds,resultat,type=0,output=""):
+        self.nom=nom
+        self.nom_split=nom_split
+        self.noeuds=noeuds
+        self.resultat=resultat
+        self.type=type
+        self.output=output
 
 def check_depend(clustershell_IHM,service,name,j):
     if(service[j].dependance!=""):
@@ -39,9 +47,10 @@ def check_depend(clustershell_IHM,service,name,j):
             taske.run()
             for output, nodelist in taske.iter_buffers():
                 result.append(serv_split[m])
-                print("Avortement %s: le service %s n'est pas activé ou installé" % (NodeSet.fromlist(nodelist),serv_split[m]))
+                print("/!\ Avortement /!\ %s: le service %s n'est pas activé ou installé" % (NodeSet.fromlist(nodelist),serv_split[m]))
                 clustershell_IHM.listWidget.addItem("Avortement %s: le service %s n'est pas activé ou installé" % (NodeSet.fromlist(nodelist),serv_split[m]))
-
+                dep="Avortement %s: le service %s n'est pas activé ou installé" % (NodeSet.fromlist(nodelist),serv_split[m])
+                clustershell_IHM.list_recap.append(recap_cluster(serv,serv_split[m],NodeSet.fromlist(nodelist),0,1,dep))
 
     else:
         return(True,0)
@@ -70,18 +79,16 @@ def clustershell(clustershell_IHM,service,i):
                 print("FAIL %s: %s %s" %(name_split[n],NodeSet.fromlist(nodelist), output))
                 clustershell_IHM.listWidget.addItem("FAIL %s: %s %s" %(name_split[n],NodeSet.fromlist(nodelist), output))
                 nodeset.remove(NodeSet.fromlist(nodelist))
-            print "nodeset: %s" % str(nodeset)
-            print "nodes: %s" % nodes
+                clustershell_IHM.list_recap.append(recap_cluster(name,name_split[n],NodeSet.fromlist(nodelist),0,2,output))
             if(str(nodeset)!=nodes):
-                #print len(nodeset)
                 if(len(nodeset)>0):
-                    #print type(nodeset)
-                    #print("nodeset=%s" % nodeset)
                     print("OK %s: %s" % (name_split[n],nodeset))
                     clustershell_IHM.listWidget.addItem("OK %s: %s" % (name_split[n],nodeset))
+                    clustershell_IHM.list_recap.append(recap_cluster(name,name_split[n],nodeset,1))
             if(str(nodeset)==nodes):
                 print("OK %s: %s" % (name_split[n],nodes))
                 clustershell_IHM.listWidget.addItem("OK %s: %s" % (name_split[n],nodes))
+                clustershell_IHM.list_recap.append(recap_cluster(name,name_split[n],nodes,1))
             #if(out==output):
             #    print("OK")
             #    clustershell_IHM.listWidget.addItem("OK")
