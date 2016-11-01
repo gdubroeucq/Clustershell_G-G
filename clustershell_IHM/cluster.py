@@ -197,9 +197,12 @@ def check_service2(doc,etatnoeud_IHM,filename):
         return(False)
 
 def check_attribut2(doc,service,etatnoeud_IHM):
+    a = 0
+    new_nodeset = NodeSet()
     for i in range(0,len(service)):
         ok=0
         name=service[i]
+
         if(doc[i].get(name).has_key("state")==False):
             print("/!\\ attribut \"state\" manquant pour %d: %s /!\\" % (i,name))
             QMessageBox.about(etatnoeud_IHM,"Erreur","/!\\ attribut \"state\" manquant pour %d: %s /!\\" % (i+1,name))
@@ -214,6 +217,7 @@ def check_attribut2(doc,service,etatnoeud_IHM):
             return(False)
         try:               # vérifie les erreurs de syntaxe pour les node
             nodeset=NodeSet(doc[i].get(name).get("nodes"))
+            new_nodeset.update(nodeset)
             ok=1
         except:
             QMessageBox.about(etatnoeud_IHM,"Erreur","/!\\ Problème avec la syntaxe de \"%s\" pour %d: %s /!\\" % (doc[i].get(name).get("nodes"),i,name))
@@ -222,10 +226,39 @@ def check_attribut2(doc,service,etatnoeud_IHM):
             return(False)
 
     if(ok==1):
-        for i in range(0,len(service)):
-            print "toto"
+         check_etat_noeud2(etatnoeud_IHM,new_nodeset)
 
     return(True)
+
+def check_etat_noeud2(etatnoeud_IHM,nodeset):
+
+    etatnoeud_IHM.listWidget.clear()
+    etatnoeud_IHM.listWidget_2.clear()
+    etatnoeud_IHM.listWidget_3.clear()
+
+    i = 1
+
+    print nodeset
+    for node in nodeset:
+        cli = "echo Hello"
+        taske = task_self()
+        taske.shell(cli, nodes=node)
+        taske.run()
+
+        for output, nodelist in task_self().iter_buffers():
+            if(output=="Hello"):
+
+                etatnoeud_IHM.listWidget.insertItem(i,"%s" % (NodeSet.fromlist(nodelist)))
+                i = i + 1
+
+            else:
+                etatnoeud_IHM.listWidget_2.insertItem(i,"%s" % (NodeSet.fromlist(nodelist)))
+                i = i + 1
+                etatnoeud_IHM.sortie.append(output)
+                print "output: %s" % output
+
+
+
 
 
 
