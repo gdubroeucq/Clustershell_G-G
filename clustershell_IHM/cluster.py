@@ -160,7 +160,7 @@ def fichier(clustershell_IHM,configuration_IHM):
     with open(filename,'r') as stream:
         try:
             doc=yaml.safe_load(stream)
-            if(check_service2(doc)):
+            if(check_service(doc)):
                 service=add_key(doc)
                 if(check_attribut(doc,service,clustershell_IHM,configuration_IHM)):
                     return(True)

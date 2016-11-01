@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'etatnoeud_IHM.ui'
 #
-# Created: Mon Oct 31 19:34:55 2016
+# Created: Tue Nov  1 19:58:15 2016
 #      by: PyQt4 UI code generator 4.11.2
 #
 # WARNING! All changes made in this file will be lost!
@@ -74,6 +74,7 @@ class Ui_Form(object):
         self.horizontalLayout_3.setMargin(0)
         self.horizontalLayout_3.setObjectName(_fromUtf8("horizontalLayout_3"))
         self.pushButton = QtGui.QPushButton(self.horizontalLayoutWidget_3)
+        self.pushButton.setEnabled(False)
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
         self.horizontalLayout_3.addWidget(self.pushButton)
         spacerItem1 = QtGui.QSpacerItem(80, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
