@@ -1,3 +1,0 @@
-FAIL: [sqd] sqd: qd SERVICE FAIL
-Output: ssh: Could not resolve hostname qd: Name or service not known
-

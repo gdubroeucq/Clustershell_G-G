@@ -9,6 +9,7 @@
 \usepackage{geometry}
 \usepackage{ae}
 \usepackage{float}
+\usepackage{hyperref}
 
 
 
@@ -64,7 +65,7 @@
   
   %% Indiquez votre prénom et votre nom en lieu et place de "Prénom Nom"
   \vskip 3mm {\LARGE {\bf Guillaume Dubroeucq}} 
-  \\ \LARGE {\bf Théo Pocard}
+  \\ \LARGE {\bf Théo Poccard}
   \\ \LARGE {\bf Nicolas Chapron}
   
   %% Remplacez JJ et AAAA par le jour et l'année de votre soutenance
@@ -123,9 +124,41 @@ Commençons tout d'abords par définir les 3 fonctionnalités de la bibliothèqu
 
 \section{Création d'une IHM}
 \label{sec:section4}
+\subsection{Utilisation de Qt Creator et PyQt}
+
+Pour la création d'une interface graphique, nous nous sommes tournés vers l'environnement de développement Qt. Qt est basé sur le langage C++ pour créer ses IHM. Cependant il existe le module PyQt permettant de programmer en python une interface graphique aisément.\\
+\linebreak 
+Au départ, on utilise Qt Creator pour pouvoir créer les fenêtres avec tous les composants nécessaires. Lorsque l'on créé une fenêtre, Qt nous génère un fichier \textbf{.ui}. A l'aide de l'utilitaire \textbf{pyuic}, on peut convertir ce fichier en python.\pagebreak 
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.3]{conversion_ui_py.jpg}
+\caption{Conversion ui - py}
+\end{figure}
+
+Pour convertir on utilise la commande suivante: \textbf{pyuic4 fenêtre.ui > fenêtre.py}
+
+\subsubsection{Les signaux et les slots}
+Pour de la programmation événementielle, on utilise deux moyens qui sont propres à Qt: les signaux et les slots. Chaque composant graphique (comme un bouton) possède des signaux et des slots qui vont permettre d'intéragir avec d'autres composants et fonctions(exemple: ouvrir une fenête via un bouton).\\
+\linebreak
+\textbf{Un signal:} Un signal est un message envoyé par une classe lors du déclenchement d'un événement comme le clic sur un bouton\\
+\textbf{Les slots:} Les slots sont tout simplement des fonctions qui seront déclenchés par les signaux. Les fonctions peuvent être créés par nous même ou cela peut être des fonctions propres à une classe de Qt( exemple: la fonction \textbf{quit} de \textbf{QApplication} qui quitte le programme.\\
+Voici un petit exemple pour mieux comprendre:\\
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.5]{exemple_signal_slot.png}
+\caption{Les signaux et slots}
+\end{figure}\\
+Pour pouvoir assigner un slot à un signal on doit utilise la fonction \textbf{connect} que l'on définit dans la classe de notre fenêtre:
+\begin{center}
+\includegraphics[scale=0.4]{signal_slot.jpg} 
+\end{center}
 
 \section{Sources}
 \label{sec:section5}
-
+\textbf{Nodeset:} \url{http://clustershell.readthedocs.io/en/latest/api/NodeSet.html}\\
+\textbf{Task:} \url{http://clustershell.readthedocs.io/en/latest/api/Task.html}\\
+\textbf{Qt GUI:} \url {http://doc.qt.io/qt-4.8/qtgui-module.html}\\
+\url {https://pythonspot.com/en/pyqt4/}\\
+\url {http://pyqt.sourceforge.net/Docs/PyQt4/qtgui.html}
 
 \end{document}
