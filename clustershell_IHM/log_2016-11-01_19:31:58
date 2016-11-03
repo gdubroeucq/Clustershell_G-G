@@ -1,0 +1,6 @@
+FAIL: [dqsd] dqsd: qsdq SERVICE FAIL
+Output: ssh: Could not resolve hostname qsdq: Name or service not known
+
+FAIL: [dqssqqqqq] dqssqqqqq: eeee SERVICE FAIL
+Output: ssh: Could not resolve hostname eeee: Name or service not known
+

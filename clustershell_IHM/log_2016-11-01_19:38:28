@@ -1,0 +1,37 @@
+FAIL: [ssh,nginx] ssh: node1 DEPENDANCE FAIL
+Output: Avortement node1: le service ssh n'est pas activé ou installé
+
+FAIL: [ssh,nginx] nginx: node1 DEPENDANCE FAIL
+Output: Avortement node1: le service nginx n'est pas activé ou installé
+
+FAIL: [ssh,nginx] nginx: node[2-3] DEPENDANCE FAIL
+Output: Avortement node[2-3]: le service nginx n'est pas activé ou installé
+
+FAIL: [ssh] ssh: node123 SERVICE FAIL
+Output: ssh: Could not resolve hostname node123: Name or service not known
+
+FAIL: [nginx] nginx: node6 SERVICE FAIL
+Output: ssh: Could not resolve hostname node6: Name or service not known
+
+FAIL: [nginx] nginx: node7 SERVICE FAIL
+Output: ssh: Could not resolve hostname node7: Name or service not known
+
+FAIL: [nginx] nginx: node8 SERVICE FAIL
+Output: ssh: Could not resolve hostname node8: Name or service not known
+
+FAIL: [cron,ssh] cron: node1 SERVICE FAIL
+Output: Host key verification failed.
+
+FAIL: [cron,ssh] cron: node4 SERVICE FAIL
+Output: ssh: Could not resolve hostname node4: Name or service not known
+
+OK: [cron,ssh] cron: node[2-3]
+
+FAIL: [cron,ssh] ssh: node1 SERVICE FAIL
+Output: Host key verification failed.
+
+FAIL: [cron,ssh] ssh: node4 SERVICE FAIL
+Output: ssh: Could not resolve hostname node4: Name or service not known
+
+OK: [cron,ssh] ssh: node[2-3]
+

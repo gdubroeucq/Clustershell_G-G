@@ -1,0 +1,15 @@
+FAIL: [nginx] nginx: node1 DEPENDANCE FAIL
+Output: Avortement node1: le service nginx n'est pas activé ou installé
+
+FAIL: [nginx] nginx: node[2-3] DEPENDANCE FAIL
+Output: Avortement node[2-3]: le service nginx n'est pas activé ou installé
+
+FAIL: [ssh] ssh: node123 SERVICE FAIL
+Output: ssh: Could not resolve hostname node123: Name or service not known
+
+FAIL: [nginx] nginx: node1 SERVICE FAIL
+Output: Host key verification failed.
+
+FAIL: [nginx] nginx: node[2-3] SERVICE FAIL
+Output: Failed to start nginx.service: Unit nginx.service failed to load: No such file or directory.
+
