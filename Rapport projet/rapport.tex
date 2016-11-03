@@ -10,6 +10,7 @@
 \usepackage{ae}
 \usepackage{float}
 \usepackage{hyperref}
+\usepackage{listings}
 
 
 
@@ -124,9 +125,7 @@ Commençons tout d'abord par définir les 3 fonctionnalités de la bibliothèque
 \section{Création d'une IHM}
 \label{sec:section4}
 Pour la création d'une interface graphique, nous nous sommes tournés vers l'environnement de développement Qt. Qt est basé sur le langage C++ pour créer ses IHM. Cependant il existe le module PyQt permettant de programmer en python une interface graphique aisément.
-\subsection{Installation de Qt Creator et PyQt}
-
-\subsection{Utilisation de Qt Creator et PyQt}
+\subsection{Qt Creator et PyQt}
 Au départ, on utilise Qt Creator pour pouvoir créer les fenêtres avec tous les composants nécessaires. Lorsque l'on créé une fenêtre, Qt nous génère un fichier \textbf{.ui}. A l'aide de l'utilitaire \textbf{pyuic}, on peut convertir ce fichier en python. 
 \begin{figure}[hbtp]
 \centering
@@ -152,13 +151,75 @@ Pour pouvoir assigner un slot à un signal on doit utilise la fonction \textbf{c
 \includegraphics[scale=0.4]{signal_slot.jpg} 
 \end{center}
 
+\subsection{Visualisation des résultats}
+\begin{center}
+\includegraphics[scale=0.6]{fenetre_principale.png} 
+\end{center}
+La fenêtre principale est le point d'entrée de notre IHM, elle va permettre de visualiser la sortie de chaque noeud de notre cluster et d'analyser rapidement les résultats.\\
+Tout d'abord nous avons mis en place une autre fenêtre (accessible via le bouton "Etat des noeuds") permettant de vérifier l'état de noeuds. Ensuite nous pouvons configurer nos noeuds (via la fenêtre de configuration accessible via le bouton "Configuration").\\
+De plus nous avons trouvé qu'il était essentiel de garder une trace des résultats de tous les noeuds alors vous avons gardé en mémoire ces résultats dans des fichiers qui sont crées à partir du bouton "Résultat".
+
+\subsection{Configuration des services}
+
+\subsection{Vérification de l'état des noeuds}
+
+\begin{center}
+\includegraphics[scale=0.6]{fen_etat_noeud.png} 
+\end{center}
+
+Il est souvent utile de savoir si un noeud est bien présent ou non pour effectuer une quelconque tâche. On a alors créé une fenêtre permettant de lister les noeuds actifs et les noeuds qui ne répondaient.\\
+On a utilisé en tout 3 \textbf{QListWidgets}; une pour les noeuds actifs, une pour les noeuds qui ne répondaient pas et une dernière pour l'affichage des erreurs.\\
+Si l'utilisateur veut tester ses noeuds, il dispose de deux choix:
+\begin{itemize}
+ \item Chercher le(s) noeud(s) qu'il veut vérifier en les renseignant dans la barre de saisie (\textbf{QLineEdit} )
+ \item Si jamais l'utilisateur avait déjà écris sont fichier au format YAML pour pouvoir administrer ses services, il peut à par avance tester les noeuds dans ce noeud. Le fichier est récupérer via le bouton (\textbf{QPushButton}) "Parcourir".
+ \end{itemize}
+\subsubsection{Test des noeuds via la barre de saisie}
+Lorsque l'utilisateur tape une liste de noeuds et lance la vérification des noeuds via le bouton "Lancer", on utilise un signal qui va appeler une fonction de vérification des noeuds:\\
+\begin{lstlisting}
+etatnoeud_IHM.pushButton.clicked.connect(check_etat_noeud)
+\end{lstlisting}
+\textbf{Partie de la fonction de vérification des noeuds:}\\
+Pour tester si les noeuds sont actifs on a finalement lancé une commande sur le(s) noeud(s) en question et on à vérifié si le résultat était bien celui qu'on attendait. Ici j'ai simplement utilisé la commande "\textbf{echo Hello}".
+\begin{flushleft}
+\includegraphics[scale=1]{check_etatnoeud.png} 
+\end{flushleft}
+Détail du code:\\
+\begin{enumerate}
+\item Utilisation de \textbf{NodeSet} pour vérifier si ce que l'utilisateur a tapé correspond à la syntaxe d'un noeud.
+\item Utilisation de \textbf{Task} pour lancer la commande sur le(s) noeud(s)
+\item La boucle for permet de récupérer le résultat d'exécution de la commande sur les noeuds.
+\begin{itemize}
+\item Si la sortie (\textbf{output}) correspond bien à "Hello", on récupère le nonom du noeud et on l'ajoute dans la \textbf{QListWidget}.
+\item Sinon on l'ajoute dans l'autre \textbf{QListWidget} qui liste les noeuds non actifs.
+\end{itemize}
+\item Biensur on vérifie si quelque chose à bien été entré dans la barre de saisie. L'objet \textbf{msg} de type QMessageBox va afficher une boite de dialogue:\\
+\linebreak
+\begin{center}
+\includegraphics[scale=0.8]{messagebox.png} 
+\end{center}
+
+\end{enumerate}
+ 
+
+
+
+
+\subsubsection{Test des noeuds via un fichier}
+
 \subsection{Mise en place des résultats d'exécution dans des logs}
 \section{Sources}
 \label{sec:section5}
+\subsection{Références}
 \textbf{Nodeset:} \url{http://clustershell.readthedocs.io/en/latest/api/NodeSet.html}\\
 \textbf{Task:} \url{http://clustershell.readthedocs.io/en/latest/api/Task.html}\\
 \textbf{Qt GUI:} \url {http://doc.qt.io/qt-4.8/qtgui-module.html}\\
 \url {https://pythonspot.com/en/pyqt4/}\\
-\url {http://pyqt.sourceforge.net/Docs/PyQt4/qtgui.html}
+\url {http://pyqt.sourceforge.net/Docs/PyQt4/qtgui.html} \pagebreak
+\subsection{Arborescence des fichiers}
+\begin{center}
+\includegraphics[scale=0.7]{arborescence_fichiers_IHM.jpg} 
+\end{center}
+
 
 \end{document}
