@@ -40,6 +40,7 @@ class configuration_IHM(QtGui.QWidget, configuration_IHM.Ui_Form):
         self.comboBox.addItem("stop")
         self.comboBox.addItem("restart")
         self.comboBox.addItem("reload")
+        self.comboBox.addItem("status")
     def main(self):
         self.show()
 
@@ -87,11 +88,11 @@ if __name__=='__main__':
                     noeuds=""
                     QMessageBox.about(configuration_IHM,"Erreur","Syntaxe noeuds incorrect")
                 if( ok==1 and name!="" and noeuds!="" and dependance!=""):
-                    configuration_IHM.listWidget.addItem("%d: %s %s ON %s (depend %s)"%(configuration_IHM.listWidget.count()+1,name,action,noeuds,dependance))
+                    configuration_IHM.listWidget.addItem(u"%d: %s %s ON %s (depend %s)"%(configuration_IHM.listWidget.count()+1,name,action,noeuds,dependance))
                     clustershell_IHM.list_service.append(typeservice(name,action,noeuds,dependance))
                     print("c'est cool")
                 if(ok==1 and name!="" and noeuds!="" and dependance==""):
-                    configuration_IHM.listWidget.addItem("%d: %s %s ON %s"%(configuration_IHM.listWidget.count()+1,name,action,noeuds))
+                    configuration_IHM.listWidget.addItem(u"%d: %s %s ON %s"%(configuration_IHM.listWidget.count()+1,name,action,noeuds))
                     clustershell_IHM.list_service.append(typeservice(name,action,noeuds))
             else:
                 QMessageBox.about(configuration_IHM,"Erreur","Attribut noeuds manquant")
@@ -133,11 +134,11 @@ if __name__=='__main__':
                     for output, nodelist in task_self().iter_buffers():
                         if(output=="Hello"):
 
-                            etatnoeud_IHM.listWidget.insertItem(i,"%s" % (NodeSet.fromlist(nodelist)))
+                            etatnoeud_IHM.listWidget.insertItem(i,u"%s" % (NodeSet.fromlist(nodelist)))
                             i = i + 1
 
                         else:
-                            etatnoeud_IHM.listWidget_2.insertItem(i,"%s" % (NodeSet.fromlist(nodelist)))
+                            etatnoeud_IHM.listWidget_2.insertItem(i,u"%s" % (NodeSet.fromlist(nodelist)))
                             i = i + 1
                             etatnoeud_IHM.sortie.append(output)
                             print "output: %s" % output
@@ -188,10 +189,10 @@ if __name__=='__main__':
             dependance=clustershell_IHM.list_service[i].dependance
             if(clustershell_IHM.list_service[i].dependance==""):
                 #clustershell_IHM.listWidget.insertItem(clustershell_IHM.listWidget.count()+1,"%s %s ON %s" % (nom,action,noeuds))
-                clustershell_IHM.listWidget.addItem("%s %s ON %s *********************************" % (nom,action,noeuds))
+                clustershell_IHM.listWidget.addItem(u"%s %s ON %s *********************************" % (nom,action,noeuds))
                 print("%s %s ON %s *********************************" % (nom,action,noeuds))
             else:
-                clustershell_IHM.listWidget.addItem("%s %s ON %s (depend: %s) ********************" % (nom,action,noeuds,dependance))
+                clustershell_IHM.listWidget.addItem(u"%s %s ON %s (depend: %s) ********************" % (nom,action,noeuds,dependance))
                 print("%s %s ON %s (depend: %s) ********************" % (nom,action,noeuds,dependance))
 
 
