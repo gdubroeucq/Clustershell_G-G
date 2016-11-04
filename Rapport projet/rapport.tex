@@ -171,6 +171,156 @@ Pour ce faire, on utilise l'api python Clustershell qui va nous permettre de cr�
 
 \section{Script avec fichier de configuration}
 \label{sec:section4}
+\subsection{Présentation}
+\label{sub:4.1}
+
+Cette deuxième partie consiste à améliorer le script précédent en ajoutant un fichier de configuration. Le script aura besoin seulement d'un fichier de configuration en argument contrairement à précédemment où il avait besoin d'une description complète des noeuds, des services et des actions à effectuer. Le fichier de configuration regroupera en lui les actions à accomplir. Nous avons choisi d'utiliser le langage YAML pour le fichier de configuration.
+
+\subsection{YAML}
+\label{sub:4.2}
+\subsubsection{Présentation}
+\label{subsub:4.2.1}
+
+YAML (YAML Ain't Markup Language) est un format de représentation des données par sérialisation, c'est à dire que YAML fait passer d'un format de description ("human friendly") à un objet représenté par des combinaisons de listes, dictionnaires et données scalaires. 
+\\
+YAML est conçu pour être facilement manipulable par des humains (comme l'indique l'abréviation de YAML), il permet par la suite de facilement manipuler les données décrient par l'utilisateur dans beaucoup de langage (C/C++,Python,Java,PHP,...).
+
+\subsubsection{Fichier de configuration .YAML}
+\label{subsub:4.2.2}
+Nous allons voir comment se compose un fichier YAML, il y a énormément de manière de synthétiser un fichier YAML, nous ne pourrons pas voir toutes les possibilités offertes par ce langage.
+\smallbreak
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.7]{syntaxe_yaml.png}
+\end{figure}
+Dans notre cas, nous utilisons des collections (crées par l'indentation, voir l'exemple si dessus), il existe aussi les scalaires, c'est à dire l'ensemble des types qui ne sont pas des collections (donc aucune indentation), nous n'en utiliserons pas dans notre cas.
+\smallbreak
+Voici ci-dessous la syntaxe du fichier YAML utilisé dans notre script:
+\smallbreak
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.7]{syntaxe_yaml2.png}
+\end{figure}
+\pagebreak
+ 
+
+\subsection{Installation}
+\label{sub:4.3}
+
+Pour pouvoir utiliser le langage YAML, il faut au préalable installer le paquet "pyyaml" disponible dans le gestionnaire de paquets pip.
+\smallbreak
+\verb?pip install pyyaml?
+
+Par la suite, pour inclure YAML dans notre script python, il faut importer sa librairie:
+\smallbreak
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.7]{import_yaml.png}
+\end{figure}
+\smallbreak
+
+À présent, nous possédons tous les outils pour pouvoir utiliser YAML dans notre code python.
+
+\subsection{Script}
+\label{sub:4.4}
+
+Il suffit maintenant d'ouvrir le fichier YAML en question qui sera passer en argument du script de la façon suivante:
+\smallbreak
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.7]{recup_yaml.png}
+\end{figure}
+\smallbreak
+
+Si il n'y a pas d'erreur dans l'ouverture et la sérialisation, on récupère un objet python (dans ce cas la variable "doc") parfaitement fonctionnelle. 
+\smallbreak
+Il faut ainsi vérifier la syntaxe de cette objet pour s'assurer que l'utilisateur a bien respecter la syntaxe imposée par notre script:
+
+\smallbreak
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.7]{controle_yaml.png}
+\end{figure}
+\smallbreak
+
+La fonction \verb?check_service(doc)? permet une première vérification de la syntaxe du fichier YAML, notamment si le fichier comporte des listes (requis dans notre cas).
+\smallbreak
+La fonction \verb?add_key(doc)? permet de récupérer tout les services du fichier et les afficher à l'utilisateur, ce dernier devra valider lui même si les services affichés sont cohérent et dans ce cas là, valider. Il est possible d'outre passer cette vérification en ajoutant "-force" en argument, c'est utile si on a besoin d'automatiser le script. Il est toutefois fortement conseiller de vérifier le fichier YAML avant de l'automatiser. 
+
+\pagebreak
+
+Dès que l'utilisateur confirme le contenu du fichier ou qu'il ait forcé le passage avec "\verb?-force?", le script continu: 
+\smallbreak
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.7]{clustershell_yaml.png}
+\end{figure}
+\smallbreak
+
+
+La fonction \verb?check_attribut(doc,service)? permet de contrôler les attributs de chaque service pour vérifier si il n'en manque pas et qu'ils ne sont pas vide ou erroné.
+\smallbreak
+Après cette vérification, la fonction \verb?clustershell(doc,service)? est appellé, le script commence à vérifier notamment si il y a des dépendances grâce à une fonction interne à \verb?clustershell(doc,service)?  et dans ce cas, le script vérifie si les services dépendants sont installés et activés.Si ce il manque une dépendance, toutes les actions liées à cette dépendance sont annulées Si tout est bon, le script effectue sur les noeuds les commandes distribuées dans \verb?clustershell(doc,service)?.
+
+
+\subsection{Affichage}
+\label{sub:4.5}
+
+Notre setup de test est le suivant: 
+\begin{itemize}
+\item Un master
+\item 3 noeuds appelés respectivement node1,node2 et node3
+\end{itemize}
+La particularité est que seulement node1 possède nginx d'installé contrairement à node2 et node3.
+\smallbreak
+Tout les noeuds sont accessibles par le master par SSH sans mot de passe.
+On commence par un cas simple:
+\smallbreak
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.7]{example1_yaml.png}
+\caption{example1.yaml}
+\end{figure}
+
+On exécute le script avec le fichier example1.yaml en argument:
+\smallbreak
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.7]{execution_yaml.png}
+\caption{exécution du script}
+\end{figure}
+Le script nous demande de confirmer le contenu du fichier \verb?example1.yaml?, dans notre cas le script affiche bien le service cron. On rappelle que l'on peut outrepasser cette confirmation en ajoutant "\verb?-force?" en argument du script.
+\smallbreak
+
+\begin{figure}[H]
+		\centerline{\includegraphics[scale=0.7]{confirmation_yaml.png}}
+		\caption{Confirmation}
+\end{figure}
+\pagebreak
+Pour finir, le script fait son travail avec ClusterShell sur les noeuds indiqués et indique le résultat des commandes, si il y a "OK", cela veut dire que la commande sur l'intégralité des noeuds a été un succès. Il y a une partie "RECAP" qui permet de voir en fin de script sur quel service il y a eu des erreurs ou non.
+\smallbreak
+
+\begin{figure}[H]
+		\centerline{\includegraphics[scale=0.6]{resultat_yaml.png}}
+		\caption{Output de l'exécution example1.yaml}
+\end{figure}
+
+Maintenant nous allons faire un fichier yaml plus complet en provoquant volontairement des erreurs, voici le fichier \verb?example2.yaml?:
+
+\begin{figure}[H]
+		\centerline{\includegraphics[scale=0.6]{example2_yaml.png}}
+		\caption{example2.yaml}
+\end{figure}
+\noindent
+Ce fichier example2.yaml comporte des erreurs volontaires comme l'activation de nginx sur tout les noeuds (nginx est installé seulement sur node1), l'activation de ssh sur node123 (qui n'existe pas), ainsi que la dépendance nginx sur cron sur tout les noeuds.
+
+\begin{figure}[H]
+		\centerline{\includegraphics[scale=0.4]{resultat2_yaml.png}}
+		\caption{Output de l'exécution example2.yaml}
+\end{figure}
+
+On remarque les erreurs évidentes
+
 \pagebreak
 
 \section{Création d'une IHM}
@@ -305,5 +455,9 @@ Comme les fonctions utilisés n'etaient pas entièrement compatible avec le cont
 \textbf{Qt GUI:} \url {http://doc.qt.io/qt-4.8/qtgui-module.html}\\
 \url {https://pythonspot.com/en/pyqt4/}\\
 \url {http://pyqt.sourceforge.net/Docs/PyQt4/qtgui.html} 
+
+\subsection{Annexes}
+
+fonctions yaml
 
 \end{document}
