@@ -34,7 +34,6 @@
 %% Taille relative tolérée d'un objet flottant sur une page
 % (MODIFIABLE)
 \renewcommand{\floatpagefraction}{0.95}
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% DÉBUT DU DOCUMENT
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -202,6 +201,20 @@ Pour pouvoir assigner un slot à un signal on doit utilise la fonction \textbf{c
 \begin{center}
 \includegraphics[scale=0.4]{signal_slot.jpg} 
 \end{center}
+La définiton d'un slot ce fait exactement de la même manière que celle d'une fonction de base. Il faut également ajouter "\textbf{@pyqtSlot()}" devant la fonction. C'est grâce à pyqtSlot que Qt va savoir que ce sont des slots et non des fonctions.\\
+Voici un exemple:
+\begin{lstlisting}
+@pyqtSlot()
+def config():
+configuration_IHM.lineEdit.clear()
+configuration_IHM.lineEdit_2.clear()
+configuration_IHM.lineEdit_3.clear()
+configuration_IHM.pushButton_2.setEnabled(False)
+configuration_IHM.main()
+\end{lstlisting}
+
+Afin de mieux comprendre comment notre IHM à été créé, voici un récapitulatif de l'ensemble de nos fichiers python.\\
+\includegraphics[scale=0.5]{arborescence_fichiers_IHM.jpg} 
 
 \subsection{Visualisation des résultats}
 \begin{center}
@@ -245,7 +258,7 @@ Détail du code:\\
 \item Si la sortie (\textbf{output}) correspond bien à "Hello", on récupère le nonom du noeud et on l'ajoute dans la \textbf{QListWidget}.
 \item Sinon on l'ajoute dans l'autre \textbf{QListWidget} qui liste les noeuds non actifs.
 \end{itemize}
-\item Biensur on vérifie si quelque chose à bien été entré dans la barre de saisie. L'objet \textbf{msg} de type QMessageBox va afficher une boite de dialogue:\\
+\item Biensur on vérifie si quelque chose à bien été entré dans la barre de saisie. L'objet \textbf{msg} de type \textbf{QMessageBox} va afficher une boite de dialogue:\\
 \linebreak
 \begin{center}
 \includegraphics[scale=0.8]{messagebox.png} 
@@ -258,6 +271,7 @@ Détail du code:\\
 
 
 \subsubsection{Test des noeuds via un fichier}
+Lors de l'ouverture du fichier au format YAML, il était nécessaire de tester avant tout si la syntaxe du fichier était correcte. Comme cette vérification à déjà été faite auparavant lors de l'importation d'un fichier au niveau de la configuration des services, on à réécris une autre fonction basé sur l'ancienne en modifiant le code pour le rendre compatible avec le contexte.
 
 \subsection{Mise en place des résultats d'exécution dans des logs}
 \section{Sources}

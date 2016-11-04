@@ -110,7 +110,6 @@ if __name__=='__main__':
         etatnoeud_IHM.main()
 
     def check_etat_noeud():
-        etatnoeud_IHM.lineEdit.clear()
         etatnoeud_IHM.listWidget.clear()
         etatnoeud_IHM.listWidget_2.clear()
         etatnoeud_IHM.listWidget_3.clear()
@@ -120,6 +119,7 @@ if __name__=='__main__':
         msg.setIcon(QMessageBox.Warning)
         msg.setWindowTitle("Erreur")
         noeuds = etatnoeud_IHM.lineEdit.text()
+        print "noeuds %s" % noeuds
         if (noeuds!=""):
             try:
                 nodeset = NodeSet(str(noeuds))
@@ -161,7 +161,6 @@ if __name__=='__main__':
     def on_item_clicked():
         #etatnoeud_IHM.setEnabled(True)
         index = etatnoeud_IHM.listWidget_2.currentRow()
-        print "index: %s" % index
         etatnoeud_IHM.listWidget_3.clear()
         etatnoeud_IHM.listWidget_3.insertItem(1,str(etatnoeud_IHM.sortie[index]))
 
@@ -242,8 +241,6 @@ if __name__=='__main__':
     def item_selected():
         configuration_IHM.pushButton_2.setEnabled(True)
 
-    def on_text_edited():
-        etatnoeud_IHM.pushButton.setEnabled(True)
 
     #signaux
     clustershell_IHM.pushButton.clicked.connect(config)
@@ -261,9 +258,6 @@ if __name__=='__main__':
     etatnoeud_IHM.pushButton_3.clicked.connect(open_file_browsers)
     etatnoeud_IHM.pushButton.clicked.connect(check_etat_noeud)
     etatnoeud_IHM.listWidget_2.currentItemChanged.connect(on_item_clicked)
-
-    etatnoeud_IHM.lineEdit.textEdited.connect(on_text_edited)
-    etatnoeud_IHM.lineEdit.textChanged.connect(on_text_edited)
 
 
     clustershell_IHM.main()
