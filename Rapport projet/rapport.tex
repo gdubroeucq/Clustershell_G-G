@@ -380,15 +380,57 @@ Comme dans tout fichier python, une fonction main existe et doit être appelé p
 Afin de mieux comprendre comment notre IHM à été créé, voici un récapitulatif de l'ensemble de nos fichiers python est regroupé dans le dosser clustershell\_IHM.\\
 \includegraphics[scale=0.5]{arborescence_fichiers_IHM.jpg} 
 
+\subsection{Configuration des services}
+
+\begin{center}
+\includegraphics[scale=0.5]{configuration_IHM_photo.png} 
+\end{center}
+
+Cette fenêtre va servir de fenêtre intermédiaire avant l'affichage des résultats sur la fenêtre principale. 
+On dispose de deux choix:
+\begin{itemize}
+\item Importer un fichier au format YAML qui recense tous les noeuds et services que l'on veut administrer.
+\item Créer une liste de services ou l'on peut manuellement rentrer le noms des services voulu avec les noeuds.
+\end{itemize}
+Lorsque nos noeuds et services sont configurés, on utilise une liste (\textbf{QListWidget}) afin d'avoir un bref récapitulatif du lancement des séquences de tâches sur les noeuds à effectuer:
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{exemple_config_service.png}
+\caption{Séquences de tâches à exécuter}
+\end{figure}
+Il est possible d'ajouter plusieurs services (chaque service doit être séparé par une virgule) à la fois, pour plusieurs ensemble de noeuds.\\
+Dans \textbf{IHM.py} une fonction s'occupera d'ajouter les services dans la \textbf{QListWidget} pour les afficher ensuite. De plus,  lors de l'ajout / supression d'un service, toute les informations seront envoyés dans \textbf{cluster.py}.\\
+Il faut également gérer le cas des dépendances, car un service peut avoir besoin qu'un autre service soit installé / activé. Pour cela, on à créé une barre de saisie supplémentaire (dépendance) permettant de vérifier au préalable si le service en question est bien disponible.
+
 \subsection{Visualisation des résultats}
 \begin{center}
 \includegraphics[scale=0.6]{fenetre_principale.png} 
 \end{center}
 La fenêtre principale est le point d'entrée de notre IHM, elle va permettre de visualiser la sortie de chaque noeud de notre cluster et d'analyser rapidement les résultats.\\
-Tout d'abord nous avons mis en place une autre fenêtre (accessible via le bouton "Etat des noeuds") permettant de vérifier l'état de noeuds. Ensuite nous pouvons configurer nos noeuds (via la fenêtre de configuration accessible via le bouton "Configuration").\\
-De plus nous avons trouvé qu'il était essentiel de garder une trace des résultats de tous les noeuds alors vous avons gardé en mémoire ces résultats dans des fichiers qui sont crées à partir du bouton "Résultat".
+Une fois que la configuration des noeuds / services à été effectué dans la fenêtre de configuration, il est possible de lancer l'exécution des commandes via le bouton "\textbf{Lancer}" (cliquable uniquement si une liste de services à été créé via la fenêtre de configuration).\\
+\begin{figure}[H]
+\centering
+\includegraphics[scale=0.5]{exemple_affichage_console.png}
+\caption{Exemple de résultat d'exécution}
+\end{figure}
+\subsubsection{Affichage des résultats}
+\noindent L'affichage se fait simplement à l'aide d'une \textbf{QListWidget} qui va récupérer en entrée le résultat de l'exécution.\\
+\textbf{Ligne 1:} On récapitule la tâche qui est effectuée\\
+\textbf{Ligne 2,3:} Le résultat est affiché de manière claire avec une réponse de type FAIL ou OK.\\
+\linebreak
 
-\subsection{Configuration des services}
+\subsubsection{Détail de l'exécution}
+Nous avons également fait un compteur qui récapitule le nombres d'actions qui a été réalisé grâce à un composant de type \textbf{QLabel}. On à aussi implémenter une barre de progression qui permet de suivre approximativement l'avancement des l'exécution des tâches sur beaucoup de noeuds.\\
+Voici le code qui s'exécute lors du clic sur le bouton Lancer:
+
+\includegraphics[scale=0.45]{def_lancer.png} 
+
+
+
+
+
+\noindent Tout d'abord nous avons mis en place une autre fenêtre (accessible via le bouton "Etat des noeuds") permettant de vérifier l'état de noeuds. Ensuite nous pouvons configurer nos noeuds (via la fenêtre de configuration accessible via le bouton "Configuration").\\
+De plus nous avons trouvé qu'il était essentiel de garder une trace des résultats de tous les noeuds alors vous avons gardé en mémoire ces résultats dans des fichiers qui sont crées à partir du bouton "Résultat".
 
 \subsection{Vérification de l'état des noeuds}
 
@@ -396,7 +438,7 @@ De plus nous avons trouvé qu'il était essentiel de garder une trace des résul
 \includegraphics[scale=0.6]{fen_etat_noeud.png} 
 \end{center}
 
-Il est souvent utile de savoir si un noeud est bien présent ou non pour effectuer une quelconque tâche. On a alors créé une fenêtre permettant de lister les noeuds actifs et les noeuds qui ne répondaient.\\
+Il est souvent utile de savoir si un noeud est bien présent ou non pour effectuer une quelconque tâche. On a alors créé une fenêtre permettant de lister les noeuds actifs, des noeuds qui ne l'étaient pas.\\
 On a utilisé en tout 3 \textbf{QListWidgets}; une pour les noeuds actifs, une pour les noeuds qui ne répondaient pas et une dernière pour l'affichage des erreurs.\\
 Si l'utilisateur veut tester ses noeuds, il dispose de deux choix:
 \begin{itemize}
@@ -444,13 +486,13 @@ Comme les fonctions utilisés n'etaient pas entièrement compatible avec le cont
 \caption{Fonctions de configuration vs Fonctions de vérification de noeuds}
 \end{figure}
 
-\subsection{Configuration des noeuds}
+
 
 \subsection{Mise en place des résultats d'exécution dans des logs}
 \section{Sources}
 \label{sec:section6}
 \subsection{Références}
-\textbf{Nodeset:} \url{http://clustershell.readthedocs.io/en/latest/api/NodeSet.html}\\
+\noindent\textbf{Nodeset:} \url{http://clustershell.readthedocs.io/en/latest/api/NodeSet.html}\\
 \textbf{Task:} \url{http://clustershell.readthedocs.io/en/latest/api/Task.html}\\
 \textbf{Qt GUI:} \url {http://doc.qt.io/qt-4.8/qtgui-module.html}\\
 \url {https://pythonspot.com/en/pyqt4/}\\

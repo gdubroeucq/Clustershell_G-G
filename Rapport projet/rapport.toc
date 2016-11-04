@@ -9,6 +9,7 @@
 \contentsline {section}{\numberline {3}Script gestion des services}{5}{section.3}
 \contentsline {subsection}{\numberline {3.1}Pr\IeC {\'e}sentation}{5}{subsection.3.1}
 \contentsline {section}{\numberline {4}Script avec fichier de configuration}{6}{section.4}
+<<<<<<< HEAD
 \contentsline {subsection}{\numberline {4.1}Pr\IeC {\'e}sentation}{6}{subsection.4.1}
 \contentsline {subsection}{\numberline {4.2}YAML}{6}{subsection.4.2}
 \contentsline {subsubsection}{\numberline {4.2.1}Pr\IeC {\'e}sentation}{6}{subsubsection.4.2.1}
@@ -33,3 +34,22 @@
 \contentsline {section}{\numberline {6}Sources}{15}{section.6}
 \contentsline {subsection}{\numberline {6.1}R\IeC {\'e}f\IeC {\'e}rences}{15}{subsection.6.1}
 \contentsline {subsection}{\numberline {6.2}Annexes}{15}{subsection.6.2}
+=======
+\contentsline {section}{\numberline {5}Cr\IeC {\'e}ation d'une IHM}{7}{section.5}
+\contentsline {subsection}{\numberline {5.1}Qt Creator et PyQt}{7}{subsection.5.1}
+\contentsline {subsubsection}{\numberline {5.1.1}La conversion ui > py}{7}{subsubsection.5.1.1}
+\contentsline {subsubsection}{\numberline {5.1.2}Les classes d'interfaces graphique}{7}{subsubsection.5.1.2}
+\contentsline {subsubsection}{\numberline {5.1.3}Les signaux et les slots}{7}{subsubsection.5.1.3}
+\contentsline {subsubsection}{\numberline {5.1.4}Le programme principal}{8}{subsubsection.5.1.4}
+\contentsline {subsubsection}{\numberline {5.1.5}Arborescence des fichiers}{8}{subsubsection.5.1.5}
+\contentsline {subsection}{\numberline {5.2}Configuration des services}{9}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Visualisation des r\IeC {\'e}sultats}{10}{subsection.5.3}
+\contentsline {subsubsection}{\numberline {5.3.1}Affichage des r\IeC {\'e}sultats}{11}{subsubsection.5.3.1}
+\contentsline {subsubsection}{\numberline {5.3.2}D\IeC {\'e}tail de l'ex\IeC {\'e}cution}{11}{subsubsection.5.3.2}
+\contentsline {subsection}{\numberline {5.4}V\IeC {\'e}rification de l'\IeC {\'e}tat des noeuds}{12}{subsection.5.4}
+\contentsline {subsubsection}{\numberline {5.4.1}Test des noeuds via la barre de saisie}{13}{subsubsection.5.4.1}
+\contentsline {subsubsection}{\numberline {5.4.2}Test des noeuds via un fichier}{14}{subsubsection.5.4.2}
+\contentsline {subsection}{\numberline {5.5}Mise en place des r\IeC {\'e}sultats d'ex\IeC {\'e}cution dans des logs}{14}{subsection.5.5}
+\contentsline {section}{\numberline {6}Sources}{14}{section.6}
+\contentsline {subsection}{\numberline {6.1}R\IeC {\'e}f\IeC {\'e}rences}{14}{subsection.6.1}
+>>>>>>> origin/master
