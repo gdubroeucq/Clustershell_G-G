@@ -24,9 +24,11 @@ def main():
                         cli="service %s %s"% (sys.argv[i], sys.argv[i+1])
                         task.shell(cli, nodes=sys.argv[1])
                         task.run() 
-            for output, nodelist in task.iter_buffers():
-                print '\n'
-                print '%s: %s' % (NodeSet.fromlist(nodelist), output)
+                        for output, nodelist in task.iter_buffers():
+                            print ''
+                            print '%s: %s' % (NodeSet.fromlist(nodelist), output)
+                    else:
+                        print("Erreur: Veuillez vérifier que la commande soit compris dans [start,stop,status,restart,reload]")
         else:
             print("Erreur: Veuillez vérifier le nombre de paramètres")
 
