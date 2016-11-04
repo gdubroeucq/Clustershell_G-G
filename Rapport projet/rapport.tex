@@ -177,14 +177,23 @@ Pour ce faire, on utilise l'api python Clustershell qui va nous permettre de cr�
 \label{sec:section5}
 Pour la création d'une interface graphique, nous nous sommes tournés vers l'environnement de développement Qt. Qt est basé sur le langage C++ pour créer ses IHM. Cependant il existe le module PyQt permettant de programmer en python une interface graphique aisément.
 \subsection{Qt Creator et PyQt}
-Au départ, on utilise Qt Creator pour pouvoir créer les fenêtres avec tous les composants nécessaires. Lorsque l'on créé une fenêtre, Qt nous génère un fichier \textbf{.ui}. A l'aide de l'utilitaire \textbf{pyuic}, on peut convertir ce fichier en python. 
+\subsubsection{La conversion ui > py}
+Au départ, on utilise Qt Creator pour pouvoir créer les fenêtres avec tous les composants nécessaires. Lorsque l'on créé une fenêtre, Qt nous génère un fichier \textbf{.ui}. A l'aide de l'utilitaire \textbf{pyuic}, on peut convertir ce fichier en python.
 \begin{figure}[hbtp]
 \centering
 \includegraphics[scale=0.3]{conversion_ui_py.jpg}
 \caption{Conversion ui - py}
 \end{figure}
+Pour convertir on utilise la commande suivante: \textbf{pyuic4 fenêtre.ui > fenêtre.py}\linebreak
+\\
+\subsubsection{Les classes d'interfaces graphique}
+Dans notre fichier python (qui représente la fênetre) se trouve au final une classe qui porte le nom \textbf{Ui\_Form} pour une fenêtre ou \textbf{Ui\_MainWindow} si c'est la fenêtre principale. Das cette classe se trouve une fonction qui s'appelle \textbf{setupUI} et qui configurer tous les composants graphiques qui se trouve dans la fenêtre (exemple: un bouton avec sa taille de base, sa taille maximum etc...). C'est la première fonction à être appelé lors du lancement de la fenêtre.
+\linebreak
+Voici comment se déroule l'initialisation d'une fenêtre
+\begin{center}
+\includegraphics[scale=0.45]{initialisation_fenetre.jpg} 
+\end{center}
 
-Pour convertir on utilise la commande suivante: \textbf{pyuic4 fenêtre.ui > fenêtre.py}
 
 \subsubsection{Les signaux et les slots}
 Pour de la programmation événementielle, on utilise deux moyens qui sont propres à Qt: les signaux et les slots. Chaque composant graphique (comme un bouton) possède des signaux et des slots qui vont permettre d'intéragir avec d'autres composants et fonctions(exemple: ouvrir une fenête via un bouton).\\
@@ -202,18 +211,23 @@ Pour pouvoir assigner un slot à un signal on doit utilise la fonction \textbf{c
 \includegraphics[scale=0.4]{signal_slot.jpg} 
 \end{center}
 La définiton d'un slot ce fait exactement de la même manière que celle d'une fonction de base. Il faut également ajouter "\textbf{@pyqtSlot()}" devant la fonction. C'est grâce à pyqtSlot que Qt va savoir que ce sont des slots et non des fonctions.\\
-Voici un exemple:
+Voici un exemple de slot:
 \begin{lstlisting}
 @pyqtSlot()
-def config():
-configuration_IHM.lineEdit.clear()
-configuration_IHM.lineEdit_2.clear()
-configuration_IHM.lineEdit_3.clear()
-configuration_IHM.pushButton_2.setEnabled(False)
-configuration_IHM.main()
+def monslot():
+   print "Hello World"
 \end{lstlisting}
 
-Afin de mieux comprendre comment notre IHM à été créé, voici un récapitulatif de l'ensemble de nos fichiers python.\\
+\subsubsection{Le programme principal}
+
+Comme dans tout fichier python, une fonction main existe et doit être appelé pour lancer le programme principal. Le fichier python principal (\textbf{IHM.py}) va contenir:
+\begin{itemize}
+\item Les signaux et les slots
+\item Les classes d'interface graphique
+\item Le code lié aux interactions avec les composants graphiques
+\end{itemize}
+\subsubsection{Arborescence des fichiers}
+Afin de mieux comprendre comment notre IHM à été créé, voici un récapitulatif de l'ensemble de nos fichiers python est regroupé dans le dosser clustershell\_IHM.\\
 \includegraphics[scale=0.5]{arborescence_fichiers_IHM.jpg} 
 
 \subsection{Visualisation des résultats}
@@ -245,7 +259,8 @@ Lorsque l'utilisateur tape une liste de noeuds et lance la vérification des noe
 etatnoeud_IHM.pushButton.clicked.connect(check_etat_noeud)
 \end{lstlisting}
 \textbf{Partie de la fonction de vérification des noeuds:}\\
-Pour tester si les noeuds sont actifs on a finalement lancé une commande sur le(s) noeud(s) en question et on à vérifié si le résultat était bien celui qu'on attendait. Ici j'ai simplement utilisé la commande "\textbf{echo Hello}".
+Pour tester si les noeuds sont actifs on a finalement lancé une commande sur le(s) noeud(s) en question et on à vérifié si le résultat était bien celui qu'on attendait. Ici j'ai simplement utilisé la commande "\textbf{echo Hello}".\\
+Voici le code qui vérifie la présence et gère l'affichage des noeuds sur l'interface graphique:
 \begin{flushleft}
 \includegraphics[scale=1]{check_etatnoeud.png} 
 \end{flushleft}
@@ -271,7 +286,15 @@ Détail du code:\\
 
 
 \subsubsection{Test des noeuds via un fichier}
-Lors de l'ouverture du fichier au format YAML, il était nécessaire de tester avant tout si la syntaxe du fichier était correcte. Comme cette vérification à déjà été faite auparavant lors de l'importation d'un fichier au niveau de la configuration des services, on à réécris une autre fonction basé sur l'ancienne en modifiant le code pour le rendre compatible avec le contexte.
+Lors de l'ouverture du fichier au format YAML, il était nécessaire de tester avant tout si la syntaxe du fichier était correcte. Cependant cette vérification à déjà été faite auparavant lors de l'importation d'un fichier au niveau de la configuration des services.\\
+Comme les fonctions utilisés n'etaient pas entièrement compatible avec le contexte il a fallu écrire de nouvelles fonctions basé sur les anciennes en les modifiant.\\
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.5]{difference_importer_openfile.png}
+\caption{Fonctions de configuration vs Fonctions de vérification de noeuds}
+\end{figure}
+
+\subsection{Configuration des noeuds}
 
 \subsection{Mise en place des résultats d'exécution dans des logs}
 \section{Sources}
@@ -281,11 +304,6 @@ Lors de l'ouverture du fichier au format YAML, il était nécessaire de tester a
 \textbf{Task:} \url{http://clustershell.readthedocs.io/en/latest/api/Task.html}\\
 \textbf{Qt GUI:} \url {http://doc.qt.io/qt-4.8/qtgui-module.html}\\
 \url {https://pythonspot.com/en/pyqt4/}\\
-\url {http://pyqt.sourceforge.net/Docs/PyQt4/qtgui.html} \pagebreak
-\subsection{Arborescence des fichiers}
-\begin{center}
-\includegraphics[scale=0.7]{arborescence_fichiers_IHM.jpg} 
-\end{center}
-
+\url {http://pyqt.sourceforge.net/Docs/PyQt4/qtgui.html} 
 
 \end{document}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2016.11.4)  4 NOV 2016 10:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2016.11.4)  4 NOV 2016 12:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -725,10 +725,10 @@ LaTeX Info: Redefining \nameref on input line 41.
 \openout3 = `rapport.out'.
 
 \c@lstlisting=\count144
- <LogoUEVE.png, id=92, 291.9708pt x 292.9344pt>
-File: LogoUEVE.png Graphic file (type png)
 
-<use LogoUEVE.png>
+<LogoUEVE.png, id=108, 291.9708pt x 292.9344pt>
+File: LogoUEVE.png Graphic file (type png)
+ <use LogoUEVE.png>
 Package pdftex.def Info: LogoUEVE.png used on input line 58.
 (pdftex.def)             Requested size: 116.78624pt x 117.17168pt.
  [1
@@ -757,137 +757,159 @@ Underfull \hbox (badness 10000) in paragraph at lines 104--108
 
 [3
 
-] <from_clustershell.png, id=134, 477.785pt x 20.075pt>
+] <from_clustershell.png, id=155, 477.785pt x 20.075pt>
 File: from_clustershell.png Graphic file (type png)
 
 <use from_clustershell.png>
 Package pdftex.def Info: from_clustershell.png used on input line 155.
 (pdftex.def)             Requested size: 334.44722pt x 14.05238pt.
  [4 <./from_clustershell.png>] [5] [6]
-<conversion_ui_py.jpg, id=151, 716.6775pt x 319.1925pt>
+<conversion_ui_py.jpg, id=173, 716.6775pt x 319.1925pt>
 File: conversion_ui_py.jpg Graphic file (type jpg)
 
 <use conversion_ui_py.jpg>
-Package pdftex.def Info: conversion_ui_py.jpg used on input line 183.
+Package pdftex.def Info: conversion_ui_py.jpg used on input line 184.
 (pdftex.def)             Requested size: 215.00491pt x 95.75848pt.
 
-<exemple_signal_slot.png, id=152, 422.57875pt x 236.885pt>
-File: exemple_signal_slot.png Graphic file (type png)
-
-<use exemple_signal_slot.png>
-Package pdftex.def Info: exemple_signal_slot.png used on input line 197.
-(pdftex.def)             Requested size: 211.28885pt x 118.4422pt.
-
-Underfull \hbox (badness 10000) in paragraph at lines 190--201
-
- []
-
-<signal_slot.jpg, id=153, 473.77pt x 149.55875pt>
-File: signal_slot.jpg Graphic file (type jpg)
- <use signal_slot.jpg>
-Package pdftex.def Info: signal_slot.jpg used on input line 202.
-(pdftex.def)             Requested size: 189.50464pt x 59.82243pt.
-
-[7 <./conversion_ui_py.jpg> <./exemple_signal_slot.png>]
-<arborescence_fichiers_IHM.jpg, id=164, 755.82375pt x 377.41pt>
-File: arborescence_fichiers_IHM.jpg Graphic file (type jpg)
-
-<use arborescence_fichiers_IHM.jpg>
-Package pdftex.def Info: arborescence_fichiers_IHM.jpg used on input line 217.
-(pdftex.def)             Requested size: 377.91095pt x 188.70453pt.
-
-<fenetre_principale.png, id=165, 444.15938pt x 504.38437pt>
-File: fenetre_principale.png Graphic file (type png)
-
-<use fenetre_principale.png>
-Package pdftex.def Info: fenetre_principale.png used on input line 221.
-(pdftex.def)             Requested size: 266.49767pt x 302.63295pt.
- [8 <./signal_slot.jpg> <./arborescence_fichiers_IHM.jpg>] <fen_etat_noeud.png,
- id=178, 555.57562pt x 481.8pt>
-File: fen_etat_noeud.png Graphic file (type png)
-
-<use fen_etat_noeud.png>
-Package pdftex.def Info: fen_etat_noeud.png used on input line 232.
-(pdftex.def)             Requested size: 333.34793pt x 289.08221pt.
- [9 <./fenetre_principale.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 243--244
-
- []
-
-<check_etatnoeud.png, id=184, 510.40688pt x 327.47343pt>
-File: check_etatnoeud.png Graphic file (type png)
-
-<use check_etatnoeud.png>
-Package pdftex.def Info: check_etatnoeud.png used on input line 250.
-(pdftex.def)             Requested size: 510.40562pt x 327.47264pt.
- [10 <./fen_etat_noeud.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 252--253
+Underfull \hbox (badness 10000) in paragraph at lines 181--189
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 261--263
+Underfull \hbox (badness 10000) in paragraph at lines 181--189
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 261--263
-
+Underfull \hbox (badness 10000) in paragraph at lines 190--193
+\T1/aer/m/n/10.95 lors du lan-ce-ment de la fe-nêtre.
  []
 
-<messagebox.png, id=191, 252.19218pt x 185.19188pt>
-File: messagebox.png Graphic file (type png)
- <use messagebox.png>
-Package pdftex.def Info: messagebox.png used on input line 264.
-(pdftex.def)             Requested size: 201.75401pt x 148.15369pt.
+<initialisation_fenetre.jpg, id=174, 1211.52625pt x 187.70125pt>
+File: initialisation_fenetre.jpg Graphic file (type jpg)
 
-[11 <./check_etatnoeud.png> <./messagebox.png>]
-LaTeX Font Info:    Try loading font information for T1+aett on input line 280.
+<use initialisation_fenetre.jpg>
+Package pdftex.def Info: initialisation_fenetre.jpg used on input line 194.
+(pdftex.def)             Requested size: 545.18178pt x 84.46478pt.
 
-
-(/usr/share/texlive/texmf-dist/tex/latex/ae/t1aett.fd
-File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
-) [12]
-File: arborescence_fichiers_IHM.jpg Graphic file (type jpg)
-
-<use arborescence_fichiers_IHM.jpg>
-Package pdftex.def Info: arborescence_fichiers_IHM.jpg used on input line 287.
-(pdftex.def)             Requested size: 529.07301pt x 264.1852pt.
-
-Overfull \hbox (16.92339pt too wide) in paragraph at lines 287--288
+Overfull \hbox (33.03215pt too wide) in paragraph at lines 194--195
  [] 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 291.
-[13]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 291.
+<exemple_signal_slot.png, id=175, 422.57875pt x 236.885pt>
+File: exemple_signal_slot.png Graphic file (type png)
+
+<use exemple_signal_slot.png>
+Package pdftex.def Info: exemple_signal_slot.png used on input line 206.
+(pdftex.def)             Requested size: 211.28885pt x 118.4422pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 199--210
+
+ []
+
+[7 <./conversion_ui_py.jpg> <./initialisation_fenetre.jpg>]
+<signal_slot.jpg, id=184, 473.77pt x 149.55875pt>
+File: signal_slot.jpg Graphic file (type jpg)
+ <use signal_slot.jpg>
+Package pdftex.def Info: signal_slot.jpg used on input line 211.
+(pdftex.def)             Requested size: 189.50464pt x 59.82243pt.
+
+<arborescence_fichiers_IHM.jpg, id=185, 755.82375pt x 377.41pt>
+File: arborescence_fichiers_IHM.jpg Graphic file (type jpg)
+
+<use arborescence_fichiers_IHM.jpg>
+Package pdftex.def Info: arborescence_fichiers_IHM.jpg used on input line 231.
+(pdftex.def)             Requested size: 377.91095pt x 188.70453pt.
+ [8 <./exemple_signal_slot.png> <./signal_slot.jpg>] <fenetre_principale.png, i
+d=196, 444.15938pt x 504.38437pt>
+File: fenetre_principale.png Graphic file (type png)
+
+<use fenetre_principale.png>
+Package pdftex.def Info: fenetre_principale.png used on input line 235.
+(pdftex.def)             Requested size: 266.49767pt x 302.63295pt.
+
+<fen_etat_noeud.png, id=197, 555.57562pt x 481.8pt>
+File: fen_etat_noeud.png Graphic file (type png)
+ <use fen_etat_noeud.png>
+Package pdftex.def Info: fen_etat_noeud.png used on input line 246.
+(pdftex.def)             Requested size: 333.34793pt x 289.08221pt.
+
+[9 <./arborescence_fichiers_IHM.jpg> <./fenetre_principale.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 257--258
+
+ []
+
+<check_etatnoeud.png, id=204, 510.40688pt x 327.47343pt>
+File: check_etatnoeud.png Graphic file (type png)
+
+<use check_etatnoeud.png>
+Package pdftex.def Info: check_etatnoeud.png used on input line 265.
+(pdftex.def)             Requested size: 510.40562pt x 327.47264pt.
+ [10 <./fen_etat_noeud.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 267--268
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 276--278
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 276--278
+
+ []
+
+<messagebox.png, id=211, 252.19218pt x 185.19188pt>
+File: messagebox.png Graphic file (type png)
+ <use messagebox.png>
+Package pdftex.def Info: messagebox.png used on input line 279.
+(pdftex.def)             Requested size: 201.75401pt x 148.15369pt.
+
+<difference_importer_openfile.png, id=212, 692.5875pt x 224.84pt>
+File: difference_importer_openfile.png Graphic file (type png)
+
+<use difference_importer_openfile.png>
+Package pdftex.def Info: difference_importer_openfile.png used on input line 29
+3.
+(pdftex.def)             Requested size: 346.2929pt x 112.41972pt.
+ [11 <./check_etatnoeud.png> <./messagebox.png>]
+LaTeX Font Info:    Try loading font information for T1+aett on input line 303.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/ae/t1aett.fd
+File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
+)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 309.
+ [12 <./difference_importer_openfile.png>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 309.
  (./rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 291.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 291.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 309.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 309.
 Package rerunfilecheck Info: File `rapport.out' has not changed.
-(rerunfilecheck)             Checksum: BE8040DE4BBD396DA0C7C2F70B9E44C4;1524.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 291.
+(rerunfilecheck)             Checksum: 5670EDA50DE86FE91AF4C8307504E366;1865.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 309.
  ) 
 Here is how much of TeX's memory you used:
- 10513 strings out of 494950
- 145082 string characters out of 6179040
- 248389 words of memory out of 5000000
- 13488 multiletter control sequences out of 15000+600000
+ 10527 strings out of 494950
+ 145515 string characters out of 6179040
+ 249389 words of memory out of 5000000
+ 13500 multiletter control sequences out of 15000+600000
  39314 words of font info for 83 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 29i,8n,35p,518b,992s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,8n,35p,531b,992s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/tex
-live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-d
-ist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fon
-ts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/typ
-e1/public/amsfonts/cm/cmtt10.pfb>
-Output written on rapport.pdf (13 pages, 303279 bytes).
+live/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmmib10.pfb></usr/share/texlive/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fo
+nts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/typ
+e1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmtt10.pfb>
+Output written on rapport.pdf (12 pages, 328348 bytes).
 PDF statistics:
- 257 PDF objects out of 1000 (max. 8388607)
- 218 compressed objects within 3 object streams
+ 278 PDF objects out of 1000 (max. 8388607)
+ 234 compressed objects within 3 object streams
  54 named destinations out of 1000 (max. 500000)
- 227 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 269 words of extra memory for PDF output out of 10000 (max. 10000000)
 
