@@ -16,12 +16,13 @@
 \contentsline {subsubsection}{\numberline {5.1.3}Les signaux et les slots}{7}{subsubsection.5.1.3}
 \contentsline {subsubsection}{\numberline {5.1.4}Le programme principal}{8}{subsubsection.5.1.4}
 \contentsline {subsubsection}{\numberline {5.1.5}Arborescence des fichiers}{8}{subsubsection.5.1.5}
-\contentsline {subsection}{\numberline {5.2}Visualisation des r\IeC {\'e}sultats}{9}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}Configuration des services}{10}{subsection.5.3}
-\contentsline {subsection}{\numberline {5.4}V\IeC {\'e}rification de l'\IeC {\'e}tat des noeuds}{10}{subsection.5.4}
-\contentsline {subsubsection}{\numberline {5.4.1}Test des noeuds via la barre de saisie}{10}{subsubsection.5.4.1}
-\contentsline {subsubsection}{\numberline {5.4.2}Test des noeuds via un fichier}{11}{subsubsection.5.4.2}
-\contentsline {subsection}{\numberline {5.5}Configuration des noeuds}{12}{subsection.5.5}
-\contentsline {subsection}{\numberline {5.6}Mise en place des r\IeC {\'e}sultats d'ex\IeC {\'e}cution dans des logs}{12}{subsection.5.6}
-\contentsline {section}{\numberline {6}Sources}{12}{section.6}
-\contentsline {subsection}{\numberline {6.1}R\IeC {\'e}f\IeC {\'e}rences}{12}{subsection.6.1}
+\contentsline {subsection}{\numberline {5.2}Configuration des services}{9}{subsection.5.2}
+\contentsline {subsection}{\numberline {5.3}Visualisation des r\IeC {\'e}sultats}{10}{subsection.5.3}
+\contentsline {subsubsection}{\numberline {5.3.1}Affichage des r\IeC {\'e}sultats}{11}{subsubsection.5.3.1}
+\contentsline {subsubsection}{\numberline {5.3.2}D\IeC {\'e}tail de l'ex\IeC {\'e}cution}{11}{subsubsection.5.3.2}
+\contentsline {subsection}{\numberline {5.4}V\IeC {\'e}rification de l'\IeC {\'e}tat des noeuds}{12}{subsection.5.4}
+\contentsline {subsubsection}{\numberline {5.4.1}Test des noeuds via la barre de saisie}{13}{subsubsection.5.4.1}
+\contentsline {subsubsection}{\numberline {5.4.2}Test des noeuds via un fichier}{14}{subsubsection.5.4.2}
+\contentsline {subsection}{\numberline {5.5}Mise en place des r\IeC {\'e}sultats d'ex\IeC {\'e}cution dans des logs}{14}{subsection.5.5}
+\contentsline {section}{\numberline {6}Sources}{14}{section.6}
+\contentsline {subsection}{\numberline {6.1}R\IeC {\'e}f\IeC {\'e}rences}{14}{subsection.6.1}
