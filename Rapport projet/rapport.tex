@@ -101,9 +101,9 @@
 \label{sec:section1}
 \subsection{Objectif}
 \label{sub:1.1}
-Développée et utilisée au CEA, l'API Clusterhell est une bibliothèque en Python qui permet d'exécuter en parallèle des commandes local et distantes sur des nœuds d'un cluster. Elle fournit également 3 outils en ligne de commande (script utilitaires basés dessus) qui nous permettent de bénéficier des fonctionnalités de la bibliothèque: clush,nodeset et clubak.
+Développée et utilisée au CEA, Clusterhell est une bibliothèque en Python qui permet d'exécuter en parallèle des commandes distantes sur des nœuds au sein d'un cluster. Elle fournit 3 outils en ligne de commande qui nous permettent de bénéficier des fonctionnalités de la bibliothèque: clush,nodeset et clubak. ClusterShell fournit également une API Python permettant d'intégrer les fonctionnalités de ClusterShell au sein d'un script python.
 \\
-Ce projet nous demande de réalisé et de développer un outils en ligne de commande de gestion distribué des service de systèmes permettant d'administrer ces services sur plusieurs nœuds, et cela en utilisant l'API Python ClusterShell.
+Ce projet nous demande de réaliser un outil de gestion distribuée permettant d'administrer des services de système sur plusieurs nœuds, et cela en utilisant l'API Python ClusterShell.
 \\
 
 
@@ -120,26 +120,27 @@ Ce projet est composé de 3 parties distinctes:
 
 Les deux scripts ainsi que l'interface graphique seront entièrement programmé en python version 2.7.
 \smallbreak
-Nous allons donc dans un premier temps implémenter une version basique de gestion de services avec des fonctionnalités simple comme : start, stop, restart , etc.. sur un ensemble de nœuds distant. Puis une fois cette base réalisé, nous allons mettre en place une configuration statique de la répartition des services grâce à des fichiers. Et pour finir nous développerons une IHM à partir des éléments déjà crée afin de parfaire l'outil de gestion des services distribué.
+Nous allons dans un premier temps implémenter une version basique de gestion de services avec des fonctionnalités simple comme : start, stop, restart , etc.. sur un ensemble de nœuds distants. Puis une fois cette base réalisée, nous allons mettre en place une configuration statique de la répartition des services grâce à des fichiers de configuration. Pour finir nous développerons une IHM à partir des éléments déjà crées afin de parfaire l'outil de gestion des services distribuées.
 \pagebreak
 
 \section{ClusterShell}
 \label{sec:section2}
 \subsection{Présentation}
 \label{sub:2.1}
-
-ClusterShell est un outil d'administration distribuée. Il permet d'exécuter des commandes à distance sur un ensemble n de noeuds. 
+\noindent
+ClusterShell est un outil d'administration distribuée. Il permet d'exécuter des commandes à distance sur un ensemble n de nœuds. 
 \smallbreak
-Pour que ClusterShell fonctionne, il faut installer le paquet "clustershell" coté master (celui qui va administrer les noeuds à distance).
-Cette outil est agent-less coté client, c'est à dire qu'il n'y a pas de service à installé sur les noeuds à administrer, ClusterShell nécessite seulement au préalable d'avoir une connexion SSH valide (accès avec échanges de clés sans mot de passe) sur chacun des noeuds qu'il va administrer.
+\noindent
+Pour que ClusterShell fonctionne, il faut installer le paquet "clustershell" dû coté master (celui qui va administrer les nœuds à distance).
+Cette outil est agent-less coté client, c'est à dire qu'il n'y a pas de service à installé sur les nœuds à administrer, ClusterShell nécessite seulement au préalable d'avoir une connexion SSH valide (accès avec échanges de clés et sans mot de passe) sur chacun des nœuds qu'il va administrer.
 
 \subsection{Commandes CLI}
 \label{sub:2.2}
-Commençons tout d'abord par définir les 3 fonctionnalités de la bibliothèques de ClusterShell définit plus haut:crush,nodeset et clubak.
+Commençons tout d'abord par définir les 3 fonctionnalités de la bibliothèque ClusterShell définit plus haut: crush,nodeset et clubak.
 \begin{itemize}
-\item Nodeset : Permet la création et la manipulation de liste de nœuds . En effet on peut créer des listes machines ainsi que des ranges de nœuds, on peut effectuer plusieurs opérations sur ces listes ( union, exclusion, intersection , etc...). Cela facilite fortement la manipulation des noeuds.
-\item Clush : Permet l'exécution des commandes en parallèle sur des noeuds distants, prends également en charge les groupes de noeuds.
-\item Clubak : Regroupement de sorties standards qui permet de présenter de manière synthétique un résultat d'exécution un peu trop verbeux.
+\item Nodeset : Permet la création et la manipulation de liste de nœuds . En effet on peut créer des listes machines ainsi que des étendus de nœuds, on peut effectuer plusieurs opérations sur ces listes ( union, exclusion, intersection , etc...). Cela facilite fortement la manipulation des noeuds.
+\item Clush : Permet l'exécution des commandes en parallèle sur des noeuds distants, prend également en charge les groupes de noeuds.
+\item Clubak : Regroupement de sorties standards qui permet de présenter de manière plus synthétique un résultat d'exécution un peu trop verbeux et répétitif.
 \end{itemize}
 
 \subsection{API Python}
@@ -161,13 +162,16 @@ Par la suite, il suffit d'intégrer l'api python ClusterShell à notre script av
 \label{sec:section3}
 \subsection{Présentation}
 \label{sub:3.1}
-
-Cette première partie consiste créer un script en python permettant d'utiliser les fonctionnalités de base des services, en étendant cette fonctionnalité de façon distribuée sur un ensemble choisi de noeuds.
+\noindent
+Cette première partie consiste à créer un script en python permettant d'utiliser les fonctionnalités de base des services, en étendant cette fonctionnalité de façon distribuée sur un ensemble choisi de nœuds.
 Pour ce faire, on utilise l'api python Clustershell qui va nous permettre de créer un script pouvant effectuer ces actions.
 
 \subsection{Fonctionnement}
 \label{sub:3.2}
-Le script fonctionne très simplement, il prend 3 élément en paramètres : les nœuds que l’on veut utiliser, le service concerné et la commande que l’on veut exécuter. Comme par exemple : ./script.py node2 cron restart ; cela correspond à relancer le service cron sur le node 2.
+\noindent
+Le script fonctionne très simplement, il prend 3 éléments en paramètre : les nœuds que l’on veut utiliser, le service concerné et la commande que l’on veut exécuter. Comme par exemple:
+\smallbreak 
+\verb?./script.py node2 cron restart? ; cela correspond à relancer le service cron sur le node 2.
 \\
 \begin{figure}[hbtp]
 \centering
@@ -175,32 +179,36 @@ Le script fonctionne très simplement, il prend 3 élément en paramètres : les
 \caption{Script Simple}
 \end{figure}
 \\
-Le script en lui même vérifie dans un premier temps si des éléments sont mis en paramètres puis si il n’y a pas d’erreur de synthase sur les nodes.
+Le script en lui même vérifie dans un premier temps si des éléments sont mis en paramètre puis si il n’y a pas d’erreur de synthaxe sur les nœuds.
 \\
-Une fois c'est deux conditions remplis, on vérifie que la commande demandé corresponde à une des commandes suivante : start,stop,status,restart,reload. Dans la variable cli on ajoute les différents service qui ont été passés en paramètre. Task-shell permet d’ajouter les commandes (cli) à exécuter à distance sur les nodes. Et enfin on exécute le tout.
+Une fois ces deux conditions remplies, on vérifie que la commande demandée corresponde à une des commandes suivantes : start,stop,status,restart,reload. On concatène les informations qui ont été passés en paramètre. Task-shell permet d’ajouter les commandes (cli) à exécuter à distance sur les nœuds. Et enfin on exécute le tout.
 \\
-La dernière boucle for nous permet d'afficher les résultats obtenu.
+La dernière boucle for permet d'afficher les erreurs obtenues.
 \pagebreak
 
 \section{Script avec fichier de configuration}
 \label{sec:section4}
 \subsection{Présentation}
 \label{sub:4.1}
-
+\noindent
 Cette deuxième partie consiste à améliorer le script précédent en ajoutant un fichier de configuration. Le script aura besoin seulement d'un fichier de configuration en argument contrairement à précédemment où il avait besoin d'une description complète des noeuds, des services et des actions à effectuer. Le fichier de configuration regroupera en lui les actions à accomplir. Nous avons choisi d'utiliser le langage YAML pour le fichier de configuration.
 
 \subsection{YAML}
 \label{sub:4.2}
 \subsubsection{Présentation}
 \label{subsub:4.2.1}
-
-YAML (YAML Ain't Markup Language) est un format de représentation des données par sérialisation, c'est à dire que YAML fait passer d'un format de description ("human friendly") à un objet représenté par des combinaisons de listes, dictionnaires et données scalaires. 
+\noindent
+YAML (Yaml Ain't Markup Language) est un format de représentation des données par sérialisation, c'est à dire que YAML fait passer d'un format de description ("human friendly") à un objet représenté par des combinaisons de listes, dictionnaires et données scalaires. 
 \\
-YAML est conçu pour être facilement manipulable par des humains (comme l'indique l'abréviation de YAML), il permet par la suite de facilement manipuler les données décrient par l'utilisateur dans beaucoup de langage (C/C++,Python,Java,PHP,...).
+YAML est conçu pour être facilement manipulable par des humains, il permet par la suite de facilement manipuler les données décrient par l'utilisateur dans de nombreux langages (C/C++,Python,Java,PHP,...).
 
 \subsubsection{Fichier de configuration .YAML}
 \label{subsub:4.2.2}
+\noindent
 Nous allons voir comment se compose un fichier YAML, il y a énormément de manière de synthétiser un fichier YAML, nous ne pourrons pas voir toutes les possibilités offertes par ce langage.
+\smallbreak
+\noindent
+Voici un exemple de fichier .yaml:
 \smallbreak
 \begin{figure}[hbtp]
 \centering
@@ -212,18 +220,19 @@ Voici ci-dessous la syntaxe du fichier YAML utilisé dans notre script:
 \smallbreak
 \begin{figure}[hbtp]
 \centering
-\includegraphics[scale=0.7]{syntaxe_yaml2.png}
+\includegraphics[scale=0.65]{syntaxe_yaml2.png}
 \end{figure}
 \pagebreak
  
 
 \subsection{Installation}
 \label{sub:4.3}
-
+\noindent
 Pour pouvoir utiliser le langage YAML, il faut au préalable installer le paquet "pyyaml" disponible dans le gestionnaire de paquets pip.
 \smallbreak
 \verb?pip install pyyaml?
-
+\smallbreak
+\noindent
 Par la suite, pour inclure YAML dans notre script python, il faut importer sa librairie:
 \smallbreak
 \begin{figure}[hbtp]
@@ -236,7 +245,7 @@ Par la suite, pour inclure YAML dans notre script python, il faut importer sa li
 
 \subsection{Script}
 \label{sub:4.4}
-
+\noindent
 Il suffit maintenant d'ouvrir le fichier YAML en question qui sera passer en argument du script de la façon suivante:
 \smallbreak
 \begin{figure}[hbtp]
@@ -244,9 +253,10 @@ Il suffit maintenant d'ouvrir le fichier YAML en question qui sera passer en arg
 \includegraphics[scale=0.7]{recup_yaml.png}
 \end{figure}
 \smallbreak
-
+\noindent
 Si il n'y a pas d'erreur dans l'ouverture et la sérialisation, on récupère un objet python (dans ce cas la variable "doc") parfaitement fonctionnelle. 
 \smallbreak
+\noindent
 Il faut ainsi vérifier la syntaxe de cette objet pour s'assurer que l'utilisateur a bien respecter la syntaxe imposée par notre script:
 
 \smallbreak
@@ -255,13 +265,14 @@ Il faut ainsi vérifier la syntaxe de cette objet pour s'assurer que l'utilisate
 \includegraphics[scale=0.7]{controle_yaml.png}
 \end{figure}
 \smallbreak
-
+\noindent
 La fonction \verb?check_service(doc)? permet une première vérification de la syntaxe du fichier YAML, notamment si le fichier comporte des listes (requis dans notre cas).
 \smallbreak
-La fonction \verb?add_key(doc)? permet de récupérer tout les services du fichier et les afficher à l'utilisateur, ce dernier devra valider lui même si les services affichés sont cohérent et dans ce cas là, valider. Il est possible d'outre passer cette vérification en ajoutant "-force" en argument, c'est utile si on a besoin d'automatiser le script. Il est toutefois fortement conseiller de vérifier le fichier YAML avant de l'automatiser. 
+\noindent
+La fonction \verb?add_key(doc)? permet de récupérer tout les services du fichier et de les afficher à l'utilisateur, ce dernier devra valider lui même si les services affichés sont cohérent et dans ce cas là, valider. Il est possible d'outre passer cette vérification en ajoutant "-force" en argument, c'est utile si on a besoin d'automatiser le script. Il est toutefois fortement conseiller de vérifier le fichier YAML avant de l'automatiser. 
 
 \pagebreak
-
+\noindent
 Dès que l'utilisateur confirme le contenu du fichier ou qu'il ait forcé le passage avec "\verb?-force?", le script continu: 
 \smallbreak
 \begin{figure}[hbtp]
@@ -270,9 +281,10 @@ Dès que l'utilisateur confirme le contenu du fichier ou qu'il ait forcé le pas
 \end{figure}
 \smallbreak
 
-
+\noindent
 La fonction \verb?check_attribut(doc,service)? permet de contrôler les attributs de chaque service pour vérifier si il n'en manque pas et qu'ils ne sont pas vide ou erroné.
 \smallbreak
+\noindent
 Après cette vérification, la fonction \verb?clustershell(doc,service)? est appellé, le script commence à vérifier notamment si il y a des dépendances grâce à une fonction interne à \verb?clustershell(doc,service)?  et dans ce cas, le script vérifie si les services dépendants sont installés et activés.Si ce il manque une dépendance, toutes les actions liées à cette dépendance sont annulées Si tout est bon, le script effectue sur les noeuds les commandes distribuées dans \verb?clustershell(doc,service)?.
 
 
@@ -286,6 +298,7 @@ Le setup de test est le suivant:
 \end{itemize}
 La particularité est que seulement node1 possède nginx d'installé contrairement à node2 et node3.
 \smallbreak
+\noindent
 Tout les noeuds sont accessibles par le master par SSH sans mot de passe.
 On commence par un cas simple:
 \smallbreak
@@ -294,7 +307,7 @@ On commence par un cas simple:
 \includegraphics[scale=0.7]{example1_yaml.png}
 \caption{example1.yaml}
 \end{figure}
-
+\noindent
 On exécute le script avec le fichier example1.yaml en argument:
 \smallbreak
 \begin{figure}[hbtp]
@@ -302,6 +315,7 @@ On exécute le script avec le fichier example1.yaml en argument:
 \includegraphics[scale=0.7]{execution_yaml.png}
 \caption{exécution du script}
 \end{figure}
+\noindent
 Le script nous demande de confirmer le contenu du fichier \verb?example1.yaml?, dans notre cas le script affiche bien le service cron. On rappelle que l'on peut outrepasser cette confirmation en ajoutant "\verb?-force?" en argument du script.
 \smallbreak
 
@@ -310,6 +324,7 @@ Le script nous demande de confirmer le contenu du fichier \verb?example1.yaml?, 
 		\caption{Confirmation}
 \end{figure}
 \pagebreak
+\noindent
 Pour finir, le script fait son travail avec ClusterShell sur les noeuds indiqués et indique le résultat des commandes, si il y a "OK", cela veut dire que la commande sur l'intégralité des noeuds a été un succès. Il y a une partie "RECAP" qui permet de voir en fin de script sur quel service il y a eu des erreurs ou non.
 \smallbreak
 
@@ -317,7 +332,7 @@ Pour finir, le script fait son travail avec ClusterShell sur les noeuds indiqué
 		\centerline{\includegraphics[scale=0.6]{resultat_yaml.png}}
 		\caption{Output de l'exécution example1.yaml}
 \end{figure}
-
+\noindent
 Maintenant nous allons faire un fichier yaml plus complet en provoquant volontairement des erreurs, voici le fichier \verb?example2.yaml?:
 
 \begin{figure}[H]

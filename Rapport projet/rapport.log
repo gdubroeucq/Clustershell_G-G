@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2016.11.1)  5 NOV 2016 15:38
+This is pdfTeX, Version 3.14159265-2.6-1.40.15 (TeX Live 2015/dev/Debian) (preloaded format=pdflatex 2016.11.1)  5 NOV 2016 18:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -761,54 +761,54 @@ Underfull \hbox (badness 10000) in paragraph at lines 104--108
 File: from_clustershell.png Graphic file (type png)
 
 <use from_clustershell.png>
-Package pdftex.def Info: from_clustershell.png used on input line 155.
+Package pdftex.def Info: from_clustershell.png used on input line 156.
 (pdftex.def)             Requested size: 334.44722pt x 14.05238pt.
  [4 <./from_clustershell.png>]
-<script1.png, id=215, 755.07094pt x 356.83313pt>
-File: script1.png Graphic file (type png)
- <use script1.png>
-Package pdftex.def Info: script1.png used on input line 174.
-(pdftex.def)             Requested size: 528.54605pt x 249.78148pt.
-
-Overfull \hbox (16.39642pt too wide) in paragraph at lines 174--175
- [][] 
- []
-
-[5 <./script1.png>] <syntaxe_yaml.png, id=222, 582.175pt x 157.58875pt>
-File: syntaxe_yaml.png Graphic file (type png)
-
-<use syntaxe_yaml.png>
-Package pdftex.def Info: syntaxe_yaml.png used on input line 207.
-(pdftex.def)             Requested size: 407.51973pt x 110.31136pt.
- <syntaxe_yaml2.png, id=223, 640.3925pt x 293.095pt>
-File: syntaxe_yaml2.png Graphic file (type png)
-
-<use syntaxe_yaml2.png>
-Package pdftex.def Info: syntaxe_yaml2.png used on input line 215.
-(pdftex.def)             Requested size: 448.27168pt x 205.16508pt.
- [6 <./syntaxe_yaml.png> <./syntaxe_yaml2.png>]
-LaTeX Font Info:    Try loading font information for T1+aett on input line 225.
+LaTeX Font Info:    Try loading font information for T1+aett on input line 174.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/ae/t1aett.fd
 File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 )
-<import_yaml.png, id=230, 104.39pt x 20.075pt>
+<script1.png, id=215, 755.07094pt x 356.83313pt>
+File: script1.png Graphic file (type png)
+ <use script1.png>
+Package pdftex.def Info: script1.png used on input line 178.
+(pdftex.def)             Requested size: 528.54605pt x 249.78148pt.
+
+Overfull \hbox (16.39642pt too wide) in paragraph at lines 178--179
+ [][] 
+ []
+
+[5 <./script1.png>] <syntaxe_yaml.png, id=223, 582.175pt x 157.58875pt>
+File: syntaxe_yaml.png Graphic file (type png)
+
+<use syntaxe_yaml.png>
+Package pdftex.def Info: syntaxe_yaml.png used on input line 215.
+(pdftex.def)             Requested size: 407.51973pt x 110.31136pt.
+ <syntaxe_yaml2.png, id=224, 640.3925pt x 293.095pt>
+File: syntaxe_yaml2.png Graphic file (type png)
+
+<use syntaxe_yaml2.png>
+Package pdftex.def Info: syntaxe_yaml2.png used on input line 223.
+(pdftex.def)             Requested size: 416.25018pt x 190.50948pt.
+ [6 <./syntaxe_yaml.png> <./syntaxe_yaml2.png>]
+<import_yaml.png, id=231, 104.39pt x 20.075pt>
 File: import_yaml.png Graphic file (type png)
  <use import_yaml.png>
-Package pdftex.def Info: import_yaml.png used on input line 231.
+Package pdftex.def Info: import_yaml.png used on input line 240.
 (pdftex.def)             Requested size: 73.07248pt x 14.05238pt.
 
-<recup_yaml.png, id=231, 319.1925pt x 73.27374pt>
+<recup_yaml.png, id=232, 319.1925pt x 73.27374pt>
 File: recup_yaml.png Graphic file (type png)
  <use recup_yaml.png>
-Package pdftex.def Info: recup_yaml.png used on input line 244.
+Package pdftex.def Info: recup_yaml.png used on input line 253.
 (pdftex.def)             Requested size: 223.43321pt x 51.29124pt.
 
-<controle_yaml.png, id=232, 475.7775pt x 213.79875pt>
+<controle_yaml.png, id=233, 475.7775pt x 213.79875pt>
 File: controle_yaml.png Graphic file (type png)
  <use controle_yaml.png>
-Package pdftex.def Info: controle_yaml.png used on input line 255.
+Package pdftex.def Info: controle_yaml.png used on input line 265.
 (pdftex.def)             Requested size: 333.04196pt x 149.6581pt.
 
 [7 <./import_yaml.png> <./recup_yaml.png> <./controle_yaml.png>]
@@ -816,66 +816,66 @@ Package pdftex.def Info: controle_yaml.png used on input line 255.
 File: clustershell_yaml.png Graphic file (type png)
 
 <use clustershell_yaml.png>
-Package pdftex.def Info: clustershell_yaml.png used on input line 269.
+Package pdftex.def Info: clustershell_yaml.png used on input line 280.
 (pdftex.def)             Requested size: 471.45816pt x 64.64104pt.
 
 <example1_yaml.png, id=243, 195.73125pt x 77.28876pt>
 File: example1_yaml.png Graphic file (type png)
  <use example1_yaml.png>
-Package pdftex.def Info: example1_yaml.png used on input line 294.
+Package pdftex.def Info: example1_yaml.png used on input line 307.
 (pdftex.def)             Requested size: 137.01093pt x 54.10175pt.
 
 <execution_yaml.png, id=244, 271.0125pt x 23.08624pt>
 File: execution_yaml.png Graphic file (type png)
  <use execution_yaml.png>
-Package pdftex.def Info: execution_yaml.png used on input line 302.
+Package pdftex.def Info: execution_yaml.png used on input line 315.
 (pdftex.def)             Requested size: 189.70744pt x 16.16023pt.
 
 <confirmation_yaml.png, id=245, 588.1975pt x 79.29625pt>
 File: confirmation_yaml.png Graphic file (type png)
 
 <use confirmation_yaml.png>
-Package pdftex.def Info: confirmation_yaml.png used on input line 309.
+Package pdftex.def Info: confirmation_yaml.png used on input line 323.
 (pdftex.def)             Requested size: 411.73544pt x 55.50697pt.
  [8 <./clustershell_yaml.png> <./example1_yaml.png> <./execution_yaml.png> <./c
 onfirmation_yaml.png>]
 <resultat_yaml.png, id=257, 823.075pt x 119.44624pt>
 File: resultat_yaml.png Graphic file (type png)
  <use resultat_yaml.png>
-Package pdftex.def Info: resultat_yaml.png used on input line 317.
+Package pdftex.def Info: resultat_yaml.png used on input line 332.
 (pdftex.def)             Requested size: 493.8488pt x 71.66829pt.
 
 <example2_yaml.png, id=258, 274.02374pt x 274.02374pt>
 File: example2_yaml.png Graphic file (type png)
  <use example2_yaml.png>
-Package pdftex.def Info: example2_yaml.png used on input line 324.
+Package pdftex.def Info: example2_yaml.png used on input line 339.
 (pdftex.def)             Requested size: 164.41551pt x 164.41551pt.
 
 <resultat2_yaml.png, id=259, 1021.8175pt x 515.9275pt>
 File: resultat2_yaml.png Graphic file (type png)
 
 <use resultat2_yaml.png>
-Package pdftex.def Info: resultat2_yaml.png used on input line 331.
+Package pdftex.def Info: resultat2_yaml.png used on input line 346.
 (pdftex.def)             Requested size: 408.71976pt x 206.36734pt.
  [9 <./resultat_yaml.png> <./example2_yaml.png> <./resultat2_yaml.png>] <conver
 sion_ui_py.jpg, id=270, 716.6775pt x 319.1925pt>
 File: conversion_ui_py.jpg Graphic file (type jpg)
 
 <use conversion_ui_py.jpg>
-Package pdftex.def Info: conversion_ui_py.jpg used on input line 347.
+Package pdftex.def Info: conversion_ui_py.jpg used on input line 362.
 (pdftex.def)             Requested size: 215.00491pt x 95.75848pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 344--352
+Underfull \hbox (badness 10000) in paragraph at lines 359--367
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 344--352
+Underfull \hbox (badness 10000) in paragraph at lines 359--367
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 353--356
+Underfull \hbox (badness 10000) in paragraph at lines 368--371
 \T1/aer/m/n/10.95 lors du lan-ce-ment de la fe-nêtre.
  []
 
@@ -883,10 +883,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 353--356
 File: initialisation_fenetre.jpg Graphic file (type jpg)
 
 <use initialisation_fenetre.jpg>
-Package pdftex.def Info: initialisation_fenetre.jpg used on input line 357.
+Package pdftex.def Info: initialisation_fenetre.jpg used on input line 372.
 (pdftex.def)             Requested size: 545.18178pt x 84.46478pt.
 
-Overfull \hbox (33.03215pt too wide) in paragraph at lines 357--358
+Overfull \hbox (33.03215pt too wide) in paragraph at lines 372--373
  [] 
  []
 
@@ -894,10 +894,10 @@ Overfull \hbox (33.03215pt too wide) in paragraph at lines 357--358
 File: exemple_signal_slot.png Graphic file (type png)
 
 <use exemple_signal_slot.png>
-Package pdftex.def Info: exemple_signal_slot.png used on input line 369.
+Package pdftex.def Info: exemple_signal_slot.png used on input line 384.
 (pdftex.def)             Requested size: 211.28885pt x 118.4422pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 362--373
+Underfull \hbox (badness 10000) in paragraph at lines 377--388
 
  []
 
@@ -905,65 +905,65 @@ Underfull \hbox (badness 10000) in paragraph at lines 362--373
 <signal_slot.jpg, id=280, 473.77pt x 149.55875pt>
 File: signal_slot.jpg Graphic file (type jpg)
  <use signal_slot.jpg>
-Package pdftex.def Info: signal_slot.jpg used on input line 374.
+Package pdftex.def Info: signal_slot.jpg used on input line 389.
 (pdftex.def)             Requested size: 189.50464pt x 59.82243pt.
 
 <arborescence_fichiers_IHM.jpg, id=281, 755.82375pt x 377.41pt>
 File: arborescence_fichiers_IHM.jpg Graphic file (type jpg)
 
 <use arborescence_fichiers_IHM.jpg>
-Package pdftex.def Info: arborescence_fichiers_IHM.jpg used on input line 394.
+Package pdftex.def Info: arborescence_fichiers_IHM.jpg used on input line 409.
 (pdftex.def)             Requested size: 377.91095pt x 188.70453pt.
  [11 <./exemple_signal_slot.png> <./signal_slot.jpg>] <configuration_IHM_photo.
 png, id=292, 558.085pt x 496.85625pt>
 File: configuration_IHM_photo.png Graphic file (type png)
 
 <use configuration_IHM_photo.png>
-Package pdftex.def Info: configuration_IHM_photo.png used on input line 399.
+Package pdftex.def Info: configuration_IHM_photo.png used on input line 414.
 (pdftex.def)             Requested size: 279.04182pt x 248.4275pt.
 
 <exemple_config_service.png, id=293, 558.085pt x 496.85625pt>
 File: exemple_config_service.png Graphic file (type png)
 
 <use exemple_config_service.png>
-Package pdftex.def Info: exemple_config_service.png used on input line 411.
+Package pdftex.def Info: exemple_config_service.png used on input line 426.
 (pdftex.def)             Requested size: 279.04182pt x 248.4275pt.
  [12 <./arborescence_fichiers_IHM.jpg> <./configuration_IHM_photo.png>]
 <fenetre_principale.png, id=300, 444.15938pt x 504.38437pt>
 File: fenetre_principale.png Graphic file (type png)
 
 <use fenetre_principale.png>
-Package pdftex.def Info: fenetre_principale.png used on input line 420.
+Package pdftex.def Info: fenetre_principale.png used on input line 435.
 (pdftex.def)             Requested size: 266.49767pt x 302.63295pt.
 
 <exemple_affichage_console.png, id=301, 596.2275pt x 672.5125pt>
 File: exemple_affichage_console.png Graphic file (type png)
 
 <use exemple_affichage_console.png>
-Package pdftex.def Info: exemple_affichage_console.png used on input line 426.
+Package pdftex.def Info: exemple_affichage_console.png used on input line 441.
 (pdftex.def)             Requested size: 298.11302pt x 336.25542pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 422--428
+Underfull \hbox (badness 10000) in paragraph at lines 437--443
 
  []
 
 [13 <./exemple_config_service.png> <./fenetre_principale.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 430--434
+Underfull \hbox (badness 10000) in paragraph at lines 445--449
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 430--434
+Underfull \hbox (badness 10000) in paragraph at lines 445--449
 
  []
 
 <def_lancer.png, id=310, 1169.36874pt x 456.70625pt>
 File: def_lancer.png Graphic file (type png)
  <use def_lancer.png>
-Package pdftex.def Info: def_lancer.png used on input line 439.
+Package pdftex.def Info: def_lancer.png used on input line 454.
 (pdftex.def)             Requested size: 526.21107pt x 205.5159pt.
 
-Overfull \hbox (31.06145pt too wide) in paragraph at lines 439--440
+Overfull \hbox (31.06145pt too wide) in paragraph at lines 454--455
 [][] 
  []
 
@@ -971,10 +971,10 @@ Overfull \hbox (31.06145pt too wide) in paragraph at lines 439--440
 <fen_etat_noeud.png, id=317, 555.57562pt x 481.8pt>
 File: fen_etat_noeud.png Graphic file (type png)
  <use fen_etat_noeud.png>
-Package pdftex.def Info: fen_etat_noeud.png used on input line 451.
+Package pdftex.def Info: fen_etat_noeud.png used on input line 466.
 (pdftex.def)             Requested size: 333.34793pt x 289.08221pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 462--463
+Underfull \hbox (badness 10000) in paragraph at lines 477--478
 
  []
 
@@ -983,27 +983,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 462--463
 File: check_etatnoeud.png Graphic file (type png)
 
 <use check_etatnoeud.png>
-Package pdftex.def Info: check_etatnoeud.png used on input line 470.
+Package pdftex.def Info: check_etatnoeud.png used on input line 485.
 (pdftex.def)             Requested size: 510.40562pt x 327.47264pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 472--473
+Underfull \hbox (badness 10000) in paragraph at lines 487--488
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 481--483
+Underfull \hbox (badness 10000) in paragraph at lines 496--498
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 481--483
+Underfull \hbox (badness 10000) in paragraph at lines 496--498
 
  []
 
 <messagebox.png, id=325, 252.19218pt x 185.19188pt>
 File: messagebox.png Graphic file (type png)
  <use messagebox.png>
-Package pdftex.def Info: messagebox.png used on input line 484.
+Package pdftex.def Info: messagebox.png used on input line 499.
 (pdftex.def)             Requested size: 201.75401pt x 148.15369pt.
 
 [16 <./check_etatnoeud.png>]
@@ -1011,18 +1011,18 @@ Package pdftex.def Info: messagebox.png used on input line 484.
 File: difference_importer_openfile.png Graphic file (type png)
 
 <use difference_importer_openfile.png>
-Package pdftex.def Info: difference_importer_openfile.png used on input line 49
-8.
+Package pdftex.def Info: difference_importer_openfile.png used on input line 51
+3.
 (pdftex.def)             Requested size: 346.2929pt x 112.41972pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 518.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 533.
  [17 <./messagebox.png> <./difference_importer_openfile.png>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 518.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 533.
  (./rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 518.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 518.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 533.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 533.
 Package rerunfilecheck Info: File `rapport.out' has not changed.
 (rerunfilecheck)             Checksum: 38FC471E77A452A73A55E132AEFC4355;2546.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 518.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 533.
  ) 
 Here is how much of TeX's memory you used:
  10654 strings out of 493105
@@ -1041,7 +1041,7 @@ dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fo
 nts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/typ
 e1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/cm/cmtt10.pfb>
-Output written on rapport.pdf (17 pages, 739184 bytes).
+Output written on rapport.pdf (17 pages, 745733 bytes).
 PDF statistics:
  398 PDF objects out of 1000 (max. 8388607)
  314 compressed objects within 4 object streams
