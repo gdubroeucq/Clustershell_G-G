@@ -166,6 +166,7 @@ Par la suite, il suffit d'intégrer l'api python ClusterShell à notre script av
 Cette première partie consiste à créer un script en python permettant d'utiliser les fonctionnalités de base des services, en étendant cette fonctionnalité de façon distribuée sur un ensemble choisi de nœuds.
 Pour ce faire, on utilise l'api python Clustershell qui va nous permettre de créer un script pouvant effectuer ces actions.
 
+
 \subsection{Fonctionnement}
 \label{sub:3.2}
 \noindent
@@ -184,7 +185,9 @@ Le script en lui même vérifie dans un premier temps si des éléments sont mis
 Une fois ces deux conditions remplies, on vérifie que la commande demandée corresponde à une des commandes suivantes : start,stop,status,restart,reload. On concatène les informations qui ont été passés en paramètre. Task-shell permet d’ajouter les commandes (cli) à exécuter à distance sur les nœuds. Et enfin on exécute le tout.
 \\
 La dernière boucle for permet d'afficher les erreurs obtenues.
+
 \pagebreak
+
 
 \section{Script avec fichier de configuration}
 \label{sec:section4}
@@ -214,8 +217,10 @@ Voici un exemple de fichier .yaml:
 \centering
 \includegraphics[scale=0.7]{syntaxe_yaml.png}
 \end{figure}
+\noindent
 Dans notre cas, nous utilisons des collections (crées par l'indentation, voir l'exemple si dessus), il existe aussi les scalaires, c'est à dire l'ensemble des types qui ne sont pas des collections (donc aucune indentation), nous n'en utiliserons pas dans notre cas.
 \smallbreak
+\noindent
 Voici ci-dessous la syntaxe du fichier YAML utilisé dans notre script:
 \smallbreak
 \begin{figure}[hbtp]
@@ -291,7 +296,7 @@ Après cette vérification, la fonction \verb?clustershell(doc,service)? est app
 \subsection{Affichage}
 \label{sub:4.5}
 
-Le setup de test est le suivant: 
+Notre setup de test est le suivant: 
 \begin{itemize}
 \item Un master
 \item 3 noeuds appelés respectivement node1,node2 et node3
@@ -347,7 +352,7 @@ Ce fichier example2.yaml comporte des erreurs volontaires comme l'activation de 
 		\caption{Output de l'exécution example2.yaml}
 \end{figure}
 \noindent
-On constate les erreurs évidentes. Dans une commande distribuée, sur 10 noeuds , si il y a 1 erreur, cela va mettre un "FAIL" pour l'ensemble de la commande.  
+On constate les erreurs évidentes. Dans une commande distribuée, sur 10 noeuds, il suffit d'une seule erreur pour que l'ensemble de l'action soit marqué d'un "FAIL".
 
 \pagebreak
 
@@ -356,7 +361,7 @@ On constate les erreurs évidentes. Dans une commande distribuée, sur 10 noeuds
 Pour la création d'une interface graphique, nous nous sommes tournés vers l'environnement de développement Qt. Qt est basé sur le langage C++ pour créer ses IHM. Cependant il existe le module PyQt permettant de programmer en python une interface graphique aisément.
 \subsection{Qt Creator et PyQt}
 \subsubsection{La conversion ui > py}
-Au départ, on utilise Qt Creator pour pouvoir créer les fenêtres avec tous les composants nécessaires. Lorsque l'on créé une fenêtre, Qt nous génère un fichier \textbf{.ui}. A l'aide de l'utilitaire \textbf{pyuic}, on peut convertir ce fichier en python.
+Au départ, on utilise Qt Creator pour pouvoir créer les fenêtres avec tous les composants graphiques nécessaires. Lorsque l'on crée une fenêtre, Qt nous génère un fichier \textbf{.ui}. A l'aide de l'utilitaire \textbf{pyuic}, on peut convertir ce fichier en python.
 \begin{figure}[hbtp]
 \centering
 \includegraphics[scale=0.3]{conversion_ui_py.jpg}
@@ -365,7 +370,7 @@ Au départ, on utilise Qt Creator pour pouvoir créer les fenêtres avec tous le
 Pour convertir on utilise la commande suivante: \textbf{pyuic4 fenêtre.ui > fenêtre.py}\linebreak
 \\
 \subsubsection{Les classes d'interfaces graphique}
-Dans notre fichier python (qui représente la fênetre) se trouve au final une classe qui porte le nom \textbf{Ui\_Form} pour une fenêtre ou \textbf{Ui\_MainWindow} si c'est la fenêtre principale. Das cette classe se trouve une fonction qui s'appelle \textbf{setupUI} et qui configurer tous les composants graphiques qui se trouve dans la fenêtre (exemple: un bouton avec sa taille de base, sa taille maximum etc...). C'est la première fonction à être appelé lors du lancement de la fenêtre.
+Dans notre fichier python (qui représente la fenêtre) se trouve au final une classe qui porte le nom \textbf{Ui\_Form} pour une fenêtre ou \textbf{Ui\_MainWindow} si c'est la fenêtre principale. Dans cette classe se trouve une fonction qui s'appelle \textbf{setupUI} qui a pour rôle de configurer tous les composants graphiques qui se trouve dans la fenêtre (exemple: un bouton avec sa taille de base, sa taille maximum etc...). C'est la première fonction à être appelé lors du lancement de la fenêtre.
 \linebreak
 Voici comment se déroule l'initialisation d'une fenêtre
 \begin{center}
@@ -374,21 +379,21 @@ Voici comment se déroule l'initialisation d'une fenêtre
 
 
 \subsubsection{Les signaux et les slots}
-Pour de la programmation événementielle, on utilise deux moyens qui sont propres à Qt: les signaux et les slots. Chaque composant graphique (comme un bouton) possède des signaux et des slots qui vont permettre d'intéragir avec d'autres composants et fonctions(exemple: ouvrir une fenête via un bouton).\\
+Pour de la programmation événementielle, on utilise deux moyens qui sont propres à Qt: les \textbf{signaux} et les \textbf{slots}. Chaque composant graphique (comme un bouton) possède des signaux et des slots qui vont permettre d'intéragir avec d'autres composants et fonctions(exemple: ouvrir une fenêtre via un bouton).\\
 \linebreak
 \textbf{Un signal:} Un signal est un message envoyé par une classe lors du déclenchement d'un événement comme le clic sur un bouton\\
-\textbf{Les slots:} Les slots sont tout simplement des fonctions qui seront déclenchés par les signaux. Les fonctions peuvent être créés par nous même ou cela peut être des fonctions propres à une classe de Qt( exemple: la fonction \textbf{quit} de \textbf{QApplication} qui quitte le programme.\\
+\textbf{Les slots:} Les slots sont tout simplement des fonctions qui seront déclenchés par les signaux. Les fonctions peuvent être créées par nous même ou cela peut être des fonctions propres à une classe de Qt (exemple: la fonction \textbf{quit} de \textbf{QApplication} qui quitte le programme.\\
 Voici un petit exemple pour mieux comprendre:\\
 \begin{figure}[hbtp]
 \centering
 \includegraphics[scale=0.5]{exemple_signal_slot.png}
 \caption{Les signaux et slots}
 \end{figure}\\
-Pour pouvoir assigner un slot à un signal on doit utilise la fonction \textbf{connect} que l'on définit dans la classe de notre fenêtre:
+Pour pouvoir assigner un slot à un signal on doit utiliser la fonction \textbf{connect} que l'on définit dans la classe de notre fenêtre:
 \begin{center}
 \includegraphics[scale=0.4]{signal_slot.jpg} 
 \end{center}
-La définiton d'un slot ce fait exactement de la même manière que celle d'une fonction de base. Il faut également ajouter "\textbf{@pyqtSlot()}" devant la fonction. C'est grâce à pyqtSlot que Qt va savoir que ce sont des slots et non des fonctions.\\
+La définition d'un slot se fait exactement de la même manière que celle d'une fonction de base. Il faut également ajouter "\textbf{@pyqtSlot()}" devant la fonction. C'est grâce à pyqtSlot que Qt va différencier les slots des fonctions.\\
 Voici un exemple de slot:
 \begin{lstlisting}
 @pyqtSlot()
@@ -398,14 +403,14 @@ def monslot():
 
 \subsubsection{Le programme principal}
 
-Comme dans tout fichier python, une fonction main existe et doit être appelé pour lancer le programme principal. Le fichier python principal (\textbf{IHM.py}) va contenir:
+Comme dans tout fichier python, une fonction main existe et doit être appelée pour lancer le programme principal. Le fichier python principal (\textbf{IHM.py}) va contenir:
 \begin{itemize}
 \item Les signaux et les slots
 \item Les classes d'interface graphique
-\item Le code lié aux interactions avec les composants graphiques
+\item Le code lié aux interactions avec les composants graphiques (ajout d'item dans une \textbf{QListWidget}, variation de la \textbf{QProgressbar}, récupération des informations d'une \textbf{QLineedit} (barre de saisie)).
 \end{itemize}
 \subsubsection{Arborescence des fichiers}
-Afin de mieux comprendre comment notre IHM à été créé, voici un récapitulatif de l'ensemble de nos fichiers python est regroupé dans le dosser clustershell\_IHM.\\
+Afin de mieux comprendre comment notre IHM à été créé, voici un récapitulatif de l'ensemble de nos fichiers python qui sont regroupés dans le dossier clustershell\_IHM.\\
 \includegraphics[scale=0.5]{arborescence_fichiers_IHM.jpg} 
 
 \subsection{Configuration des services}
@@ -417,8 +422,8 @@ Afin de mieux comprendre comment notre IHM à été créé, voici un récapitula
 Cette fenêtre va servir de fenêtre intermédiaire avant l'affichage des résultats sur la fenêtre principale. 
 On dispose de deux choix:
 \begin{itemize}
-\item Importer un fichier au format YAML qui recense tous les noeuds et services que l'on veut administrer.
-\item Créer une liste de services ou l'on peut manuellement rentrer le noms des services voulu avec les noeuds.
+\item Importer un fichier au format \textbf{YAML} qui recense tous les noeuds et services que l'on veut administrer.
+\item Créer une liste de services où l'on peut manuellement rentrer le nom des services voulu avec les noeuds.
 \end{itemize}
 Lorsque nos noeuds et services sont configurés, on utilise une liste (\textbf{QListWidget}) afin d'avoir un bref récapitulatif du lancement des séquences de tâches sur les noeuds à effectuer:
 \begin{figure}[H]
@@ -426,9 +431,9 @@ Lorsque nos noeuds et services sont configurés, on utilise une liste (\textbf{Q
 \includegraphics[scale=0.5]{exemple_config_service.png}
 \caption{Séquences de tâches à exécuter}
 \end{figure}
-Il est possible d'ajouter plusieurs services (chaque service doit être séparé par une virgule) à la fois, pour plusieurs ensemble de noeuds.\\
+Il est possible d'ajouter plusieurs services à la fois,(chaque service doit être séparé par une virgule) pour plusieurs ensemble de noeuds.\\
 Dans \textbf{IHM.py} une fonction s'occupera d'ajouter les services dans la \textbf{QListWidget} pour les afficher ensuite. De plus,  lors de l'ajout / supression d'un service, toute les informations seront envoyés dans \textbf{cluster.py}.\\
-Il faut également gérer le cas des dépendances, car un service peut avoir besoin qu'un autre service soit installé / activé. Pour cela, on à créé une barre de saisie supplémentaire (dépendance) permettant de vérifier au préalable si le service en question est bien disponible.
+Il faut également gérer le cas des dépendances, car un service peut avoir besoin qu'un autre service soit installé / activé. Pour cela, on a créé une barre de saisie supplémentaire (dépendance) permettant de vérifier au préalable si le service en question est bien disponible.
 
 \subsection{Visualisation des résultats}
 \begin{center}
@@ -448,17 +453,30 @@ Une fois que la configuration des noeuds / services à été effectué dans la f
 \linebreak
 
 \subsubsection{Détail de l'exécution}
-Nous avons également fait un compteur qui récapitule le nombres d'actions qui a été réalisé grâce à un composant de type \textbf{QLabel}. On à aussi implémenter une barre de progression qui permet de suivre approximativement l'avancement des l'exécution des tâches sur beaucoup de noeuds.\\
+Nous avons également fait un compteur qui récapitule le nombre d'actions qui a été réalisé grâce à un composant de type \textbf{QLabel}. On a aussi implémenté une barre de progression qui permet de suivre approximativement l'avancement de l'exécution des tâches sur beaucoup de noeuds.\\
 Voici le code qui s'exécute lors du clic sur le bouton Lancer:
 
 \includegraphics[scale=0.45]{def_lancer.png} 
 
+\textbf{Détail du code}\\
+\begin{enumerate}
+\item On nettoie notre console et on reset la barre de progression.
+\item On récupère toutes les informations (noeuds, services, action, dépendance).
+\item On affichage le récapitulatif de la tâche selon s'il y a une dépendance ou non.
+\item On appelle la fonction \textbf{clustershell} et on lui passe toutes les informations. De plus comme cette fonction se trouve dans un autre fichier que la fonction lancer, on lui passe la fenêtre en paramètre. Cette fonction va effectuer la vérification des dépendances, lancer les tâches puis afficher le résultat dans la console.
+\item On utilise la barre de progression de type \textbf{QProgressbar} et on la met à jour en fonction du nombre de services.
+\end{enumerate}
 
+\subsubsection{L'accès au différentes fonctionnalités}
 
+\begin{itemize}
+\item \textbf{La vérification de l'état des noeuds:} Accessible depuis le bouton "Etat des noeuds"
+\item \textbf{La configuration des services / noeuds:} Accessible depuis le bouton "Configuration"
+\item \textbf{La visualisation des résultats:} Les résultats sont affichés sur la console de la fenêtre principale.
+\item \textbf{La journalisation des résultats:} La création de logs se fait via le bouton "Résultat"
+\item \textbf{L'exécution des séquences de tâches:} Une fois la configuration remplie, l'exécution se fait via le bouton "Lancer" de notre fenêtre principale.
+\end{itemize}
 
-
-\noindent Tout d'abord nous avons mis en place une autre fenêtre (accessible via le bouton "Etat des noeuds") permettant de vérifier l'état de noeuds. Ensuite nous pouvons configurer nos noeuds (via la fenêtre de configuration accessible via le bouton "Configuration").\\
-De plus nous avons trouvé qu'il était essentiel de garder une trace des résultats de tous les noeuds alors vous avons gardé en mémoire ces résultats dans des fichiers qui sont crées à partir du bouton "Résultat".
 
 \subsection{Vérification de l'état des noeuds}
 
@@ -471,15 +489,15 @@ On a utilisé en tout 3 \textbf{QListWidgets}; une pour les noeuds actifs, une p
 Si l'utilisateur veut tester ses noeuds, il dispose de deux choix:
 \begin{itemize}
  \item Chercher le(s) noeud(s) qu'il veut vérifier en les renseignant dans la barre de saisie (\textbf{QLineEdit} )
- \item Si jamais l'utilisateur avait déjà écris sont fichier au format YAML pour pouvoir administrer ses services, il peut à par avance tester les noeuds dans ce noeud. Le fichier est récupérer via le bouton (\textbf{QPushButton}) "Parcourir".
+ \item Si jamais l'utilisateur avait déjà écris son fichier au format YAML pour pouvoir administrer ses services, il peut par avance tester les noeuds présents dans le fichier. Le fichier est récupéré via le bouton (\textbf{QPushButton}) "Parcourir".
  \end{itemize}
 \subsubsection{Test des noeuds via la barre de saisie}
 Lorsque l'utilisateur tape une liste de noeuds et lance la vérification des noeuds via le bouton "Lancer", on utilise un signal qui va appeler une fonction de vérification des noeuds:\\
 \begin{lstlisting}
 etatnoeud_IHM.pushButton.clicked.connect(check_etat_noeud)
 \end{lstlisting}
-\textbf{Partie de la fonction de vérification des noeuds:}\\
-Pour tester si les noeuds sont actifs on a finalement lancé une commande sur le(s) noeud(s) en question et on à vérifié si le résultat était bien celui qu'on attendait. Ici j'ai simplement utilisé la commande "\textbf{echo Hello}".\\
+\textbf{Fonction de vérification des noeuds (Partie)}\\
+Pour tester si les noeuds sont actifs on a finalement lancé une commande sur le(s) noeud(s) en question et on a vérifié si le résultat était bien celui qu'on attendait. Ici j'ai simplement utilisé la commande "\textbf{echo Hello}".\\
 Voici le code qui vérifie la présence et gère l'affichage des noeuds sur l'interface graphique:
 \begin{flushleft}
 \includegraphics[scale=1]{check_etatnoeud.png} 
@@ -490,10 +508,10 @@ Détail du code:\\
 \item Utilisation de \textbf{Task} pour lancer la commande sur le(s) noeud(s)
 \item La boucle for permet de récupérer le résultat d'exécution de la commande sur les noeuds.
 \begin{itemize}
-\item Si la sortie (\textbf{output}) correspond bien à "Hello", on récupère le nonom du noeud et on l'ajoute dans la \textbf{QListWidget}.
+\item Si la sortie (\textbf{output}) correspond bien à "Hello", on récupère le nom du noeud et on l'ajoute dans la \textbf{QListWidget}.
 \item Sinon on l'ajoute dans l'autre \textbf{QListWidget} qui liste les noeuds non actifs.
 \end{itemize}
-\item Biensur on vérifie si quelque chose à bien été entré dans la barre de saisie. L'objet \textbf{msg} de type \textbf{QMessageBox} va afficher une boite de dialogue:\\
+\item Bien-sur on vérifie si quelque chose a bien été entré dans la barre de saisie. L'objet \textbf{msg} de type \textbf{QMessageBox} va afficher une boite de dialogue:\\
 \linebreak
 \begin{center}
 \includegraphics[scale=0.8]{messagebox.png} 
@@ -507,7 +525,7 @@ Détail du code:\\
 
 \subsubsection{Test des noeuds via un fichier}
 Lors de l'ouverture du fichier au format YAML, il était nécessaire de tester avant tout si la syntaxe du fichier était correcte. Cependant cette vérification à déjà été faite auparavant lors de l'importation d'un fichier au niveau de la configuration des services.\\
-Comme les fonctions utilisés n'etaient pas entièrement compatible avec le contexte il a fallu écrire de nouvelles fonctions basé sur les anciennes en les modifiant.\\
+Comme les fonctions utilisés n’étaient pas entièrement compatible avec le contexte il a fallu écrire de nouvelles fonctions basé sur les anciennes en les modifiant.\\
 \begin{figure}[hbtp]
 \centering
 \includegraphics[scale=0.5]{difference_importer_openfile.png}
@@ -517,6 +535,9 @@ Comme les fonctions utilisés n'etaient pas entièrement compatible avec le cont
 
 
 \subsection{Mise en place des résultats d'exécution dans des logs}
+Lorsque la séquence de tâches à été effectué, il est possible d'appuyer sur le bouton "Résultat" pour générer un fichier log. Ce fichier permettra de sauvegarder, garder un historique des résultats qui ont été réalisé. Le fichier se trouvera directement dans le même répertoire que le projet sera nommer sous la forme "log\_Year\-month\-day\_Hour:Minute:Second".\\
+De plus il est également possible de voir le résultat dans le terminal.	
+
 \section{Sources}
 \label{sec:section6}
 \subsection{Références}
