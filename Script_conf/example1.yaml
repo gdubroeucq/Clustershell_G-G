@@ -1,0 +1,4 @@
+---
+- cron:
+    state: start
+    nodes: node[1-3]

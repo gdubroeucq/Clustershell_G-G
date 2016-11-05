@@ -165,9 +165,22 @@ Par la suite, il suffit d'intégrer l'api python ClusterShell à notre script av
 Cette première partie consiste créer un script en python permettant d'utiliser les fonctionnalités de base des services, en étendant cette fonctionnalité de façon distribuée sur un ensemble choisi de noeuds.
 Pour ce faire, on utilise l'api python Clustershell qui va nous permettre de créer un script pouvant effectuer ces actions.
 
-
+\subsection{Fonctionnement}
+\label{sub:3.2}
+Le script fonctionne très simplement, il prend 3 élément en paramètres : les nœuds que l’on veut utiliser, le service concerné et la commande que l’on veut exécuter. Comme par exemple : ./script.py node2 cron restart ; cela correspond à relancer le service cron sur le node 2.
+\\
+\begin{figure}[hbtp]
+\centering
+\includegraphics[scale=0.7]{script1.png}
+\caption{Script Simple}
+\end{figure}
+\\
+Le script en lui même vérifie dans un premier temps si des éléments sont mis en paramètres puis si il n’y a pas d’erreur de synthase sur les nodes.
+\\
+Une fois c'est deux conditions remplis, on vérifie que la commande demandé corresponde à une des commandes suivante : start,stop,status,restart,reload. Dans la variable cli on ajoute les différents service qui ont été passés en paramètre. Task-shell permet d’ajouter les commandes (cli) à exécuter à distance sur les nodes. Et enfin on exécute le tout.
+\\
+La dernière boucle for nous permet d'afficher les résultats obtenu.
 \pagebreak
-
 
 \section{Script avec fichier de configuration}
 \label{sec:section4}
@@ -266,7 +279,7 @@ Après cette vérification, la fonction \verb?clustershell(doc,service)? est app
 \subsection{Affichage}
 \label{sub:4.5}
 
-Notre setup de test est le suivant: 
+Le setup de test est le suivant: 
 \begin{itemize}
 \item Un master
 \item 3 noeuds appelés respectivement node1,node2 et node3
@@ -318,8 +331,8 @@ Ce fichier example2.yaml comporte des erreurs volontaires comme l'activation de 
 		\centerline{\includegraphics[scale=0.4]{resultat2_yaml.png}}
 		\caption{Output de l'exécution example2.yaml}
 \end{figure}
-
-On remarque les erreurs évidentes
+\noindent
+On constate les erreurs évidentes. Dans une commande distribuée, sur 10 noeuds , si il y a 1 erreur, cela va mettre un "FAIL" pour l'ensemble de la commande.  
 
 \pagebreak
 
