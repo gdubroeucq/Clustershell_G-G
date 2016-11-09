@@ -511,6 +511,7 @@ Lors de l'appel à \textbf{check\_etat\_noeud } on vérifie bien-sur si quelque 
 Pour tester si les noeuds sont actifs on a finalement lancé la commande "\textbf{echo Hello}". Si le noeud répond simplement par "\textbf{Hello}", on considère que le noeud est présent, sinon on affiche l'erreur.
  
 \subsubsection{Test des noeuds via un fichier}
+\noindent
 Lors de l'ouverture du fichier au format YAML, il était nécessaire de tester avant tout si la syntaxe du fichier était correcte. Cependant cette vérification à déjà été faite auparavant lors de l'importation d'un fichier au niveau de la configuration des services.\\
 Comme les fonctions utilisés n’étaient pas entièrement compatible avec le contexte il a fallu écrire de nouvelles fonctions basé sur les anciennes en les modifiant.\\
 \begin{figure}[hbtp]
@@ -522,27 +523,35 @@ Comme les fonctions utilisés n’étaient pas entièrement compatible avec le c
 
 
 \subsection{Mise en place des résultats d'exécution dans des logs}
+\noindent
 Lorsque la séquence de tâches à été effectué, il est possible d'appuyer sur le bouton "Résultat" pour générer un fichier log. Ce fichier permettra de sauvegarder, garder un historique des résultats qui ont été réalisé. Le fichier se trouvera directement dans le même répertoire que le projet sera nommer sous la forme "log\_Year\-month\-day\_Hour:Minute:Second".\\
 De plus il est également possible de voir le résultat dans le terminal.	
 
-\subsection{Génération d'un exécutable via PythonInstaller}
-Afin d'éviter d'utiliser le fichier python pour lancer l'interface graphique, on peut générer un exécutable qui le fera pour nous.\\
-Pour cela on peut utiliser le paquet \textbf{pyinstaller}.\\
-Il suffit de créer l'exécutable via la commande: \textbf{pyinstaller.exe --onefile --windowed IHM.py}\linebreak
-Le nom de l'exécutable possèdera le même nom que le fichier python.\\
-\textbf{onefile}: permet de réunir toute les librairies dont pyinstaller à besoin dans le .exe\\
-\textbf{windowed}: permet d'indiquer si l'exécution se fais en mode interface graphique.
+\subsection{Génération d'un exécutable via Pyinstaller}
+\noindent
+Il est possible de générer un exécutable afin d'éviter de lancer le programme par ligne de commande. L'avantage de cette exécutable est qu'il peut être exporter sur d'autre système quel qu'il soit (Windows, Linux, OSX, FreeBSD,...)
+\\
+Pour cela on peut utiliser \textbf{pyinstaller}.\\
+Il suffit de créer l'exécutable via la commande: \textbf{pyinstaller -F IHM.py}\smallbreak
+\noindent
+L'option -F permet d'intégrer toutes les dépendances dans l'exécutable (taille de l'exécutable = ~30 Mo).
+\smallbreak
+\noindent
+Le nom de l'exécutable sera le même nom que le fichier python.\\
+
 
 \section{Sources}
 \label{sec:section6}
 \subsection{Références}
+\noindent
+\textbf{Yaml:} \url{http://pyyaml.org/wiki/PyYAMLDocumentation}\\
 \noindent\textbf{Nodeset:} \url{http://clustershell.readthedocs.io/en/latest/api/NodeSet.html}\\
 \textbf{Task:} \url{http://clustershell.readthedocs.io/en/latest/api/Task.html}\\
 \textbf{Qt GUI:} \url {http://doc.qt.io/qt-4.8/qtgui-module.html}\\
 \url {https://pythonspot.com/en/pyqt4/}\\
 \url {http://pyqt.sourceforge.net/Docs/PyQt4/qtgui.html} 
 
-\pagebreak
+
 \subsection{Annexes}
 \noindent
 Lien du projet (avec le code source):

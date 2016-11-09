@@ -25,14 +25,15 @@
 \contentsline {subsubsection}{\numberline {5.1.4}Le programme principal}{11}{subsubsection.5.1.4}
 \contentsline {subsubsection}{\numberline {5.1.5}Arborescence des fichiers}{11}{subsubsection.5.1.5}
 \contentsline {subsection}{\numberline {5.2}Configuration des services}{12}{subsection.5.2}
-\contentsline {subsection}{\numberline {5.3}Visualisation des r\IeC {\'e}sultats}{13}{subsection.5.3}
-\contentsline {subsubsection}{\numberline {5.3.1}Affichage des r\IeC {\'e}sultats}{14}{subsubsection.5.3.1}
-\contentsline {subsubsection}{\numberline {5.3.2}D\IeC {\'e}tail de l'ex\IeC {\'e}cution}{14}{subsubsection.5.3.2}
-\contentsline {subsubsection}{\numberline {5.3.3}L'acc\IeC {\`e}s au diff\IeC {\'e}rentes fonctionnalit\IeC {\'e}s}{15}{subsubsection.5.3.3}
-\contentsline {subsection}{\numberline {5.4}V\IeC {\'e}rification de l'\IeC {\'e}tat des noeuds}{16}{subsection.5.4}
-\contentsline {subsubsection}{\numberline {5.4.1}Test des noeuds via la barre de saisie}{16}{subsubsection.5.4.1}
-\contentsline {subsubsection}{\numberline {5.4.2}Test des noeuds via un fichier}{17}{subsubsection.5.4.2}
+\contentsline {subsection}{\numberline {5.3}Visualisation des r\IeC {\'e}sultats}{14}{subsection.5.3}
+\contentsline {subsubsection}{\numberline {5.3.1}Affichage des r\IeC {\'e}sultats}{15}{subsubsection.5.3.1}
+\contentsline {subsubsection}{\numberline {5.3.2}D\IeC {\'e}tail de l'ex\IeC {\'e}cution}{15}{subsubsection.5.3.2}
+\contentsline {subsubsection}{\numberline {5.3.3}L'acc\IeC {\`e}s au diff\IeC {\'e}rentes fonctionnalit\IeC {\'e}s}{16}{subsubsection.5.3.3}
+\contentsline {subsection}{\numberline {5.4}V\IeC {\'e}rification de l'\IeC {\'e}tat des noeuds}{17}{subsection.5.4}
+\contentsline {subsubsection}{\numberline {5.4.1}Test des noeuds via la barre de saisie}{17}{subsubsection.5.4.1}
+\contentsline {subsubsection}{\numberline {5.4.2}Test des noeuds via un fichier}{18}{subsubsection.5.4.2}
 \contentsline {subsection}{\numberline {5.5}Mise en place des r\IeC {\'e}sultats d'ex\IeC {\'e}cution dans des logs}{18}{subsection.5.5}
-\contentsline {section}{\numberline {6}Sources}{18}{section.6}
-\contentsline {subsection}{\numberline {6.1}R\IeC {\'e}f\IeC {\'e}rences}{18}{subsection.6.1}
+\contentsline {subsection}{\numberline {5.6}G\IeC {\'e}n\IeC {\'e}ration d'un ex\IeC {\'e}cutable via Pyinstaller}{18}{subsection.5.6}
+\contentsline {section}{\numberline {6}Sources}{19}{section.6}
+\contentsline {subsection}{\numberline {6.1}R\IeC {\'e}f\IeC {\'e}rences}{19}{subsection.6.1}
 \contentsline {subsection}{\numberline {6.2}Annexes}{19}{subsection.6.2}
