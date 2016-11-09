@@ -503,33 +503,13 @@ Lorsque l'utilisateur tape une liste de noeuds et lance la vérification des noe
 \begin{lstlisting}
 etatnoeud_IHM.pushButton.clicked.connect(check_etat_noeud)
 \end{lstlisting}
-\textbf{Fonction de vérification des noeuds (Partie)}\\
-Pour tester si les noeuds sont actifs on a finalement lancé une commande sur le(s) noeud(s) en question et on a vérifié si le résultat était bien celui qu'on attendait. Ici j'ai simplement utilisé la commande "\textbf{echo Hello}".\\
-Voici le code qui vérifie la présence et gère l'affichage des noeuds sur l'interface graphique:
-\begin{flushleft}
-\includegraphics[scale=1]{check_etatnoeud.png} 
-\end{flushleft}
-Détail du code:\\
-\begin{enumerate}
-\item Utilisation de \textbf{NodeSet} pour vérifier si ce que l'utilisateur a tapé correspond à la syntaxe d'un noeud.
-\item Utilisation de \textbf{Task} pour lancer la commande sur le(s) noeud(s)
-\item La boucle for permet de récupérer le résultat d'exécution de la commande sur les noeuds.
-\begin{itemize}
-\item Si la sortie (\textbf{output}) correspond bien à "Hello", on récupère le nom du noeud et on l'ajoute dans la \textbf{QListWidget}.
-\item Sinon on l'ajoute dans l'autre \textbf{QListWidget} qui liste les noeuds non actifs.
-\end{itemize}
-\item Bien-sur on vérifie si quelque chose a bien été entré dans la barre de saisie. L'objet \textbf{msg} de type \textbf{QMessageBox} va afficher une boite de dialogue:\\
+Lors de l'appel à \textbf{check\_etat\_noeud } on vérifie bien-sur si quelque chose a bien été entré dans la barre de saisie. L'objet \textbf{msg} de type \textbf{QMessageBox} va afficher une boite de dialogue:\\
 \linebreak
 \begin{center}
 \includegraphics[scale=0.8]{messagebox.png} 
 \end{center}
-
-\end{enumerate}
+Pour tester si les noeuds sont actifs on a finalement lancé la commande "\textbf{echo Hello}". Si le noeud répond simplement par "\textbf{Hello}", on considère que le noeud est présent, sinon on affiche l'erreur.
  
-
-
-
-
 \subsubsection{Test des noeuds via un fichier}
 Lors de l'ouverture du fichier au format YAML, il était nécessaire de tester avant tout si la syntaxe du fichier était correcte. Cependant cette vérification à déjà été faite auparavant lors de l'importation d'un fichier au niveau de la configuration des services.\\
 Comme les fonctions utilisés n’étaient pas entièrement compatible avec le contexte il a fallu écrire de nouvelles fonctions basé sur les anciennes en les modifiant.\\
@@ -544,6 +524,14 @@ Comme les fonctions utilisés n’étaient pas entièrement compatible avec le c
 \subsection{Mise en place des résultats d'exécution dans des logs}
 Lorsque la séquence de tâches à été effectué, il est possible d'appuyer sur le bouton "Résultat" pour générer un fichier log. Ce fichier permettra de sauvegarder, garder un historique des résultats qui ont été réalisé. Le fichier se trouvera directement dans le même répertoire que le projet sera nommer sous la forme "log\_Year\-month\-day\_Hour:Minute:Second".\\
 De plus il est également possible de voir le résultat dans le terminal.	
+
+\subsection{Génération d'un exécutable via PythonInstaller}
+Afin d'éviter d'utiliser le fichier python pour lancer l'interface graphique, on peut générer un exécutable qui le fera pour nous.\\
+Pour cela on peut utiliser le paquet \textbf{pyinstaller}.\\
+Il suffit de créer l'exécutable via la commande: \textbf{pyinstaller.exe --onefile --windowed IHM.py}\linebreak
+Le nom de l'exécutable possèdera le même nom que le fichier python.\\
+\textbf{onefile}: permet de réunir toute les librairies dont pyinstaller à besoin dans le .exe\\
+\textbf{windowed}: permet d'indiquer si l'exécution se fais en mode interface graphique.
 
 \section{Sources}
 \label{sec:section6}
