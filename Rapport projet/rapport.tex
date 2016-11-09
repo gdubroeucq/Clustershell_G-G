@@ -290,7 +290,7 @@ Dès que l'utilisateur confirme le contenu du fichier ou qu'il ait forcé le pas
 La fonction \verb?check_attribut(doc,service)? permet de contrôler les attributs de chaque service pour vérifier si il n'en manque pas et qu'ils ne sont pas vide ou erroné.
 \smallbreak
 \noindent
-Après cette vérification, la fonction \verb?clustershell(doc,service)? est appellé, le script commence à vérifier notamment si il y a des dépendances grâce à une fonction interne à \verb?clustershell(doc,service)?  et dans ce cas, le script vérifie si les services dépendants sont installés et activés.Si ce il manque une dépendance, toutes les actions liées à cette dépendance sont annulées Si tout est bon, le script effectue sur les noeuds les commandes distribuées dans \verb?clustershell(doc,service)?.
+Après cette vérification, la fonction \verb?clustershell(doc,service)? est appellé, le script commence à vérifier notamment si il y a des dépendances grâce à une fonction interne à \verb?clustershell(doc,service)?  et dans ce cas, le script vérifie si les services dépendants sont installés et activés. Si ce il manque une dépendance, toutes les actions liées à cette dépendance sont annulées Si tout est bon, le script effectue sur les noeuds les commandes distribuées dans \verb?clustershell(doc,service)?.
 
 
 \subsection{Affichage}
@@ -358,21 +358,23 @@ On constate les erreurs évidentes. Dans une commande distribuée, sur 10 noeuds
 
 \section{Création d'une IHM}
 \label{sec:section5}
-Pour la création d'une interface graphique, nous nous sommes tournés vers l'environnement de développement Qt. Qt est basé sur le langage C++ pour créer ses IHM. Cependant il existe le module PyQt permettant de programmer en python une interface graphique aisément.
+Pour la création d'une interface graphique, nous nous sommes tournés vers l'environnement de développement Qt. Qt est basé sur le langage C++ pour créer ses IHM. Cependant, il existe le module PyQt permettant de programmer facilement une interface graphique en python.
 \subsection{Qt Creator et PyQt}
 \subsubsection{La conversion ui > py}
 Au départ, on utilise Qt Creator pour pouvoir créer les fenêtres avec tous les composants graphiques nécessaires. Lorsque l'on crée une fenêtre, Qt nous génère un fichier \textbf{.ui}. A l'aide de l'utilitaire \textbf{pyuic}, on peut convertir ce fichier en python.
+\smallbreak
 \begin{figure}[hbtp]
 \centering
 \includegraphics[scale=0.3]{conversion_ui_py.jpg}
 \caption{Conversion ui - py}
 \end{figure}
-Pour convertir on utilise la commande suivante: \textbf{pyuic4 fenêtre.ui > fenêtre.py}\linebreak
-\\
+Pour convertir on utilise la commande suivante: \textbf{pyuic4 fenêtre.ui > fenêtre.py}
+
 \subsubsection{Les classes d'interfaces graphique}
-Dans notre fichier python (qui représente la fenêtre) se trouve au final une classe qui porte le nom \textbf{Ui\_Form} pour une fenêtre ou \textbf{Ui\_MainWindow} si c'est la fenêtre principale. Dans cette classe se trouve une fonction qui s'appelle \textbf{setupUI} qui a pour rôle de configurer tous les composants graphiques qui se trouve dans la fenêtre (exemple: un bouton avec sa taille de base, sa taille maximum etc...). C'est la première fonction à être appelé lors du lancement de la fenêtre.
-\linebreak
-Voici comment se déroule l'initialisation d'une fenêtre
+Une fois généré, le fichier python (qui représente la fenêtre) est composé d'une classe qui porte le nom \textbf{Ui\_Form} pour une fenêtre ou \textbf{Ui\_MainWindow} si c'est la fenêtre principale. Dans cette classe se trouve une fonction qui s'appelle \textbf{setupUI} qui a pour rôle d'initialiser et configurer tous les composants graphiques qui se trouve dans la fenêtre (exemple: un bouton avec sa taille de base, sa taille maximum etc...). C'est la première fonction à être appelé lors du lancement de la fenêtre.
+\smallbreak
+\noindent
+Pour afficher la fenêtre, on doit importer le fichier et instancier la classe générée ci-dessus dans un nouveau fichier python (IHM.py dans notre cas) qui sera le fichier principal (fichier expliqué un peu plus loin):
 \begin{center}
 \includegraphics[scale=0.45]{initialisation_fenetre.jpg} 
 \end{center}
@@ -409,6 +411,7 @@ Comme dans tout fichier python, une fonction main existe et doit être appelée 
 \item Les classes d'interface graphique
 \item Le code lié aux interactions avec les composants graphiques (ajout d'item dans une \textbf{QListWidget}, variation de la \textbf{QProgressbar}, récupération des informations d'une \textbf{QLineedit} (barre de saisie)).
 \end{itemize}
+Nous avons décider de séparer par soucis de clarté le code Qt (IHM.py) du code ClusterShell qui se tiendra dans un fichier appelé \verb?cluster.py?.
 \subsubsection{Arborescence des fichiers}
 Afin de mieux comprendre comment notre IHM à été créé, voici un récapitulatif de l'ensemble de nos fichiers python qui sont regroupés dans le dossier clustershell\_IHM.\\
 \includegraphics[scale=0.5]{arborescence_fichiers_IHM.jpg} 
@@ -453,7 +456,10 @@ Une fois que la configuration des noeuds / services à été effectué dans la f
 \linebreak
 
 \subsubsection{Détail de l'exécution}
-Nous avons également fait un compteur qui récapitule le nombre d'actions qui a été réalisé grâce à un composant de type \textbf{QLabel}. On a aussi implémenté une barre de progression qui permet de suivre approximativement l'avancement de l'exécution des tâches sur beaucoup de noeuds.\\
+Nous avons également fait un compteur qui récapitule le nombre d'actions a réalisé grâce à un composant de type \textbf{QLabel}. On a aussi implémenté une barre de progression qui permet de suivre l'avancement de l'exécution des tâches sur l'ensemble des noeuds.
+\smallbreak
+\pagebreak
+\smallbreak
 Voici le code qui s'exécute lors du clic sur le bouton Lancer:
 
 \includegraphics[scale=0.45]{def_lancer.png} 
@@ -483,7 +489,7 @@ Voici le code qui s'exécute lors du clic sur le bouton Lancer:
 \begin{center}
 \includegraphics[scale=0.6]{fen_etat_noeud.png} 
 \end{center}
-
+\noindent
 Il est souvent utile de savoir si un noeud est bien présent ou non pour effectuer une quelconque tâche. On a alors créé une fenêtre permettant de lister les noeuds actifs, des noeuds qui ne l'étaient pas.\\
 On a utilisé en tout 3 \textbf{QListWidgets}; une pour les noeuds actifs, une pour les noeuds qui ne répondaient pas et une dernière pour l'affichage des erreurs.\\
 Si l'utilisateur veut tester ses noeuds, il dispose de deux choix:
@@ -492,6 +498,7 @@ Si l'utilisateur veut tester ses noeuds, il dispose de deux choix:
  \item Si jamais l'utilisateur avait déjà écris son fichier au format YAML pour pouvoir administrer ses services, il peut par avance tester les noeuds présents dans le fichier. Le fichier est récupéré via le bouton (\textbf{QPushButton}) "Parcourir".
  \end{itemize}
 \subsubsection{Test des noeuds via la barre de saisie}
+\noindent
 Lorsque l'utilisateur tape une liste de noeuds et lance la vérification des noeuds via le bouton "Lancer", on utilise un signal qui va appeler une fonction de vérification des noeuds:\\
 \begin{lstlisting}
 etatnoeud_IHM.pushButton.clicked.connect(check_etat_noeud)
@@ -547,8 +554,11 @@ De plus il est également possible de voir le résultat dans le terminal.
 \url {https://pythonspot.com/en/pyqt4/}\\
 \url {http://pyqt.sourceforge.net/Docs/PyQt4/qtgui.html} 
 
+\pagebreak
 \subsection{Annexes}
-
-fonctions yaml
+\noindent
+Lien du projet (avec le code source):
+\smallbreak
+\url{https://github.com/gdubroeucq/Clustershell_GG}
 
 \end{document}
